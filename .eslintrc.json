@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "extends": [
+    "@mitsue",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "linebreak-style": [2, "unix"],
+    "indent": [2, 2]
+  }
+}

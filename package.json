@@ -1,0 +1,57 @@
+{
+  "name": "@tkskto/vue-component-analyzer",
+  "version": "0.0.1",
+  "description": "Analyze dependency tree for Vue.js SFC (Single File Component)",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "bin": {
+    "analyze": "bin/analyze.js"
+  },
+  "scripts": {
+    "dev": "rollup --config -w",
+    "build": "rollup --config",
+    "lint": "eslint -c .eslintrc.json src",
+    "cover": "npm run cover:test && npm run cover:report",
+    "cover:test": "nyc npm run test:base -- --timeout 60000",
+    "cover:report": "nyc report --reporter=html",
+    "test": "nyc npm run test:base -- --timeout 60000",
+    "test:base": "mocha --reporter dot"
+  },
+  "keywords": [],
+  "author": {
+    "name": "tkskto",
+    "url": "https://github.com/tkskto/"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "bin",
+    "types"
+  ],
+  "dependencies": {
+    "vue-eslint-parser": "^7.1.0"
+  },
+  "devDependencies": {
+    "@mitsue/eslint-config": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "eslint": "^7.7.0",
+    "husky": "4.2.5",
+    "lint-staged": "10.2.11",
+    "mocha": "^7.1.2",
+    "nyc": "^15.1.0",
+    "rollup": "^2.26.0",
+    "rollup-plugin-typescript2": "^0.27.2",
+    "typescript": "^3.9.7"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
