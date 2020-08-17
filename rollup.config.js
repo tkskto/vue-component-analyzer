@@ -1,4 +1,9 @@
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
+import commonjs from '@rollup/plugin-commonjs';
+import {nodeResolve} from '@rollup/plugin-node-resolve';
+import json from '@rollup/plugin-json';
+import buildIns from 'rollup-plugin-node-builtins';
+
 import pkg from './package.json';
 
 const banner = `/*!
@@ -17,6 +22,10 @@ export default [
     },
     plugins: [
       typescript(),
+      commonjs(),
+      nodeResolve(),
+      json(),
+      buildIns(),
     ],
   },
   {
