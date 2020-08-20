@@ -50,6 +50,7 @@
     "mocha": "^7.1.2",
     "nyc": "^15.1.0",
     "rollup": "^2.26.0",
+    "rollup-plugin-license": "^2.2.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "typescript": "^3.9.7"
   },
