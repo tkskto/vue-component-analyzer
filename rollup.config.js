@@ -17,7 +17,7 @@ export default [
     input: 'src/index.ts',
     output: {
       file: 'dist/index.js',
-      format: 'es',
+      format: 'cjs',
       banner,
     },
     plugins: [
@@ -32,6 +32,17 @@ export default [
     input: 'src/cli.ts',
     output: {
       file: 'dist/cli.js',
+      format: 'es',
+      banner,
+    },
+    plugins: [
+      typescript(),
+    ],
+  },
+  {
+    input: 'src/renderer.ts',
+    output: {
+      file: 'dist/renderer.js',
       format: 'es',
       banner,
     },

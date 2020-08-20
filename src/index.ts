@@ -1,3 +1,3 @@
-import {parse} from 'vue-eslint-parser';
+import fs from 'fs';
 
-console.log(parse);
+// can not import fs module...
