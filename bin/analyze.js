@@ -19,7 +19,6 @@ function onCatchError(error) {
   process.on("uncaughtException", onCatchError);
   process.on("unhandledRejection", onCatchError);
 
-  // Otherwise, call the CLI.
   process.exitCode = await require("../dist/cli").analyze(
     process.argv,
   );

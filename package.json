@@ -22,6 +22,10 @@
     "name": "tkskto",
     "url": "https://github.com/tkskto/"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkskto/vue-component-analyzer.git"
+  },
   "license": "MIT",
   "files": [
     "dist",
