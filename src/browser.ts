@@ -2,14 +2,13 @@ import path from 'path';
 import express from 'express';
 import webSocket from 'ws';
 import http from 'http';
+import Report = vueComponentAnalyzer.Report;
 
 const projectRoot = path.resolve(__dirname, '..');
 
-// TODO: generate tree data
-
 // TODO: open tree viewer
 
-function startServer() {
+export const startServer = (json: Report) => {
   const app = express();
 
   app.set('views', `${projectRoot}/views`);
@@ -19,9 +18,9 @@ function startServer() {
       mode: 'server',
       title: 'title', // TODO: import package.json
       enableWebSocket: true,
+      json,
     });
   });
-
 
   const server = http.createServer(app);
 
@@ -40,4 +39,4 @@ function startServer() {
     ws: wss,
     http: server,
   };
-}
+};
