@@ -8,10 +8,9 @@ const program = require('commander');
 
 try {
   // set commander options.
-  program.option('--dir [dir]', 'root directory.');
+  program.option('--dir [dir]', 'root directory of src.', "src");
   program.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', 'browser');
-
-  // TODO: add option for output dir?
+  program.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json")', 'out');
 
   const argv = program.parse(process.argv);
   const rootDir = argv.dir || __dirname;
@@ -19,7 +18,11 @@ try {
   const children = getImportDeclarationTree(rootDir, entryFile);
 
   // TODO: separate process based on formatter type.
-  writeFileSync(resolve(__dirname, '../out/result.json'), JSON.stringify(children, null, 4));
+  writeFileSync(resolve(__dirname, `${argv.out}/result.json`), JSON.stringify(children, null, 4));
 } catch (err) {
   console.error(err.message);
+}
+
+export {
+  getImportDeclarationTree
 }
