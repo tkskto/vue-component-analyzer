@@ -1,14 +1,14 @@
 import {getImportDeclarationTree} from './utils';
 import {writeFileSync} from 'fs';
 import {resolve} from 'path';
-const program = require('commander');
+const program = require('commander'); // eslint-disable-line
 
 // TODO: add log system
 // TODO: add error system
 
 try {
   // set commander options.
-  program.option('--dir [dir]', 'root directory of src.', "src");
+  program.option('--dir [dir]', 'root directory of src.', 'src');
   program.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', 'browser');
   program.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json")', 'out');
 
@@ -24,5 +24,5 @@ try {
 }
 
 export {
-  getImportDeclarationTree
-}
+  getImportDeclarationTree,
+};

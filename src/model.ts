@@ -4,15 +4,11 @@ import Report = vueComponentAnalyzer.Report;
 export class Model extends CustomEventDispatcher {
   private _data: Report = {
     name: '',
-    children: []
+    children: [],
   };
 
   public static EVENT = {
-    DATA_UPDATE: 'dataUpdate'
-  }
-
-  constructor() {
-    super();
+    DATA_UPDATE: 'dataUpdate',
   }
 
   get data(): vueComponentAnalyzer.Report {

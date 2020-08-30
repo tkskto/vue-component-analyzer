@@ -8,11 +8,11 @@ import Report = vueComponentAnalyzer.Report;
  * get only Import Declaration syntax.
  * @param {Node[]} nodeArr
  */
-export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[] => {
-  return nodeArr.filter((node) => {
+export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[] => { // eslint-disable-line
+  return nodeArr.filter((node) => { // eslint-disable-line
     return node.type === 'ImportDeclaration';
   }) as ESLintImportDeclaration[];
-}
+};
 
 /**
  * TODO: add comment.
@@ -22,21 +22,21 @@ export const resolveFile = (_filename: string) => {
   // support relative path and nuxt alias.
   if (_filename.startsWith('.') || _filename.startsWith('~') || _filename.startsWith('@')) {
     // TODO: resolve same directories line start from [./].
-    const filename = _filename.replace(/\.\.\//g, '');
+    const filename = _filename.replace(/\.\.\//ug, '');
 
     return filename.slice(-4) === '.vue' ? filename : `${filename}.vue`;
   }
 
   return '';
-}
+};
 
 export const getImportDeclarationTree = (rootDir: string, fileName: string): Report => {
   const filename = resolve(__dirname, rootDir, fileName);
   const children: Report[] = [];
   const result: Report = {
     name: filename,
-    children
-  }
+    children,
+  };
 
   console.log(`read ${filename}...`);
 
@@ -44,8 +44,8 @@ export const getImportDeclarationTree = (rootDir: string, fileName: string): Rep
   try {
     const file = readFileSync(filename, 'utf-8');
     const parserOption = {
-      sourceType: 'module'
-    }
+      sourceType: 'module',
+    };
 
     // using vue-eslint-parser package.
     const esLintProgram = parse(file, parserOption);
@@ -59,10 +59,10 @@ export const getImportDeclarationTree = (rootDir: string, fileName: string): Rep
       const source = String(body[i].source.value);
 
       if (source) {
-        const filename = resolveFile(source);
+        const childFilename = resolveFile(source);
 
-        if (filename) {
-          children.push(getImportDeclarationTree(rootDir, filename));
+        if (childFilename) {
+          children.push(getImportDeclarationTree(rootDir, childFilename));
         }
       }
     }
@@ -71,4 +71,4 @@ export const getImportDeclarationTree = (rootDir: string, fileName: string): Rep
   }
 
   return result;
-}
+};

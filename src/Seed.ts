@@ -1,12 +1,24 @@
 export class Seed {
+  private _name: string;
+
+  private _level: number;
+
+  private _index: number;
+
   private _children: Seed[] = [];
+
   private _duplicate = false;
+
   /**
-   * @param _name - filename
-   * @param _level - hierarchy level of this file
-   * @param _index - index of this hierarchy line
+   * @param name - filename
+   * @param level - hierarchy level of this file
+   * @param index - index of this hierarchy line
    */
-  constructor(private _name: string, private _level: number, private _index: number) {}
+  constructor(private name: string, private level: number, private index: number) {
+    this._name = name;
+    this._level = level;
+    this._index = index;
+  }
 
   private renderChildren():string {
     let html = '';
@@ -20,7 +32,7 @@ export class Seed {
     </div>`;
   }
 
-  public render() {
+  public render(): string {
     let childHTML = '';
     let seedClassName = '';
     let fileClassName = '';
@@ -28,7 +40,7 @@ export class Seed {
     if (this._children.length > 0) {
       childHTML = this.renderChildren();
     } else {
-      seedClassName = ` -no-child`;
+      seedClassName = ' -no-child';
     }
 
     if (this._duplicate) {
@@ -47,6 +59,10 @@ export class Seed {
 
   set children(value: Seed[]) {
     this._children = value;
+  }
+
+  get duplicate(): boolean {
+    return this._duplicate;
   }
 
   set duplicate(value: boolean) {

@@ -3,7 +3,8 @@ import {Model} from './model';
 import Report = vueComponentAnalyzer.Report;
 
 export class Renderer {
-  private _app: HTMLElement | null;
+  private readonly _app: HTMLElement | null;
+
   private _tree: Seed[] = [];
 
   constructor(private _model: Model) {
@@ -55,7 +56,7 @@ export class Renderer {
    * @private
    */
   private render():void {
-    const root = this._tree[0];
+    const [root] = this._tree;
 
     const group = `<div class="root">
         ${root.render()}
