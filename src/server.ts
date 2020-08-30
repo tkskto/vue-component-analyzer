@@ -5,8 +5,6 @@ import http from 'http';
 
 const projectRoot = path.resolve(__dirname, '..');
 
-// TODO: generate tree data
-
 // TODO: open tree viewer
 
 function startServer() {
@@ -22,9 +20,7 @@ function startServer() {
     });
   });
 
-
   const server = http.createServer(app);
-
   const wss = new webSocket.Server({
     server,
   });

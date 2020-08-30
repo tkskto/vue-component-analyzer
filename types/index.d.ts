@@ -4,4 +4,9 @@ declare namespace vueComponentAnalyzer {
     name: string,
     children: Report[]
   }
+  class CustomEventDispatcher {}
+}
+
+interface Window {
+  enableWebSocket: boolean;
 }

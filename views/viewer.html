@@ -4,9 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Component Tree of application.</title>
-  <script src="/dist/" type="module" defer></script>
+  <style>
+    body {
+      font-family: "游ゴシック", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+    }
+    .root {
+      background-color: #eee;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .seed {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      grid-template-rows: auto auto;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .seed.-no-child {
+      grid-template-columns: 150px;
+      grid-template-rows: auto;
+    }
+    .seed:last-child {
+      margin-bottom: 0;
+    }
+    .group {
+      padding: 10px 0;
+    }
+    .filename {
+      display: inline-block;
+      border: 1px solid #41b883;
+      border-radius: 4px;
+      padding: 12px;
+    }
+    .filename.-duplicate {
+      background-color: #34495e;
+      color: #ffffff;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px;
+      font-size: 10px;
+      text-align: right;
+    }
+  </style>
+  <script src="../dist/client.js" defer></script>
 </head>
 <body>
 <div id="app"></div>
+<footer>
+<p>Thank you for using! If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
+</footer>
 </body>
 </html>
