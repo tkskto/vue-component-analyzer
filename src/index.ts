@@ -11,8 +11,9 @@ const program = require('commander'); // eslint-disable-line
 
 try {
   // set commander options.
-  program.option('--dir [dir]', 'root directory.');
+  program.option('--dir [dir]', 'root directory of src.', 'src');
   program.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', FORMAT.BROWSER);
+  program.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json")', 'out');
 
   // TODO: add option for output dir?
 
@@ -28,12 +29,16 @@ try {
 
   if (argv.format === FORMAT.BOTH) {
     startServer(children);
-    writeFileSync(resolve(__dirname, '../out/result.json'), JSON.stringify(children, null, 4));
+    writeFileSync(resolve(__dirname, `${argv.out}/result.json`), JSON.stringify(children, null, 4));
   } else if (argv.format === FORMAT.BROWSER) {
     startServer(children);
   } else if (argv.format === FORMAT.JSON) {
-    writeFileSync(resolve(__dirname, '../out/result.json'), JSON.stringify(children, null, 4));
+    writeFileSync(resolve(__dirname, `${argv.out}/result.json`), JSON.stringify(children, null, 4));
   }
 } catch (err) {
   console.error(err.message);
 }
+
+export {
+  getImportDeclarationTree,
+};

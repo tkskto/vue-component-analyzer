@@ -44,9 +44,9 @@ export default [
     ],
   },
   {
-    input: 'src/cli.ts',
+    input: 'src/commadline.ts',
     output: {
-      file: 'dist/cli.js',
+      file: 'dist/commadline.js',
       format: 'es',
       banner,
     },
@@ -55,9 +55,9 @@ export default [
     ],
   },
   {
-    input: 'src/renderer.ts',
+    input: 'src/client.ts',
     output: {
-      file: 'dist/renderer.js',
+      file: 'dist/client.js',
       format: 'es',
       banner,
     },

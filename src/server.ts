@@ -23,7 +23,6 @@ export const startServer = (json: Report) => {
   });
 
   const server = http.createServer(app);
-
   const wss = new webSocket.Server({
     server,
   });
