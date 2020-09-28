@@ -1,13 +1,16 @@
+/**
+ * Data Type of one of Vue File.
+ */
 export class Seed {
-  private _name: string;
+  private _name: string; // file name
 
-  private _level: number;
+  private _level: number; // directory level
 
-  private _index: number;
+  private _index: number; // index
 
-  private _children: Seed[] = [];
+  private _children: Seed[] = []; // imported modules from this file.
 
-  private _duplicate = false;
+  private _duplicate = false; // this file is imported from multiple files or not?
 
   /**
    * @param name - filename

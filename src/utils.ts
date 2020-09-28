@@ -55,7 +55,7 @@ export const getImportDeclarationTree = (rootDir: string, fileName: string): Rep
 
     // if we get, read imported file recursive.
     for (let i = 0, len = body.length; i < len; i++) {
-      // TODO: support other type? value might be RegExp, or number, boolean.
+      // TODO: support other type? (value might be RegExp, or number, boolean.)
       const source = String(body[i].source.value);
 
       if (source) {

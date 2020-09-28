@@ -1,3 +1,5 @@
+// for execute from browser.
+
 import {Seed} from './Seed';
 import {Model} from './model';
 import Report = vueComponentAnalyzer.Report;
@@ -9,6 +11,7 @@ export class Renderer {
 
   constructor(private _model: Model) {
     this._app = document.getElementById('app');
+
     _model.addEventListener(Model.EVENT.DATA_UPDATE, this.ready);
   }
 

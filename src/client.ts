@@ -1,3 +1,4 @@
+// // for execute from cli
 import {Model} from './model';
 import {Renderer} from './renderer';
 
@@ -10,7 +11,7 @@ try {
     ws = new WebSocket(`ws://${location.host}`);
   }
 } catch (err) {
-  console.warn("Couldn't connect to analyzer websocket server so you'll have to reload page manually to see updates in the treemap");
+  console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
 }
 
 window.addEventListener('load', () => {
@@ -18,7 +19,7 @@ window.addEventListener('load', () => {
     ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
 
-      model.data = msg.data;
+      model.data = msg.data; // emit Model.EVENT.DATA_UPDATE event
     });
   }
 

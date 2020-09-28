@@ -2,12 +2,14 @@ import path from 'path';
 import express from 'express';
 import webSocket from 'ws';
 import http from 'http';
-
 const projectRoot = path.resolve(__dirname, '..');
 
 // TODO: open tree viewer
 
-function startServer() {
+/**
+ * start web socket server and connect when finished generate component tree.
+ */
+export const startServer = function (): {ws: webSocket.Server, http: http.Server} {
   const app = express();
 
   app.set('views', `${projectRoot}/views`);
@@ -15,7 +17,7 @@ function startServer() {
   app.use('/', (req, res) => {
     res.render('viewer', {
       mode: 'server',
-      title: 'title', // TODO: import package.json
+      title: 'title', // TODO: import project's package.json
       enableWebSocket: true,
     });
   });
@@ -36,4 +38,4 @@ function startServer() {
     ws: wss,
     http: server,
   };
-}
+};
