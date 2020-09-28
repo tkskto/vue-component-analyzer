@@ -2,6 +2,8 @@ import path from 'path';
 import express from 'express';
 import webSocket from 'ws';
 import http from 'http';
+import Report = vueComponentAnalyzer.Report;
+
 const projectRoot = path.resolve(__dirname, '..');
 
 // TODO: open tree viewer
@@ -9,7 +11,7 @@ const projectRoot = path.resolve(__dirname, '..');
 /**
  * start web socket server and connect when finished generate component tree.
  */
-export const startServer = function (): {ws: webSocket.Server, http: http.Server} {
+export const startServer = (json: Report): {ws: webSocket.Server, http: http.Server} => {
   const app = express();
 
   app.set('views', `${projectRoot}/views`);
@@ -19,6 +21,7 @@ export const startServer = function (): {ws: webSocket.Server, http: http.Server
       mode: 'server',
       title: 'title', // TODO: import project's package.json
       enableWebSocket: true,
+      json,
     });
   });
 

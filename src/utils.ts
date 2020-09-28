@@ -9,16 +9,14 @@ import Report = vueComponentAnalyzer.Report;
  * @param {Node[]} nodeArr
  */
 export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[] => { // eslint-disable-line
-  return nodeArr.filter((node) => { // eslint-disable-line
-    return node.type === 'ImportDeclaration';
-  }) as ESLintImportDeclaration[];
+  return nodeArr.filter((node) => node.type === 'ImportDeclaration') as ESLintImportDeclaration[];
 };
 
 /**
  * TODO: add comment.
  * @param _filename
  */
-export const resolveFile = (_filename: string) => {
+export const resolveFile = (_filename: string): string => {
   // support relative path and nuxt alias.
   if (_filename.startsWith('.') || _filename.startsWith('~') || _filename.startsWith('@')) {
     // TODO: resolve same directories line start from [./].
@@ -59,10 +57,10 @@ export const getImportDeclarationTree = (rootDir: string, fileName: string): Rep
       const source = String(body[i].source.value);
 
       if (source) {
-        const childFilename = resolveFile(source);
+        const nextFilename = resolveFile(source);
 
-        if (childFilename) {
-          children.push(getImportDeclarationTree(rootDir, childFilename));
+        if (nextFilename) {
+          children.push(getImportDeclarationTree(rootDir, nextFilename));
         }
       }
     }
