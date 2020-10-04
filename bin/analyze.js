@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-"use strict";
+const {version} = require('../package.json');
 
 /**
  * Catch and report unexpected error.
@@ -8,18 +8,19 @@
  * @returns {void}
  */
 function onCatchError(error) {
-  process.exitCode = 1;
+  process.exit(1);
 
-  const {version} = require("../package.json");
-
-  console.error(`Something went wrong. component-analyzer: ${version}`);
+  console.error(`Something went wrong. component-analyzer: ${version}. follow error message.`);
+  console.error(`${error.message}`);
 }
 
-(async function main() {
-  process.on("uncaughtException", onCatchError);
-  process.on("unhandledRejection", onCatchError);
+(function main() {
+  process.on('uncaughtException', onCatchError);
+  process.on('unhandledRejection', onCatchError);
 
-  process.exitCode = await require("../dist/cli").analyze(
-    process.argv,
-  );
-}()).catch(onCatchError);
+  try {
+    require('../dist/index');
+  } catch (err) {
+    onCatchError(err);
+  }
+}());

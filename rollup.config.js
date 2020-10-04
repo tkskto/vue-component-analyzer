@@ -44,9 +44,20 @@ export default [
     ],
   },
   {
-    input: 'src/commadline.ts',
+    input: 'src/server.ts',
     output: {
-      file: 'dist/commadline.js',
+      file: 'dist/server.js',
+      format: 'es',
+      banner,
+    },
+    plugins: [
+      typescript(),
+    ],
+  },
+  {
+    input: 'src/utils.ts',
+    output: {
+      file: 'dist/utils.js',
       format: 'es',
       banner,
     },
@@ -62,7 +73,9 @@ export default [
       banner,
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfig: 'tsconfigForClient.json',
+      }),
     ],
   },
 ];

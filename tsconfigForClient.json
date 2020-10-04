@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "ESNEXT",
+    "removeComments": true,
+    "strict": true,
+     "moduleResolution": "node",
+     "resolveJsonModule": true,
+     "typeRoots": [
+       "node_modules/@types",
+       "types"
+     ],
+     "types": [
+       "vue-eslint-parser"
+     ],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

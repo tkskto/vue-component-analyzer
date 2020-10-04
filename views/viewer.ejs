@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%- title %></title>
+  <style>
+    body {
+      font-family: "游ゴシック","yuGothic", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+      background-color: #35495e;
+    }
+    .root {
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .seed {
+      display: grid;
+      grid-template-columns: 0.8fr 1fr;
+      grid-template-rows: auto auto;
+      align-items: center;
+      padding: 0 18px;
+      margin: 10px 0;
+      color: #fff;
+      background-color: #35495e;
+    }
+    .file {
+      margin-right: 40px;
+    }
+    .seed.-no-child {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .seed:last-child {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .filename {
+      position: relative;
+    }
+    .seed .filename::before,
+    .seed .filename::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 30px;
+      height: 2px;
+      background-color: #ffffff;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .seed .filename::before {
+      left: 0;
+      transform: translateX(-100%);
+    }
+    .seed .filename::after {
+      right: 0;
+      transform: translateX(100%);
+    }
+    .root > .seed > .file > .filename::before {
+      content: none;
+    }
+    .seed.-no-child .filename::after {
+      content: none;
+    }
+    .group {
+      position: relative;
+    }
+    .group::before {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 2px;
+      height: calc(100% - 58px);
+      background-color: #ffffff;
+      top: 34px;
+      left: -12px;
+    }
+    .filename {
+      display: inline-block;
+      border: 1px solid #41b883;
+      border-radius: 4px;
+      padding: 12px;
+    }
+    .filename.-duplicate {
+      background-color: #34495e;
+      color: #ffffff;
+    }
+    footer {
+      margin-top: 20px;
+      padding: 8px;
+      font-size: 10px;
+      text-align: left;
+      color: #ffffff;
+    }
+    footer a {
+      color: #41b883;
+    }
+  </style>
+  <script>
+    window.enableWebSocket = <%- enableWebSocket %>;
+  </script>
+  <script src="../dist/client.js" defer></script>
+</head>
+<body>
+<div id="app"></div>
+<footer>
+<p>If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
+</footer>
+</body>
+</html>
