@@ -1,8 +1,9 @@
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, Node} from 'vue-eslint-parser/ast/nodes';
 import {readFileSync} from 'fs';
-import {resolve} from 'path';
-import Report = vueComponentAnalyzer.Report;
+import {resolve, extname, dirname} from 'path';
+import FileReport = vueComponentAnalyzer.FileReport;
+const cwd = process.cwd();
 
 /**
  * get only Import Declaration syntax.
@@ -13,35 +14,46 @@ export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[]
 };
 
 /**
- * TODO: add comment.
+ * get filename from import string. support relative path and nuxt alias.
  * @param _filename
+ * @param _currentFileName
  */
-export const resolveFile = (_filename: string): string => {
-  // support relative path and nuxt alias.
-  if (_filename.startsWith('.') || _filename.startsWith('~') || _filename.startsWith('@')) {
-    // TODO: resolve same directories line start from [./].
+export const resolveFile = (_filename: string, _currentFileName: string): string => {
+  if (_filename.startsWith('../')) {
     const filename = _filename.replace(/\.\.\//ug, '');
 
-    return filename.slice(-4) === '.vue' ? filename : `${filename}.vue`;
+    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+  } else if (_filename.startsWith('./')) {
+    const filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
+
+    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+  } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
+    const filename = _filename.replace('~', '.').replace('@', '.');
+
+    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
   }
 
   return '';
 };
 
-export const getImportDeclarationTree = (rootDir: string, fileName: string): Report => {
-  const filename = resolve(__dirname, rootDir, fileName);
-  const children: Report[] = [];
-  const result: Report = {
-    name: filename,
+export const getImportDeclarationTree = (fileName: string): FileReport => {
+  const filename = resolve(cwd, fileName);
+  const children: FileReport[] = [];
+  const result: FileReport = {
+    name: filename.replace(cwd, ''),
     children,
   };
 
-  console.log(`read ${filename}...`);
+  console.log(`read ${filename}.`);
 
-  // TODO: add await
+  if (extname(filename) !== '.vue') {
+    return result;
+  }
+
   try {
     const file = readFileSync(filename, 'utf-8');
     const parserOption = {
+      ecmaVersion: 2018,
       sourceType: 'module',
     };
 
@@ -57,14 +69,15 @@ export const getImportDeclarationTree = (rootDir: string, fileName: string): Rep
       const source = String(body[i].source.value);
 
       if (source) {
-        const nextFilename = resolveFile(source);
+        const nextFilename = resolveFile(source, filename);
 
         if (nextFilename) {
-          children.push(getImportDeclarationTree(rootDir, nextFilename));
+          children.push(getImportDeclarationTree(nextFilename));
         }
       }
     }
   } catch (err) {
+    console.error(`Something went wrong with reading ${filename}`);
     console.error(err.message);
   }
 

@@ -1,8 +1,8 @@
 /**
  * イベント発光時に引数として渡されるEventクラス
  */
-export class CustomEvent {
-  currentTarget: any;
+export class MyCustomEvent {
+  public currentTarget: any;
 
   static COMPLETE = 'complete';
 
@@ -21,7 +21,7 @@ export class CustomEventListener {
    * @param handler
    * @param priority
    */
-  constructor(public type: string, public handler: (e: CustomEvent) => void, public priority: number = 0) {} // eslint-disable-line
+  constructor(public type: string, public handler: (e: MyCustomEvent) => void, public priority: number = 0) {} // eslint-disable-line
 
   /**
    * タイプとコールバックからリスナーを比較する
@@ -29,7 +29,7 @@ export class CustomEventListener {
    * @param handler
    * @returns {boolean}
    */
-  equalCurrentListener(type: string, handler: (e: CustomEvent) => void): boolean {
+  equalCurrentListener(type: string, handler: (e: MyCustomEvent) => void): boolean {
     return this.type === type && this.handler === handler;
   }
 }
@@ -44,19 +44,19 @@ export class CustomEventDispatcher {
    * イベントを発光するメソッド
    * @param event
    */
-  dispatchEvent(event: string | CustomEvent): void {
-    let e: CustomEvent;
+  dispatchEvent(event: string | MyCustomEvent): void {
+    let e: MyCustomEvent;
     let type: string;
 
     // 引数がEventオブジェクトだった場合
-    if (event instanceof CustomEvent) {
+    if (event instanceof MyCustomEvent) {
       type = event.type; // eslint-disable-line
       e = event;
 
       // 引数がstringだった場合
     } else {
       type = event;
-      e = new CustomEvent(type);
+      e = new MyCustomEvent(type);
     }
 
     if (this.listeners[type] !== null) {
@@ -84,8 +84,8 @@ export class CustomEventDispatcher {
    * @param callback
    * @param priority
    */
-  addEventListener(type: string, callback: (e: CustomEvent) => void, priority = 0): void {
-    if (this.listeners[type] === null) {
+  addEventListener(type: string, callback: (e: MyCustomEvent) => void, priority = 0): void {
+    if (!this.listeners[type]) {
       this.listeners[type] = [];
     }
 
@@ -98,7 +98,7 @@ export class CustomEventDispatcher {
    * @param type
    * @param callback
    */
-  removeEventListener(type: string, callback: (e: CustomEvent) => void): void {
+  removeEventListener(type: string, callback: (e: MyCustomEvent) => void): void {
     if (this.hasEventListener(type, callback)) {
       for (let i = 0; i < this.listeners[type].length; i++) {
         const listener: CustomEventListener = this.listeners[type][i];
@@ -124,7 +124,7 @@ export class CustomEventDispatcher {
    * @returns {boolean}
    */
   containEventListener(type: string): boolean {
-    if (this.listeners[type] === null) {
+    if (!this.listeners[type]) {
       return false;
     }
 
@@ -137,8 +137,8 @@ export class CustomEventDispatcher {
    * @param callback
    * @returns {boolean}
    */
-  hasEventListener(type: string, callback: (e: CustomEvent) => void): boolean {
-    if (this.listeners[type] === null) {
+  hasEventListener(type: string, callback: (e: MyCustomEvent) => void): boolean {
+    if (!this.listeners[type]) {
       return false;
     }
 

@@ -1,10 +1,12 @@
 declare namespace vueComponentAnalyzer {
-  export function getImportDeclarationTree(rootDir: string, file: string): Report;
-  interface Report {
-    name: string,
-    children: Report[]
+  export function getImportDeclarationTree(rootDir: string, file: string): FileReport;
+  interface AnalyzeReport {
+    entries: FileReport[]
   }
-  class CustomEventDispatcher {}
+  interface FileReport {
+    name: string,
+    children: FileReport[]
+  }
 }
 
 interface Window {

@@ -2,12 +2,13 @@
 
 import {Seed} from './Seed';
 import {Model} from './model';
-import Report = vueComponentAnalyzer.Report;
+import AnalyzeReport = vueComponentAnalyzer.AnalyzeReport;
+import FileReport = vueComponentAnalyzer.FileReport;
 
 export class Renderer {
   private readonly _app: HTMLElement | null;
 
-  private _tree: Seed[] = [];
+  private _tree: Seed[][] = [];
 
   constructor(private _model: Model) {
     this._app = document.getElementById('app');
@@ -22,7 +23,7 @@ export class Renderer {
    * @param level
    * @private
    */
-  private generateSeed(data: Report, seed: Seed, level: number): Seed[] {
+  private generateSeed(data: FileReport, seed: Seed, level: number): Seed[] {
     const tree: Seed[] = [];
     const {children} = data;
     const childSeeds: Seed[] = [];
@@ -44,12 +45,17 @@ export class Renderer {
 
   private ready = () => {
     const {data} = this._model;
+    const {entries} = data;
 
-    // TODO: multi entry?
+    for (let i = 0, len = entries.length; i < len; i++) {
+      const entry = entries[i];
 
-    const root = new Seed(data.name, 0, 0);
+      if (data) {
+        const root = new Seed(entry.name, 0, 0);
 
-    this._tree = this.generateSeed(data, root, 0);
+        this._tree.push(this.generateSeed(entry, root, 0));
+      }
+    }
 
     this.render();
   }
@@ -59,10 +65,15 @@ export class Renderer {
    * @private
    */
   private render():void {
-    const [root] = this._tree;
+    let html = '';
+    for (let i = 0, len = this._tree.length; i < len; i++) {
+      const [root] = this._tree[i];
+
+      html += root.render();
+    }
 
     const group = `<div class="root">
-        ${root.render()}
+        ${html}
     </div>`;
 
     if (this._app) {
