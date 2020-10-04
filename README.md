@@ -1,16 +1,36 @@
 # vue-component-analyzer
 
-// TODO: description of tool
+This tool can Analyze dependency tree for Vue.js SFC (Single File Component)
 
-// TODO: set capture of application
+![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot.png?raw=true)
 
 ## installation and usage
 
-// TODO: write installation and usage
+You can install vue-component-analyzer using npm:
 
-## demo
+```
+npm install @tkskto/vue-component-analyzer --save-dev
+```
 
+Then put command on npm scripts.
 
+```
+"scripts": {
+  "vca": "vca --dir pages"
+}
+```
+
+Or you can use npx:
+
+```
+npx vca --dir pages
+```
+
+### CLI Options
+
+- `--dir` : target directory. default is `src`.
+- `-f` or `--format` : report type. choose one from [browser | json | both]. default is `browser'.
+- `-o` or `--out` : output directory for JSON file.
 
 ## License
 

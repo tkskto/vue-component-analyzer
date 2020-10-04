@@ -1,6 +1,6 @@
 {
   "name": "@tkskto/vue-component-analyzer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Analyze dependency tree for Vue.js SFC (Single File Component)",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -33,6 +33,10 @@
     "types",
     "views"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "public"
+  },
   "dependencies": {
     "commander": "6.1.0",
     "ejs": "^3.1.5",
