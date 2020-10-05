@@ -12,7 +12,6 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "linebreak-style": [2, "unix"],
     "indent": [2, 2],
     "multiline-comment-style": 0,
     "@typescript-eslint/no-var-requires": 0
