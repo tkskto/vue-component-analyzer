@@ -13,7 +13,11 @@
       border-radius: 8px;
       margin-bottom: 20px;
     }
+    .group {
+      position: relative;
+    }
     .seed {
+      position: relative;
       display: grid;
       grid-template-columns: 400px 1fr;
       grid-template-rows: auto auto;
@@ -26,10 +30,25 @@
     .root > .seed {
       margin: 40px 0;
     }
-    .file {
-      position: relative;
-      margin-right: 40px;
-      z-index: 1;
+    .seed::before {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 2px;
+      height: calc(100% + 10px);
+      background-color: #ffffff;
+      top: 0;
+      left: -12px;
+    }
+    .seed:first-child::before {
+      height: calc(50% + 10px);
+      top: 50%;
+    }
+    .seed:last-child::before {
+      height: 50%;
+    }
+    .seed:first-child:last-child::before {
+      height: 0;
     }
     .seed.-no-child {
       grid-template-columns: 400px;
@@ -37,6 +56,11 @@
     }
     .seed.-no-child:first-child:last-child {
       margin: 0;
+    }
+    .file {
+      position: relative;
+      margin-right: 40px;
+      z-index: 1;
     }
     .seed .file::before,
     .seed .file::after {
@@ -64,19 +88,6 @@
     }
     .seed.-no-child .file::after {
       content: none;
-    }
-    .group {
-      position: relative;
-    }
-    .group::before {
-      content: "";
-      position: absolute;
-      display: block;
-      width: 2px;
-      height: calc(100% - 68px);
-      background-color: #ffffff;
-      top: 34px;
-      left: -12px;
     }
     .filename {
       position: relative;
