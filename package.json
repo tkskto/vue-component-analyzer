@@ -1,6 +1,6 @@
 {
   "name": "@tkskto/vue-component-analyzer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Analyze dependency tree for Vue.js SFC (Single File Component)",
   "main": "dist/index.js",
   "module": "dist/index.js",

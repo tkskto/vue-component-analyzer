@@ -3,7 +3,7 @@
  */
 
 /*!
-  @tkskto/vue-component-analyzer v0.0.3
+  @tkskto/vue-component-analyzer v0.0.5
   https://github.com/tkskto/
   Released under the MIT License.
 */
