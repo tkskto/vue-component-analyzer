@@ -3,17 +3,15 @@
  */
 
 /*!
-  @tkskto/vue-component-analyzer v0.0.5
+  @tkskto/vue-component-analyzer v0.0.6
   https://github.com/tkskto/
   Released under the MIT License.
 */
 'use strict';
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getImportDeclarationTree = void 0;
 const tslib_1 = require("tslib");
 const utils_1 = require("./utils");
-Object.defineProperty(exports, "getImportDeclarationTree", { enumerable: true, get: function () { return utils_1.getImportDeclarationTree; } });
 const server_1 = require("./server");
 const fs_1 = require("fs");
 const path_1 = tslib_1.__importDefault(require("path"));

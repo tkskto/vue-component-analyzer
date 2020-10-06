@@ -26,6 +26,7 @@ function writeFileExtra(filename: string, data: string) {
     }
   });
 }
+
 (async () => {
   try {
     // set commander options.
@@ -73,7 +74,3 @@ function writeFileExtra(filename: string, data: string) {
     console.error(err.message);
   }
 })();
-
-export {
-  getImportDeclarationTree,
-};
