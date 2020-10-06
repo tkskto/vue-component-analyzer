@@ -3,7 +3,6 @@ import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
-import buildIns from 'rollup-plugin-node-builtins';
 import license from 'rollup-plugin-license';
 
 import pkg from './package.json';
@@ -32,7 +31,6 @@ export default [
       commonjs(),
       nodeResolve(),
       json(),
-      buildIns(),
       license({
         banner: 'see license.txt',
         thirdParty: {
