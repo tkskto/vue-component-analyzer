@@ -50,6 +50,7 @@ export class Seed {
       fileClassName = ' -duplicate';
     }
 
+    // TODO add Props.
     return `<div class="seed${seedClassName}">
       <span class="file"><span class="filename${fileClassName}">${this._name}</span></span>
       ${childHTML}

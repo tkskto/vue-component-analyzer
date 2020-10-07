@@ -12,7 +12,6 @@ const projectRoot = path.resolve(__dirname, '..');
 /**
  * start web socket server and connect when finished generate component tree.
  */
-// export const startServer = (json: Report): {ws: webSocket.Server, http: http.Server} => {
 export const startServer = (json: AnalyzeReport): void => {
   const HOST = '127.0.0.1';
   const PORT = 8888;
