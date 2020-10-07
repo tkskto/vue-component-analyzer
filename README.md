@@ -20,7 +20,7 @@ Then put command on npm scripts.
 }
 ```
 
-Or you can use npx:
+Or you can use npx（after npm install）:
 
 ```
 npx vca --dir pages
