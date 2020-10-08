@@ -1,5 +1,5 @@
 /*!
-  @tkskto/vue-component-analyzer v0.0.6
+  @tkskto/vue-component-analyzer v0.1.0
   https://github.com/tkskto/
   Released under the MIT License.
 */
@@ -12,9 +12,8 @@ const ws_1 = tslib_1.__importDefault(require("ws"));
 const http_1 = tslib_1.__importDefault(require("http"));
 const opener = require('opener');
 const projectRoot = path_1.default.resolve(__dirname, '..');
-exports.startServer = (json) => {
+exports.startServer = (port, json) => {
     const HOST = '127.0.0.1';
-    const PORT = 8888;
     const app = express_1.default();
     app.engine('ejs', require('ejs').renderFile);
     app.set('view engine', 'ejs');
@@ -31,8 +30,8 @@ exports.startServer = (json) => {
             enableWebSocket: true,
         });
     });
-    server.listen(PORT, HOST, () => {
-        const addressPort = server.address().port || PORT;
+    server.listen(port, HOST, () => {
+        const addressPort = server.address().port || port;
         const url = `http://${HOST}:${addressPort}/`;
         console.log(`Vue Component Analyzer is started at ${url}`);
         console.log('Use \'Ctrl+C\' to close it');

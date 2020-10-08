@@ -1,5 +1,6 @@
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, Node} from 'vue-eslint-parser/ast/nodes';
+import {Token} from 'vue-eslint-parser/ast/tokens';
 import {readFileSync} from 'fs';
 import {resolve, extname, dirname} from 'path';
 import FileReport = vueComponentAnalyzer.FileReport;
@@ -14,26 +15,84 @@ export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[]
 };
 
 /**
+ * get Props Declaration syntax from Tokens.
+ * @param tokens
+ */
+export const getPropsDeclaration = (tokens: Token[]): string => {
+  let isPropsToken = false;
+  let result = '{'; // for JSON.parse
+  let closedCount = 0;
+  // TODO: support Date and Function Type Props.
+  const needQuotingTypes = ['Identifier', 'Boolean', 'Keyword'];
+
+  for (const token of tokens) {
+    const {type, value} = token;
+    // waiting to see starting the declaration of props.
+    if (isPropsToken || (type === 'Identifier' && value === 'props')) {
+      const needQuoting = needQuotingTypes.includes(type);
+      isPropsToken = true;
+
+      if (type === 'Punctuator') {
+        // count brace for finding end of the declaration.
+        if (value === '{') {
+          closedCount++;
+        } else if (value === '}') {
+          closedCount--;
+
+          // remove trailing comma for JSON.
+          if (result[result.length - 1] === ',') {
+            result = result.slice(0, -1);
+          }
+
+          if (closedCount === 0) {
+            result += '}';
+            break;
+          }
+        }
+      }
+
+      // put left-hand quotation for JSON.
+      if (needQuoting) {
+        result += '"';
+      }
+
+      // change quotation to double for JSON.
+      result += value.replace(/'/ug, '"');
+
+      // put right-hand quotation for JSON.
+      if (needQuoting) {
+        result += '"';
+      }
+    }
+  }
+
+  return `${result}}`;
+};
+
+/**
  * get filename from import string. support relative path and nuxt alias.
  * @param _filename
  * @param _currentFileName
  */
 export const resolveFile = (_filename: string, _currentFileName: string): string => {
+  let filename = '';
+
+  // TODO: support no extension type.
   if (_filename.startsWith('../')) {
-    const filename = _filename.replace(/\.\.\//ug, '');
-
-    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+    filename = _filename.replace(/\.\.\//ug, '');
   } else if (_filename.startsWith('./')) {
-    const filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
-
-    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+    filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
   } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
-    const filename = _filename.replace('~', '.').replace('@', '.');
-
-    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+    filename = _filename.replace('~', '.').replace('@', '.');
   }
 
-  return '';
+  if (filename) {
+    if (extname(filename) === '') {
+      return `${filename}.vue`;
+    }
+  }
+
+  return filename;
 };
 
 export const getImportDeclarationTree = (fileName: string): FileReport => {
@@ -41,6 +100,7 @@ export const getImportDeclarationTree = (fileName: string): FileReport => {
   const children: FileReport[] = [];
   const result: FileReport = {
     name: filename.replace(cwd, ''),
+    props: '',
     children,
   };
 
@@ -59,6 +119,14 @@ export const getImportDeclarationTree = (fileName: string): FileReport => {
 
     // using vue-eslint-parser package.
     const esLintProgram = parse(file, parserOption);
+
+    if (esLintProgram.tokens) {
+      const propsDeclaration = JSON.parse(getPropsDeclaration(esLintProgram.tokens));
+
+      if (propsDeclaration && propsDeclaration.props) {
+        result.props = propsDeclaration.props;
+      }
+    }
 
     // get only import declaration syntax.
     const body = getImportDeclaration(esLintProgram.body);

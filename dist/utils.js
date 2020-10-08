@@ -1,10 +1,10 @@
 /*!
-  @tkskto/vue-component-analyzer v0.0.6
+  @tkskto/vue-component-analyzer v0.1.0
   https://github.com/tkskto/
   Released under the MIT License.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getImportDeclarationTree = exports.resolveFile = exports.getImportDeclaration = void 0;
+exports.getImportDeclarationTree = exports.resolveFile = exports.getPropsDeclaration = exports.getImportDeclaration = void 0;
 const vue_eslint_parser_1 = require("vue-eslint-parser");
 const fs_1 = require("fs");
 const path_1 = require("path");
@@ -12,26 +12,66 @@ const cwd = process.cwd();
 exports.getImportDeclaration = (nodeArr) => {
     return nodeArr.filter((node) => node.type === 'ImportDeclaration');
 };
+exports.getPropsDeclaration = (tokens) => {
+    let isPropsToken = false;
+    let result = '{';
+    let closedCount = 0;
+    const needQuotingTypes = ['Identifier', 'Boolean', 'Keyword'];
+    for (const token of tokens) {
+        const { type, value } = token;
+        if (isPropsToken || (type === 'Identifier' && value === 'props')) {
+            const needQuoting = needQuotingTypes.includes(type);
+            isPropsToken = true;
+            if (type === 'Punctuator') {
+                if (value === '{') {
+                    closedCount++;
+                }
+                else if (value === '}') {
+                    closedCount--;
+                    if (result[result.length - 1] === ',') {
+                        result = result.slice(0, -1);
+                    }
+                    if (closedCount === 0) {
+                        result += '}';
+                        break;
+                    }
+                }
+            }
+            if (needQuoting) {
+                result += '"';
+            }
+            result += value.replace(/'/ug, '"');
+            if (needQuoting) {
+                result += '"';
+            }
+        }
+    }
+    return `${result}}`;
+};
 exports.resolveFile = (_filename, _currentFileName) => {
+    let filename = '';
     if (_filename.startsWith('../')) {
-        const filename = _filename.replace(/\.\.\//ug, '');
-        return path_1.extname(filename) === '.vue' ? filename : path_1.extname(filename) !== '' ? filename : `${filename}.vue`;
+        filename = _filename.replace(/\.\.\//ug, '');
     }
     else if (_filename.startsWith('./')) {
-        const filename = `${path_1.dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
-        return path_1.extname(filename) === '.vue' ? filename : path_1.extname(filename) !== '' ? filename : `${filename}.vue`;
+        filename = `${path_1.dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
     }
     else if (_filename.startsWith('~') || _filename.startsWith('@')) {
-        const filename = _filename.replace('~', '.').replace('@', '.');
-        return path_1.extname(filename) === '.vue' ? filename : path_1.extname(filename) !== '' ? filename : `${filename}.vue`;
+        filename = _filename.replace('~', '.').replace('@', '.');
     }
-    return '';
+    if (filename) {
+        if (path_1.extname(filename) === '') {
+            return `${filename}.vue`;
+        }
+    }
+    return filename;
 };
 exports.getImportDeclarationTree = (fileName) => {
     const filename = path_1.resolve(cwd, fileName);
     const children = [];
     const result = {
         name: filename.replace(cwd, ''),
+        props: '',
         children,
     };
     console.log(`read ${filename}.`);
@@ -45,6 +85,12 @@ exports.getImportDeclarationTree = (fileName) => {
             sourceType: 'module',
         };
         const esLintProgram = vue_eslint_parser_1.parse(file, parserOption);
+        if (esLintProgram.tokens) {
+            const propsDeclaration = JSON.parse(exports.getPropsDeclaration(esLintProgram.tokens));
+            if (propsDeclaration && propsDeclaration.props) {
+                result.props = propsDeclaration.props;
+            }
+        }
         const body = exports.getImportDeclaration(esLintProgram.body);
         for (let i = 0, len = body.length; i < len; i++) {
             const source = String(body[i].source.value);

@@ -33,6 +33,7 @@ function writeFileExtra(filename: string, data: string) {
     commander.option('--dir [dir]', 'root directory of src.', 'src');
     commander.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', FORMAT.BROWSER);
     commander.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json" or "both")', 'out');
+    commander.option('-p, --port [number]', 'select a port number for the local server', '8888');
 
     const argv = commander.parse(process.argv);
 
@@ -50,7 +51,7 @@ function writeFileExtra(filename: string, data: string) {
     const entriesData = [];
 
     for (let i = 0, len = entries.length; i < len; i++) {
-      const entryFile = entries[i]; // TODO: get from cli? just get from dir?
+      const entryFile = entries[i];
       const children = getImportDeclarationTree(entryFile);
 
       entriesData.push(children);
@@ -61,10 +62,10 @@ function writeFileExtra(filename: string, data: string) {
     };
 
     if (argv.format === FORMAT.BOTH) {
-      startServer(result);
+      startServer(argv.port, result);
       writeFileExtra(path.resolve(process.cwd(), `${argv.out}/result.json`), JSON.stringify(result, null, 4));
     } else if (argv.format === FORMAT.BROWSER) {
-      startServer(result);
+      startServer(argv.port, result);
     } else if (argv.format === FORMAT.JSON) {
       writeFileExtra(path.resolve(process.cwd(), `${argv.out}/result.json`), JSON.stringify(result, null, 4));
     }

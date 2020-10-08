@@ -3,7 +3,7 @@
  */
 
 /*!
-  @tkskto/vue-component-analyzer v0.0.6
+  @tkskto/vue-component-analyzer v0.1.0
   https://github.com/tkskto/
   Released under the MIT License.
 */
@@ -37,6 +37,7 @@ function writeFileExtra(filename, data) {
         commander.option('--dir [dir]', 'root directory of src.', 'src');
         commander.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', FORMAT.BROWSER);
         commander.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json" or "both")', 'out');
+        commander.option('-p, --port [number]', 'select a port number for the local server', '8888');
         const argv = commander.parse(process.argv);
         if (argv.format !== FORMAT.BROWSER && argv.format !== FORMAT.JSON && argv.format !== FORMAT.BOTH) {
             console.error(`not support ${argv.format} format.`);
@@ -56,11 +57,11 @@ function writeFileExtra(filename, data) {
             entries: entriesData,
         };
         if (argv.format === FORMAT.BOTH) {
-            server_1.startServer(result);
+            server_1.startServer(argv.port, result);
             writeFileExtra(path_1.default.resolve(process.cwd(), `${argv.out}/result.json`), JSON.stringify(result, null, 4));
         }
         else if (argv.format === FORMAT.BROWSER) {
-            server_1.startServer(result);
+            server_1.startServer(argv.port, result);
         }
         else if (argv.format === FORMAT.JSON) {
             writeFileExtra(path_1.default.resolve(process.cwd(), `${argv.out}/result.json`), JSON.stringify(result, null, 4));
