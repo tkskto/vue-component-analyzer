@@ -1,8 +1,10 @@
 # vue-component-analyzer
 
-This tool can Analyze dependency tree for Vue.js SFC (Single File Component)
+This tool can Analyze dependency tree for Vue.js SFC (Single File Component).
 
-![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot.png?raw=true)
+Also, you can see Props of Component.
+
+![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot2.png?raw=true)
 
 ## installation and usage
 
@@ -28,9 +30,10 @@ npx vca --dir pages
 
 ### CLI Options
 
-- `--dir` : target directory. default is `src`.
+- `--dir` : analyze target directory. default is `src`.
 - `-f` or `--format` : report type. choose one from [browser | json | both]. default is `browser'.
-- `-o` or `--out` : output directory for JSON file.
+- `-o` or `--out` : output directory. JSON file will output here.
+- `-p` or `--port` : select a port number for the local server.
 
 ## License
 
