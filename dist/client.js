@@ -1,5 +1,5 @@
 /*!
-  @tkskto/vue-component-analyzer v0.0.6
+  @tkskto/vue-component-analyzer v0.1.0
   https://github.com/tkskto/
   Released under the MIT License.
 */
@@ -116,13 +116,13 @@ Model.EVENT = {
 };
 
 class Seed {
-    constructor(name, level, index) {
-        this.name = name;
+    constructor(file, level, index) {
         this.level = level;
         this.index = index;
         this._children = [];
         this._duplicate = false;
-        this._name = name;
+        this._name = file.name;
+        this._props = file.props;
         this._level = level;
         this._index = index;
     }
@@ -135,7 +135,11 @@ class Seed {
         ${html}
     </div>`;
     }
+    renderWithProps() {
+        return `<details><summary>${this._name}</summary><pre>${JSON.stringify(this._props, null, '\t')}</pre></details>`;
+    }
     render() {
+        const contents = this._props ? this.renderWithProps() : this._name;
         let childHTML = '';
         let seedClassName = '';
         let fileClassName = '';
@@ -149,7 +153,7 @@ class Seed {
             fileClassName = ' -duplicate';
         }
         return `<div class="seed${seedClassName}">
-      <span class="file"><span class="filename${fileClassName}">${this._name}</span></span>
+      <span class="file"><span class="filename${fileClassName}">${contents}</span></span>
       ${childHTML}
     </div>`;
     }
@@ -177,7 +181,7 @@ class Renderer {
             for (let i = 0, len = entries.length; i < len; i++) {
                 const entry = entries[i];
                 if (data) {
-                    const root = new Seed(entry.name, 0, 0);
+                    const root = new Seed(entry, 0, 0);
                     this._tree.push(this.generateSeed(entry, root, 0));
                 }
             }
@@ -192,7 +196,7 @@ class Renderer {
         const childSeeds = [];
         for (let i = 0, len = children.length; i < len; i++) {
             const child = children[i];
-            const childSeed = new Seed(child.name, level + 1, i);
+            const childSeed = new Seed(child, level + 1, i);
             childSeeds.push(childSeed);
             this.generateSeed(child, childSeed, level + 1);
         }

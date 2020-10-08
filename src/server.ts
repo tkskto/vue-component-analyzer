@@ -12,13 +12,13 @@ const projectRoot = path.resolve(__dirname, '..');
 /**
  * start web socket server and connect when finished generate component tree.
  */
-export const startServer = (json: AnalyzeReport): void => {
+export const startServer = (port: number, json: AnalyzeReport): void => {
   const HOST = '127.0.0.1';
-  const PORT = 8888;
 
   // establish local web server.
   const app = express();
 
+  // use EJS to pass variables.
   app.engine('ejs', require('ejs').renderFile);
   app.set('view engine', 'ejs');
   app.set('views', `${projectRoot}/views`);
@@ -38,8 +38,8 @@ export const startServer = (json: AnalyzeReport): void => {
     });
   });
 
-  server.listen(PORT, HOST, () => {
-    const addressPort = (server.address() as AddressInfo).port || PORT;
+  server.listen(port, HOST, () => {
+    const addressPort = (server.address() as AddressInfo).port || port;
     const url = `http://${HOST}:${addressPort}/`;
 
     console.log(`Vue Component Analyzer is started at ${url}`);

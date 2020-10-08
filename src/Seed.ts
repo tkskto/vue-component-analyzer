@@ -1,8 +1,12 @@
 /**
  * Data Type of one of Vue File.
  */
+import FileReport = vueComponentAnalyzer.FileReport;
+
 export class Seed {
   private _name: string; // file name
+
+  private _props: string; // props string
 
   private _level: number; // directory level
 
@@ -13,17 +17,18 @@ export class Seed {
   private _duplicate = false; // this file is imported from multiple files or not?
 
   /**
-   * @param name - filename
+   * @param file - filename
    * @param level - hierarchy level of this file
    * @param index - index of this hierarchy line
    */
-  constructor(private name: string, private level: number, private index: number) {
-    this._name = name;
+  constructor(file: FileReport, private level: number, private index: number) {
+    this._name = file.name;
+    this._props = file.props;
     this._level = level;
     this._index = index;
   }
 
-  private renderChildren():string {
+  private renderChildren(): string {
     let html = '';
 
     for (let i = 0, len = this._children.length; i < len; i++) {
@@ -35,7 +40,12 @@ export class Seed {
     </div>`;
   }
 
+  private renderWithProps(): string {
+    return `<details><summary>${this._name}</summary><pre>${JSON.stringify(this._props, null, '\t')}</pre></details>`;
+  }
+
   public render(): string {
+    const contents = this._props ? this.renderWithProps() : this._name;
     let childHTML = '';
     let seedClassName = '';
     let fileClassName = '';
@@ -50,9 +60,8 @@ export class Seed {
       fileClassName = ' -duplicate';
     }
 
-    // TODO add Props.
     return `<div class="seed${seedClassName}">
-      <span class="file"><span class="filename${fileClassName}">${this._name}</span></span>
+      <span class="file"><span class="filename${fileClassName}">${contents}</span></span>
       ${childHTML}
     </div>`;
   }

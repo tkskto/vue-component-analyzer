@@ -75,22 +75,24 @@ export const getPropsDeclaration = (tokens: Token[]): string => {
  * @param _currentFileName
  */
 export const resolveFile = (_filename: string, _currentFileName: string): string => {
+  let filename = '';
+
   // TODO: support no extension type.
   if (_filename.startsWith('../')) {
-    const filename = _filename.replace(/\.\.\//ug, '');
-
-    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+    filename = _filename.replace(/\.\.\//ug, '');
   } else if (_filename.startsWith('./')) {
-    const filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
-
-    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+    filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
   } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
-    const filename = _filename.replace('~', '.').replace('@', '.');
-
-    return extname(filename) === '.vue' ? filename : extname(filename) !== '' ? filename : `${filename}.vue`;
+    filename = _filename.replace('~', '.').replace('@', '.');
   }
 
-  return '';
+  if (filename) {
+    if (extname(filename) === '') {
+      return `${filename}.vue`;
+    }
+  }
+
+  return filename;
 };
 
 export const getImportDeclarationTree = (fileName: string): FileReport => {

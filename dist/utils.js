@@ -1,5 +1,5 @@
 /*!
-  @tkskto/vue-component-analyzer v0.0.6
+  @tkskto/vue-component-analyzer v0.1.0
   https://github.com/tkskto/
   Released under the MIT License.
 */
@@ -49,19 +49,22 @@ exports.getPropsDeclaration = (tokens) => {
     return `${result}}`;
 };
 exports.resolveFile = (_filename, _currentFileName) => {
+    let filename = '';
     if (_filename.startsWith('../')) {
-        const filename = _filename.replace(/\.\.\//ug, '');
-        return path_1.extname(filename) === '.vue' ? filename : path_1.extname(filename) !== '' ? filename : `${filename}.vue`;
+        filename = _filename.replace(/\.\.\//ug, '');
     }
     else if (_filename.startsWith('./')) {
-        const filename = `${path_1.dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
-        return path_1.extname(filename) === '.vue' ? filename : path_1.extname(filename) !== '' ? filename : `${filename}.vue`;
+        filename = `${path_1.dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
     }
     else if (_filename.startsWith('~') || _filename.startsWith('@')) {
-        const filename = _filename.replace('~', '.').replace('@', '.');
-        return path_1.extname(filename) === '.vue' ? filename : path_1.extname(filename) !== '' ? filename : `${filename}.vue`;
+        filename = _filename.replace('~', '.').replace('@', '.');
     }
-    return '';
+    if (filename) {
+        if (path_1.extname(filename) === '') {
+            return `${filename}.vue`;
+        }
+    }
+    return filename;
 };
 exports.getImportDeclarationTree = (fileName) => {
     const filename = path_1.resolve(cwd, fileName);
