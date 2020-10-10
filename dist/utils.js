@@ -51,7 +51,7 @@ exports.getPropsDeclaration = (tokens) => {
 exports.resolveFile = (_filename, _currentFileName) => {
     let filename = '';
     if (_filename.startsWith('../')) {
-        filename = _filename.replace(/\.\.\//ug, '');
+        filename = path_1.resolve(path_1.dirname(_currentFileName), _filename);
     }
     else if (_filename.startsWith('./')) {
         filename = `${path_1.dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;

@@ -79,7 +79,7 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
 
   // TODO: support no extension type.
   if (_filename.startsWith('../')) {
-    filename = _filename.replace(/\.\.\//ug, '');
+    filename = resolve(dirname(_currentFileName), _filename);
   } else if (_filename.startsWith('./')) {
     filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
   } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
