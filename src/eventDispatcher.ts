@@ -2,13 +2,13 @@
  * イベント発光時に引数として渡されるEventクラス
  */
 export class MyCustomEvent {
-  public currentTarget: any;
+  public currentTarget: CustomEventDispatcher | null = null; // eslint-disable-line
 
   static COMPLETE = 'complete';
 
   static CHANGE_PROPERTY = 'changeProperty';
 
-  constructor(public type: string, public value: any = null) {} // eslint-disable-line
+  constructor(public type: string) {} // eslint-disable-line
 }
 
 /**
@@ -38,7 +38,7 @@ export class CustomEventListener {
  * dispatcherとなるクラスでextendして使う
  */
 export class CustomEventDispatcher {
-  listeners: any = {};
+  listeners: {[key:string]: CustomEventListener[]} = {};
 
   /**
    * イベントを発光するメソッド

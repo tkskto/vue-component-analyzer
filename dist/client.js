@@ -1,12 +1,12 @@
 /*!
-  @tkskto/vue-component-analyzer v0.1.0
+  @tkskto/vue-component-analyzer v0.1.1
   https://github.com/tkskto/
   Released under the MIT License.
 */
 class MyCustomEvent {
-    constructor(type, value = null) {
+    constructor(type) {
         this.type = type;
-        this.value = value;
+        this.currentTarget = null;
     }
 }
 MyCustomEvent.COMPLETE = 'complete';
