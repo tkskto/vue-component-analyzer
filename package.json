@@ -14,8 +14,9 @@
     "cover": "npm run cover:test && npm run cover:report",
     "cover:test": "nyc npm run test:base -- --timeout 60000",
     "cover:report": "nyc report --reporter=html",
-    "test": "nyc npm run test:base -- --timeout 60000",
-    "test:base": "ts-mocha ./test/specs/*.ts"
+    "test": "npm run test:base -- --timeout 60000",
+    "test:base": "ts-mocha ./test/specs/*.ts",
+    "test:base:update": "ts-mocha ./test/specs/*.ts"
   },
   "keywords": [
     "Vue.js",

@@ -6,9 +6,9 @@ const mkdirp = require('mkdirp');
 const fixturesDir = join(__dirname, '../fixture/');
 const snapshotDir = join(__dirname, '../snapshots/');
 
-describe('import declaration test', () => {
-  it('importOne.vue', async () => {
-    const filename = 'declarationTest/importOne';
+describe('props test', () => {
+  it('oneProps.vue', async () => {
+    const filename = 'propsTest/oneProps';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`));
     const expectedFilePath = join(snapshotDir, `${filename}.json`);
     const json = JSON.stringify(declaration).slice(0);
