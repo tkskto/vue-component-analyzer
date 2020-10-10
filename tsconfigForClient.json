@@ -11,7 +11,8 @@
        "types"
      ],
      "types": [
-       "vue-eslint-parser"
+       "vue-eslint-parser",
+       "mocha"
      ],
     "esModuleInterop": true,
     "skipLibCheck": true,
