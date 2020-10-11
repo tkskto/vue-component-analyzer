@@ -1,0 +1,1 @@
+{"name":"/test/fixture/propsTest/twoProps.vue","props":{"data":{"type":"String","required":"true","default":"1"},"data2":{"type":"Number","required":"false","default":1}},"children":[]}

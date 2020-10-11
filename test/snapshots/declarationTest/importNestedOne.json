@@ -1,0 +1,1 @@
+{"name":"/test/fixture/declarationTest/importNestedOne.vue","props":"","children":[{"name":"/test/components/nested.vue","props":"","children":[{"name":"/test/components/child.vue","props":"","children":[]}]}]}

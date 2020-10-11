@@ -2,5 +2,5 @@
   <div></div>
 </template>
 <script>
-  import nested from '../components/nested';
+  import nested from '../../components/nested';
 </script>

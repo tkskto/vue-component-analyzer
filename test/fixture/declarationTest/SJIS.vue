@@ -3,5 +3,5 @@
 </template>
 
 <script>
-  import child from '../components/child';
+  import child from '../../components/child';
 </script>

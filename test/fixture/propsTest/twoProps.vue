@@ -9,6 +9,11 @@
         required: true,
         default: '1',
       },
+      data2: {
+        type: Number,
+        required: false,
+        default: 1,
+      },
     },
   };
 </script>
