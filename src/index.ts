@@ -1,6 +1,6 @@
 // for execute from npm scripts or commandline.
 
-import {getImportDeclarationTree} from './utils';
+import {getImportDeclarationTree, counter} from './utils';
 import {startServer} from './server';
 import {writeFileSync} from 'fs';
 import path from 'path';
@@ -59,6 +59,7 @@ function writeFileExtra(filename: string, data: string) {
 
     const result = {
       entries: entriesData,
+      counter,
     };
 
     if (argv.format === FORMAT.BOTH) {

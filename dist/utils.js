@@ -3,12 +3,16 @@
   https://github.com/tkskto/
   Released under the MIT License.
 */
+'use strict';
+
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getImportDeclarationTree = exports.resolveFile = exports.getPropsDeclaration = exports.getImportDeclaration = void 0;
+exports.getImportDeclarationTree = exports.resolveFile = exports.getPropsDeclaration = exports.getImportDeclaration = exports.counter = void 0;
 const vue_eslint_parser_1 = require("vue-eslint-parser");
 const fs_1 = require("fs");
 const path_1 = require("path");
 const cwd = process.cwd();
+const FileCounter = require('./FileCounter');
+exports.counter = new FileCounter();
 exports.getImportDeclaration = (nodeArr) => {
     return nodeArr.filter((node) => node.type === 'ImportDeclaration');
 };
@@ -68,13 +72,15 @@ exports.resolveFile = (_filename, _currentFileName) => {
 };
 exports.getImportDeclarationTree = (fileName) => {
     const filename = path_1.resolve(cwd, fileName);
+    const shortFilename = filename.replace(cwd, '');
     const children = [];
     const result = {
-        name: filename.replace(cwd, ''),
+        name: shortFilename,
         props: '',
         children,
     };
     console.log(`read ${filename}.`);
+    exports.counter.add(shortFilename);
     if (path_1.extname(filename) !== '.vue') {
         return result;
     }

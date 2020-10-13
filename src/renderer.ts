@@ -44,7 +44,9 @@ export class Renderer {
 
   private ready = () => {
     const {data} = this._model;
-    const {entries} = data;
+    const {entries, counter} = data;
+
+    console.log(counter);
 
     for (let i = 0, len = entries.length; i < len; i++) {
       const entry = entries[i];

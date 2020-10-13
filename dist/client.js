@@ -101,6 +101,7 @@ class Model extends CustomEventDispatcher {
         super(...arguments);
         this._data = {
             entries: [],
+            counter: {},
         };
     }
     get data() {
@@ -177,7 +178,8 @@ class Renderer {
         this._tree = [];
         this.ready = () => {
             const { data } = this._model;
-            const { entries } = data;
+            const { entries, counter } = data;
+            console.log(counter);
             for (let i = 0, len = entries.length; i < len; i++) {
                 const entry = entries[i];
                 if (data) {

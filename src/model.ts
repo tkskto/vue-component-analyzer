@@ -4,6 +4,7 @@ import AnalyzeReport = vueComponentAnalyzer.AnalyzeReport;
 export class Model extends CustomEventDispatcher {
   private _data: AnalyzeReport = {
     entries: [],
+    counter: {},
   };
 
   public static EVENT = {
