@@ -12,20 +12,22 @@ export class Seed {
 
   private _index: number; // index
 
-  private _children: Seed[] = []; // imported modules from this file.
+  private _count: number;
 
-  private _duplicate = false; // this file is imported from multiple files or not?
+  private _children: Seed[] = []; // imported modules from this file.
 
   /**
    * @param file - filename
    * @param level - hierarchy level of this file
    * @param index - index of this hierarchy line
+   * @param count - number of files reference this file.
    */
-  constructor(file: FileReport, private level: number, private index: number) {
+  constructor(file: FileReport, level: number, index: number, count: number) {
     this._name = file.name;
     this._props = file.props;
     this._level = level;
     this._index = index;
+    this._count = count;
   }
 
   private renderChildren(): string {
@@ -48,7 +50,6 @@ export class Seed {
     const contents = this._props ? this.renderWithProps() : this._name;
     let childHTML = '';
     let seedClassName = '';
-    let fileClassName = '';
 
     if (this._children.length > 0) {
       childHTML = this.renderChildren();
@@ -56,14 +57,25 @@ export class Seed {
       seedClassName = ' -no-child';
     }
 
-    if (this._duplicate) {
-      fileClassName = ' -duplicate';
-    }
-
     return `<div class="seed${seedClassName}">
-      <span class="file"><span class="filename${fileClassName}">${contents}</span></span>
+      <span class="file">
+        <span class="filename">
+          <span class="file__text">${contents}</span>
+          ${this.getCountText()}
+        </span>
+      </span>
       ${childHTML}
     </div>`;
+  }
+
+  private getCountText(): string {
+    if (this._count === 0) {
+      return '';
+    } else if (this._count === 1) {
+      return '<span class="file__count">1 time referenced.</span>';
+    }
+
+    return `<span class="file__count">${this._count} times referenced.</span>`;
   }
 
   get children(): Seed[] {
@@ -72,13 +84,5 @@ export class Seed {
 
   set children(value: Seed[]) {
     this._children = value;
-  }
-
-  get duplicate(): boolean {
-    return this._duplicate;
-  }
-
-  set duplicate(value: boolean) {
-    this._duplicate = value;
   }
 }

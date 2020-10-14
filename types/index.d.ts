@@ -7,7 +7,7 @@ declare namespace vueComponentAnalyzer {
   export function getImportDeclarationTree(rootDir: string, file: string): FileReport;
   interface AnalyzeReport {
     entries: FileReport[],
-    counter: {[key: string]: number}
+    count: {[key: string]: number}
   }
 }
 

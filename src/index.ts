@@ -59,7 +59,7 @@ function writeFileExtra(filename: string, data: string) {
 
     const result = {
       entries: entriesData,
-      counter,
+      count: counter.count,
     };
 
     if (argv.format === FORMAT.BOTH) {
