@@ -5,6 +5,9 @@ import {readFileSync} from 'fs';
 import {resolve, extname, dirname} from 'path';
 import FileReport = vueComponentAnalyzer.FileReport;
 const cwd = process.cwd();
+const FileCounter = require('./FileCounter');
+
+export const counter = new FileCounter();
 
 /**
  * get only Import Declaration syntax.
@@ -97,14 +100,17 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
 
 export const getImportDeclarationTree = (fileName: string): FileReport => {
   const filename = resolve(cwd, fileName);
+  const shortFilename = filename.replace(cwd, '');
   const children: FileReport[] = [];
   const result: FileReport = {
-    name: filename.replace(cwd, ''),
+    name: shortFilename,
     props: '',
     children,
   };
 
   console.log(`read ${filename}.`);
+
+  counter.add(shortFilename);
 
   if (extname(filename) !== '.vue') {
     return result;

@@ -13,6 +13,7 @@ const banner = `/*!
   Released under the ${pkg.license} License.
 */`;
 
+// TODO: bundle cjs modules.
 export default [
   {
     input: 'src/index.ts',
@@ -45,7 +46,18 @@ export default [
     input: 'src/server.ts',
     output: {
       file: 'dist/server.js',
-      format: 'es',
+      format: 'cjs',
+      banner,
+    },
+    plugins: [
+      typescript(),
+    ],
+  },
+  {
+    input: 'src/FileCounter.ts',
+    output: {
+      file: 'dist/FileCounter.js',
+      format: 'cjs',
       banner,
     },
     plugins: [
@@ -56,7 +68,7 @@ export default [
     input: 'src/utils.ts',
     output: {
       file: 'dist/utils.js',
-      format: 'es',
+      format: 'cjs',
       banner,
     },
     plugins: [

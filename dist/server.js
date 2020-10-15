@@ -3,6 +3,8 @@
   https://github.com/tkskto/
   Released under the MIT License.
 */
+'use strict';
+
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startServer = void 0;
 const tslib_1 = require("tslib");

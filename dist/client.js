@@ -101,6 +101,7 @@ class Model extends CustomEventDispatcher {
         super(...arguments);
         this._data = {
             entries: [],
+            count: {},
         };
     }
     get data() {
@@ -116,15 +117,13 @@ Model.EVENT = {
 };
 
 class Seed {
-    constructor(file, level, index) {
-        this.level = level;
-        this.index = index;
+    constructor(file, level, index, count) {
         this._children = [];
-        this._duplicate = false;
         this._name = file.name;
         this._props = file.props;
         this._level = level;
         this._index = index;
+        this._count = count;
     }
     renderChildren() {
         let html = '';
@@ -142,32 +141,36 @@ class Seed {
         const contents = this._props ? this.renderWithProps() : this._name;
         let childHTML = '';
         let seedClassName = '';
-        let fileClassName = '';
         if (this._children.length > 0) {
             childHTML = this.renderChildren();
         }
         else {
             seedClassName = ' -no-child';
         }
-        if (this._duplicate) {
-            fileClassName = ' -duplicate';
-        }
         return `<div class="seed${seedClassName}">
-      <span class="file"><span class="filename${fileClassName}">${contents}</span></span>
+      <span class="file">
+        <span class="filename">
+          <span class="file__text">${contents}</span>
+          ${this.getCountText()}
+        </span>
+      </span>
       ${childHTML}
     </div>`;
+    }
+    getCountText() {
+        if (this._count === 0) {
+            return '';
+        }
+        else if (this._count === 1) {
+            return '<span class="file__count">1 time referenced.</span>';
+        }
+        return `<span class="file__count">${this._count} times referenced.</span>`;
     }
     get children() {
         return this._children;
     }
     set children(value) {
         this._children = value;
-    }
-    get duplicate() {
-        return this._duplicate;
-    }
-    set duplicate(value) {
-        this._duplicate = value;
     }
 }
 
@@ -181,7 +184,7 @@ class Renderer {
             for (let i = 0, len = entries.length; i < len; i++) {
                 const entry = entries[i];
                 if (data) {
-                    const root = new Seed(entry, 0, 0);
+                    const root = new Seed(entry, 0, 0, 0);
                     this._tree.push(this.generateSeed(entry, root, 0));
                 }
             }
@@ -194,9 +197,10 @@ class Renderer {
         const tree = [];
         const { children } = data;
         const childSeeds = [];
+        const { count } = this._model.data;
         for (let i = 0, len = children.length; i < len; i++) {
             const child = children[i];
-            const childSeed = new Seed(child, level + 1, i);
+            const childSeed = new Seed(child, level + 1, i, count[child.name]);
             childSeeds.push(childSeed);
             this.generateSeed(child, childSeed, level + 1);
         }

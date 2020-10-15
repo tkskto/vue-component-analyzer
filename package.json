@@ -16,7 +16,8 @@
     "cover:report": "nyc report --reporter=html",
     "test": "npm run test:base -- --timeout 60000",
     "test:base": "ts-mocha ./test/specs/*.ts",
-    "test:base:update": "ts-mocha ./test/specs/*.ts --update"
+    "test:base:update": "ts-mocha ./test/specs/*.ts --update",
+    "tmp": "node dist/index.js --dir test/fixture/declarationTest/importOne.vue -p 8888"
   },
   "keywords": [
     "Vue.js",
@@ -62,6 +63,7 @@
     "@rollup/plugin-typescript": "6.0.0",
     "@types/express": "4.17.8",
     "@types/mocha": "8.0.3",
+    "@types/node": "14.11.8",
     "@types/opener": "1.4.0",
     "@types/ws": "7.2.7",
     "@typescript-eslint/eslint-plugin": "4.4.0",

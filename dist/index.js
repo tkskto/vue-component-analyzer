@@ -55,6 +55,7 @@ function writeFileExtra(filename, data) {
         }
         const result = {
             entries: entriesData,
+            count: utils_1.counter.count,
         };
         if (argv.format === FORMAT.BOTH) {
             server_1.startServer(argv.port, result);

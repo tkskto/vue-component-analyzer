@@ -26,10 +26,11 @@ export class Renderer {
     const tree: Seed[] = [];
     const {children} = data;
     const childSeeds: Seed[] = [];
+    const {count} = this._model.data;
 
     for (let i = 0, len = children.length; i < len; i++) {
       const child = children[i];
-      const childSeed = new Seed(child, level + 1, i);
+      const childSeed = new Seed(child, level + 1, i, count[child.name]);
 
       childSeeds.push(childSeed);
 
@@ -50,7 +51,7 @@ export class Renderer {
       const entry = entries[i];
 
       if (data) {
-        const root = new Seed(entry, 0, 0);
+        const root = new Seed(entry, 0, 0, 0);
 
         this._tree.push(this.generateSeed(entry, root, 0));
       }
