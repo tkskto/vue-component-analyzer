@@ -1,5 +1,5 @@
 /*!
-  @tkskto/vue-component-analyzer v0.1.1
+  @tkskto/vue-component-analyzer v0.1.2
   https://github.com/tkskto/
   Released under the MIT License.
 */

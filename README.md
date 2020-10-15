@@ -4,7 +4,7 @@ This tool can Analyze dependency tree for Vue.js SFC (Single File Component).
 
 Also, you can see Props of Component.
 
-![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot2.png?raw=true)
+![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot3.png?raw=true)
 
 ## installation and usage
 
