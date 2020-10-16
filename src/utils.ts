@@ -1,7 +1,7 @@
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, Node} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
-import {readFileSync} from 'fs';
+import {readFileSync, existsSync} from 'fs';
 import {resolve, extname, dirname} from 'path';
 import FileReport = vueComponentAnalyzer.FileReport;
 const cwd = process.cwd();
@@ -80,7 +80,6 @@ export const getPropsDeclaration = (tokens: Token[]): string => {
 export const resolveFile = (_filename: string, _currentFileName: string): string => {
   let filename = '';
 
-  // TODO: support no extension type.
   if (_filename.startsWith('../')) {
     filename = resolve(dirname(_currentFileName), _filename);
   } else if (_filename.startsWith('./')) {
@@ -90,7 +89,7 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   }
 
   if (filename) {
-    if (extname(filename) === '') {
+    if (extname(filename) === '' && existsSync(`${filename}.vue`)) {
       return `${filename}.vue`;
     }
   }
