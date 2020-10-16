@@ -1,1 +1,1 @@
-{"name":"/test/fixture/declarationTest/noExtension.vue","props":"","children":[{"name":"/test/components/nested.vue","props":"","children":[{"name":"/test/components/child.vue","props":"","children":[]}]}]}
+{"name":"/test/fixture/declarationTest/noExtension.vue","props":"","children":[{"name":"/test/components/nested.vue","props":"","children":[{"name":"/test/components/child.vue","props":"","children":[]}]},{"name":"/test/assets/module","props":"","children":[]}]}

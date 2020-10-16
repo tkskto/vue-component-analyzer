@@ -64,7 +64,7 @@ exports.resolveFile = (_filename, _currentFileName) => {
         filename = _filename.replace('~', '.').replace('@', '.');
     }
     if (filename) {
-        if (path_1.extname(filename) === '') {
+        if (path_1.extname(filename) === '' && fs_1.existsSync(`${filename}.vue`)) {
             return `${filename}.vue`;
         }
     }
