@@ -11,7 +11,7 @@ export class Seed {
 
   private _fileSize: number; // this file size. (in byte)
 
-  private _lastModifiedTime: Date; // Last modified time of this file.
+  private _lastModifiedTime: number; // Last modified time of this file.
 
   private _count: number;
 
@@ -26,7 +26,7 @@ export class Seed {
     this._name = file.name;
     this._props = file.props;
     this._fileSize = file.size;
-    this._lastModifiedTime = new Date(file.lastModifiedTime);
+    this._lastModifiedTime = file.lastModifiedTime;
     this._count = count;
   }
 
@@ -47,10 +47,17 @@ export class Seed {
   }
 
   private renderMetaData(): string {
-    return `
-        <span class="file__meta">FileSize: ${(this._fileSize / 1024).toFixed(2)} KB</span>
-        <span class="file__meta">LastUpdated: ${this._model.getHowManyDaysAgo(this._lastModifiedTime)} days ago</span>
-    `;
+    const fileSize = (this._fileSize / 1024).toFixed(2);
+    const lastUpdated = this._lastModifiedTime === 0 ? 0 : this._model.getHowManyDaysAgo(new Date(this._lastModifiedTime));
+
+    if (fileSize && lastUpdated) {
+      return `
+        <span class="file__meta">FileSize: ${fileSize} KB</span>
+        <span class="file__meta">LastUpdated: ${lastUpdated} days ago</span>
+      `;
+    }
+
+    return '';
   }
 
   private renderDetails(): string {
