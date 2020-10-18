@@ -106,7 +106,7 @@ export const getImportDeclarationTree = (fileName: string): FileReport => {
     name: shortFilename,
     props: '',
     size: stat.size,
-    lastModifiedTime: stat.mtimeMs,
+    lastModifiedTime: Number(stat.mtimeMs.toFixed(0)),
     children,
   };
 
