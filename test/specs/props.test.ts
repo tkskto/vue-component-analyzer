@@ -1,4 +1,4 @@
-import {getImportDeclarationTree} from '../../src/utils';
+const {getImportDeclarationTree} = require('../../src/utils');
 import {existsSync, writeFileSync, readFileSync} from 'fs';
 import {join, dirname} from 'path';
 import assert from 'assert';

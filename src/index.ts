@@ -1,9 +1,9 @@
 // for execute from npm scripts or commandline.
 
-import {getImportDeclarationTree, counter} from './utils';
-import {startServer} from './server';
-import {writeFileSync} from 'fs';
-import path from 'path';
+const {getImportDeclarationTree, counter} = require('./utils');
+const {startServer} = require('./server');
+const {writeFileSync} = require('fs');
+const path = require('path');
 const mkdirp = require('mkdirp');
 const commander = require('commander');
 const globby = require('globby');

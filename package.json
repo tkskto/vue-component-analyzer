@@ -8,8 +8,7 @@
     "vca": "bin/analyze.js"
   },
   "scripts": {
-    "dev": "rollup --config -w",
-    "build": "rollup --config",
+    "build": "tsc -p tsconfig.json && rollup --config",
     "lint": "eslint -c .eslintrc.json src",
     "cover": "npm run cover:test && npm run cover:report",
     "cover:test": "nyc npm run test:base -- --timeout 60000",
