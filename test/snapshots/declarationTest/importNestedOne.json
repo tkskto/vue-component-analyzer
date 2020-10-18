@@ -1,1 +1,1 @@
-{"name":"/test/fixture/declarationTest/importNestedOne.vue","props":"","children":[{"name":"/test/components/nested.vue","props":"","children":[{"name":"/test/components/child.vue","props":"","children":[]}]}]}
+{"name":"/test/fixture/declarationTest/importNestedOne.vue","props":"","size":108,"lastModifiedTime":1602415081858.0754,"children":[{"name":"/test/components/nested.vue","props":"","size":97,"lastModifiedTime":1598084447270.8015,"children":[{"name":"/test/components/child.vue","props":"","size":42,"lastModifiedTime":1602339747230.0881,"children":[]}]}]}

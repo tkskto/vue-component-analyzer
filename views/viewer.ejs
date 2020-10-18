@@ -4,131 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%- title %></title>
-  <style>
-    body {
-      font-family: "游ゴシック","yuGothic", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
-      background-color: #35495e;
-    }
-    .root {
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .group {
-      position: relative;
-    }
-    .seed {
-      position: relative;
-      display: grid;
-      grid-template-columns: 400px 1fr;
-      grid-template-rows: auto auto;
-      align-items: center;
-      padding: 0 18px;
-      margin: 10px 0;
-      color: #fff;
-      background-color: #35495e;
-    }
-    .root > .seed {
-      margin: 40px 0;
-    }
-    .seed::before {
-      content: "";
-      position: absolute;
-      display: block;
-      width: 2px;
-      height: calc(100% + 10px);
-      background-color: #ffffff;
-      top: 0;
-      left: -12px;
-    }
-    .seed:first-child::before {
-      height: calc(50% + 10px);
-      top: 50%;
-    }
-    .seed:last-child::before {
-      height: 50%;
-    }
-    .seed:first-child:last-child::before {
-      height: 0;
-    }
-    .seed.-no-child {
-      grid-template-columns: 400px;
-      grid-template-rows: auto;
-    }
-    .seed.-no-child:first-child:last-child {
-      margin: 0;
-    }
-    .file {
-      position: relative;
-      margin-right: 40px;
-      z-index: 1;
-    }
-    .seed .file::before,
-    .seed .file::after {
-      content: "";
-      position: absolute;
-      display: block;
-      width: 30px;
-      height: 2px;
-      background-color: #ffffff;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-    }
-    .seed .file::before {
-      left: 0;
-      transform: translateX(-100%);
-    }
-    .seed .file::after {
-      left: 0;
-      width: calc(100% + 30px);
-      z-index: -1;
-    }
-    .root > .seed > .file::before {
-      content: none;
-    }
-    .seed.-no-child .file::after {
-      content: none;
-    }
-    .filename {
-      position: relative;
-      display: inline-block;
-      border: 1px solid #41b883;
-      border-radius: 4px;
-      padding: 12px;
-      word-break: break-all;
-      z-index: 1;
-      background-color: #35495e;
-    }
-    .file__text {
-      display: block;
-    }
-    .file__count {
-      display: block;
-      text-align: right;
-      font-size: 12px;
-      color: #aaa888;
-    }
-    footer {
-      margin-top: 20px;
-      padding: 8px;
-      font-size: 10px;
-      text-align: left;
-      color: #ffffff;
-    }
-    footer a {
-      color: #41b883;
-    }
-    pre {
-      margin-bottom: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="../dist/style.css">
   <script>
     window.enableWebSocket = <%- enableWebSocket %>;
   </script>
   <script src="../dist/client.js" defer></script>
 </head>
 <body>
+<main>
 <div id="app"></div>
+</main>
 <footer>
 <p>If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
 </footer>

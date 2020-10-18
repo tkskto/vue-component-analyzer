@@ -1,7 +1,7 @@
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, Node} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
-import {readFileSync, existsSync} from 'fs';
+import {readFileSync, existsSync, statSync} from 'fs';
 import {resolve, extname, dirname} from 'path';
 import FileReport = vueComponentAnalyzer.FileReport;
 const cwd = process.cwd();
@@ -99,11 +99,14 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
 
 export const getImportDeclarationTree = (fileName: string): FileReport => {
   const filename = resolve(cwd, fileName);
+  const stat = statSync(filename);
   const shortFilename = filename.replace(cwd, '');
   const children: FileReport[] = [];
   const result: FileReport = {
     name: shortFilename,
     props: '',
+    size: stat.size,
+    lastModifiedTime: stat.mtimeMs,
     children,
   };
 
