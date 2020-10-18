@@ -19,10 +19,9 @@ export class Renderer {
    * generate seed object from json.
    * @param data
    * @param seed
-   * @param level
    * @private
    */
-  private generateSeed(data: FileReport, seed: Seed, level: number): Seed[] {
+  private generateSeed(data: FileReport, seed: Seed): Seed[] {
     const tree: Seed[] = [];
     const {children} = data;
     const childSeeds: Seed[] = [];
@@ -30,11 +29,11 @@ export class Renderer {
 
     for (let i = 0, len = children.length; i < len; i++) {
       const child = children[i];
-      const childSeed = new Seed(child, level + 1, i, count[child.name]);
+      const childSeed = new Seed(child, count[child.name], this._model);
 
       childSeeds.push(childSeed);
 
-      this.generateSeed(child, childSeed, level + 1);
+      this.generateSeed(child, childSeed);
     }
 
     seed.children = childSeeds;
@@ -51,9 +50,9 @@ export class Renderer {
       const entry = entries[i];
 
       if (data) {
-        const root = new Seed(entry, 0, 0, 0);
+        const root = new Seed(entry, 0, this._model);
 
-        this._tree.push(this.generateSeed(entry, root, 0));
+        this._tree.push(this.generateSeed(entry, root));
       }
     }
 

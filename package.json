@@ -36,8 +36,8 @@
   },
   "license": "MIT",
   "files": [
-    "dist",
     "bin",
+    "dist",
     "types",
     "views"
   ],

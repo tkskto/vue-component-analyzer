@@ -1,7 +1,7 @@
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, Node} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
-import {readFileSync, existsSync} from 'fs';
+import {readFileSync, existsSync, statSync} from 'fs';
 import {resolve, extname, dirname} from 'path';
 import FileReport = vueComponentAnalyzer.FileReport;
 const cwd = process.cwd();
@@ -97,13 +97,15 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   return filename;
 };
 
-export const getImportDeclarationTree = (fileName: string): FileReport => {
+export const getImportDeclarationTree = (fileName: string, isTest = false): FileReport => {
   const filename = resolve(cwd, fileName);
   const shortFilename = filename.replace(cwd, '');
   const children: FileReport[] = [];
   const result: FileReport = {
     name: shortFilename,
     props: '',
+    size: 0,
+    lastModifiedTime: 0,
     children,
   };
 
@@ -114,6 +116,15 @@ export const getImportDeclarationTree = (fileName: string): FileReport => {
   if (extname(filename) !== '.vue') {
     return result;
   }
+
+  // get statistic only vue file.
+  const stat = statSync(filename);
+
+  if (!isTest) {
+    result.lastModifiedTime = Number(stat.mtimeMs.toFixed(0));
+  }
+
+  result.size = stat.size;
 
   try {
     const file = readFileSync(filename, 'utf-8');
@@ -145,7 +156,7 @@ export const getImportDeclarationTree = (fileName: string): FileReport => {
         const nextFilename = resolveFile(source, filename);
 
         if (nextFilename) {
-          children.push(getImportDeclarationTree(nextFilename));
+          children.push(getImportDeclarationTree(nextFilename, isTest));
         }
       }
     }

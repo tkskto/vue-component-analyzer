@@ -2,15 +2,16 @@
  * Data Type of one of Vue File.
  */
 import FileReport = vueComponentAnalyzer.FileReport;
+import {Model} from './model';
 
 export class Seed {
   private _name: string; // file name
 
   private _props: string; // props string
 
-  private _level: number; // directory level
+  private _fileSize: number; // this file size. (in byte)
 
-  private _index: number; // index
+  private _lastModifiedTime: Date; // Last modified time of this file.
 
   private _count: number;
 
@@ -18,15 +19,14 @@ export class Seed {
 
   /**
    * @param file - filename
-   * @param level - hierarchy level of this file
-   * @param index - index of this hierarchy line
    * @param count - number of files reference this file.
+   * @param _model - Model instance.
    */
-  constructor(file: FileReport, level: number, index: number, count: number) {
+  constructor(file: FileReport, count: number, private _model: Model) {
     this._name = file.name;
     this._props = file.props;
-    this._level = level;
-    this._index = index;
+    this._fileSize = file.size;
+    this._lastModifiedTime = new Date(file.lastModifiedTime);
     this._count = count;
   }
 
@@ -42,12 +42,27 @@ export class Seed {
     </div>`;
   }
 
-  private renderWithProps(): string {
-    return `<details><summary>${this._name}</summary><pre>${JSON.stringify(this._props, null, '\t')}</pre></details>`;
+  private renderProps(): string {
+    return this._props ? `<pre class="file__props">props: ${JSON.stringify(this._props, null, '\t')}</pre>` : '';
+  }
+
+  private renderMetaData(): string {
+    return `
+        <span class="file__meta">FileSize: ${(this._fileSize / 1024).toFixed(2)} KB</span>
+        <span class="file__meta">LastUpdated: ${this._model.getHowManyDaysAgo(this._lastModifiedTime)} days ago</span>
+    `;
+  }
+
+  private renderDetails(): string {
+    return `<details>
+        <summary>${this._name}</summary>
+        ${this.renderProps()}
+        ${this.renderMetaData()}
+    </details>`;
   }
 
   public render(): string {
-    const contents = this._props ? this.renderWithProps() : this._name;
+    const contents = this.renderDetails();
     let childHTML = '';
     let seedClassName = '';
 
