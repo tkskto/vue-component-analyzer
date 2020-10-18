@@ -1,15 +1,23 @@
-import path from 'path';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
-import license from 'rollup-plugin-license';
 import pkg from './package.json';
+
+let dependencies = '';
+
+for (const name in pkg.dependencies) {
+  if (Object.prototype.hasOwnProperty.call(pkg.dependencies, name)) {
+    dependencies += `    ${name} -- ${pkg.dependencies[name]}\n`;
+  }
+}
 
 const banner = `/*!
   ${pkg.name} v${pkg.version}
   ${pkg.author.url}
   Released under the ${pkg.license} License.
+  dependencies: 
+    ${dependencies.trim()}
 */`;
 
 export default [
@@ -38,14 +46,6 @@ export default [
       json(),
       commonjs(),
       nodeResolve(),
-      license({
-        banner: 'see license.txt',
-        thirdParty: {
-          output: {
-            file: path.join(__dirname, 'dist', 'license.txt'),
-          },
-        },
-      }),
     ],
   },
   {
@@ -53,7 +53,6 @@ export default [
     output: {
       file: 'dist/client.js',
       format: 'es',
-      banner,
     },
     plugins: [
       typescript({

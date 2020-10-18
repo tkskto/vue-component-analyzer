@@ -14,6 +14,7 @@
   "rules": {
     "indent": [2, 2],
     "multiline-comment-style": 0,
-    "@typescript-eslint/no-var-requires": 0
+    "@typescript-eslint/no-var-requires": 0,
+    "no-console": 0
   }
 }
