@@ -10,7 +10,7 @@ const isUpdate = process.argv.includes('--update');
 describe('counter\'s count test', () => {
   it('counterTest.vue', async () => {
     const filename = 'counterTest/counterTest';
-    await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`));
+    await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), true);
     const expectedFilePath = join(snapshotDir, `${filename}.json`);
     const json = JSON.stringify(counter.count);
 
