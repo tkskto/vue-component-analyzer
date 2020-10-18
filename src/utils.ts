@@ -118,7 +118,7 @@ const getImportDeclarationTree = (fileName: string, isTest = false): FileReport 
   // increment count of this file.
   counter.add(shortFilename);
 
-  if (extname(filename) !== '.vue') {
+  if (extname(filename) === '') {
     return result;
   }
 
@@ -130,6 +130,10 @@ const getImportDeclarationTree = (fileName: string, isTest = false): FileReport 
   }
 
   result.size = stat.size;
+
+  if (extname(filename) !== '.vue') {
+    return result;
+  }
 
   try {
     const file = readFileSync(filename, 'utf-8');
