@@ -1,21 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ESNEXT",
+    "target": "ES2015",
     "module": "ESNEXT",
     "removeComments": true,
     "strict": true,
-     "moduleResolution": "node",
-     "resolveJsonModule": true,
-     "typeRoots": [
-       "node_modules/@types",
-       "types"
-     ],
-     "types": [
-       "vue-eslint-parser",
-       "mocha"
-     ],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "types"
+    ],
+    "types": [
+      "vue-eslint-parser",
+      "mocha"
+    ],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": [
+    "test",
+    "node_modules"
+  ]
 }

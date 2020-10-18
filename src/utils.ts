@@ -1,19 +1,23 @@
-import {parse} from 'vue-eslint-parser';
-import {ESLintImportDeclaration, Node} from 'vue-eslint-parser/ast/nodes';
+import {
+  ESLintImportDeclaration,
+  ESLintModuleDeclaration,
+  ESLintProgram,
+  ESLintStatement,
+} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
-import {readFileSync, existsSync, statSync} from 'fs';
-import {resolve, extname, dirname} from 'path';
 import FileReport = vueComponentAnalyzer.FileReport;
+const {parse} = require('vue-eslint-parser');
+const {readFileSync, existsSync, statSync} = require('fs');
+const {resolve, extname, dirname} = require('path');
 const cwd = process.cwd();
 const FileCounter = require('./FileCounter');
-
-export const counter = new FileCounter();
+const counter = new FileCounter();
 
 /**
  * get only Import Declaration syntax.
  * @param {Node[]} nodeArr
  */
-export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[] => { // eslint-disable-line
+const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDeclaration)[]): ESLintImportDeclaration[] => { // eslint-disable-line
   return nodeArr.filter((node) => node.type === 'ImportDeclaration') as ESLintImportDeclaration[];
 };
 
@@ -21,7 +25,7 @@ export const getImportDeclaration = (nodeArr: Node[]): ESLintImportDeclaration[]
  * get Props Declaration syntax from Tokens.
  * @param tokens
  */
-export const getPropsDeclaration = (tokens: Token[]): string => {
+const getPropsDeclaration = (tokens: Token[]): string => {
   let isPropsToken = false;
   let result = '{'; // for JSON.parse
   let closedCount = 0;
@@ -77,7 +81,7 @@ export const getPropsDeclaration = (tokens: Token[]): string => {
  * @param _filename
  * @param _currentFileName
  */
-export const resolveFile = (_filename: string, _currentFileName: string): string => {
+const resolveFile = (_filename: string, _currentFileName: string): string => {
   let filename = '';
 
   if (_filename.startsWith('../')) {
@@ -97,7 +101,7 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   return filename;
 };
 
-export const getImportDeclarationTree = (fileName: string, isTest = false): FileReport => {
+const getImportDeclarationTree = (fileName: string, isTest = false): FileReport => {
   const filename = resolve(cwd, fileName);
   const shortFilename = filename.replace(cwd, '');
   const children: FileReport[] = [];
@@ -111,6 +115,7 @@ export const getImportDeclarationTree = (fileName: string, isTest = false): File
 
   console.log(`read ${filename}.`);
 
+  // increment count of this file.
   counter.add(shortFilename);
 
   if (extname(filename) !== '.vue') {
@@ -134,7 +139,7 @@ export const getImportDeclarationTree = (fileName: string, isTest = false): File
     };
 
     // using vue-eslint-parser package.
-    const esLintProgram = parse(file, parserOption);
+    const esLintProgram: ESLintProgram = parse(file, parserOption);
 
     if (esLintProgram.tokens) {
       const propsDeclaration = JSON.parse(getPropsDeclaration(esLintProgram.tokens));
@@ -167,3 +172,6 @@ export const getImportDeclarationTree = (fileName: string, isTest = false): File
 
   return result;
 };
+
+exports.counter = counter;
+exports.getImportDeclarationTree = getImportDeclarationTree;

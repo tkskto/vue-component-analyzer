@@ -12,7 +12,3 @@ declare namespace vueComponentAnalyzer {
     count: {[key: string]: number}
   }
 }
-
-interface Window {
-  enableWebSocket: boolean;
-}

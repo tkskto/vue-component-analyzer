@@ -4,7 +4,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
 import license from 'rollup-plugin-license';
-
 import pkg from './package.json';
 
 const banner = `/*!
@@ -13,25 +12,32 @@ const banner = `/*!
   Released under the ${pkg.license} License.
 */`;
 
-// TODO: bundle cjs modules.
 export default [
   {
-    input: 'src/index.ts',
+    input: '.temp/index.js',
     output: {
       file: 'dist/index.js',
       format: 'cjs',
       banner,
+      exports: 'default',
     },
     external: [
       'fs',
       'path',
-      'buffer',
+      'mkdirp',
+      'commander',
+      'globby',
+      'vue-eslint-parser',
+      'opener',
+      'http',
+      'ws',
+      'express',
+      'ejs',
     ],
     plugins: [
-      typescript(),
+      json(),
       commonjs(),
       nodeResolve(),
-      json(),
       license({
         banner: 'see license.txt',
         thirdParty: {
@@ -40,39 +46,6 @@ export default [
           },
         },
       }),
-    ],
-  },
-  {
-    input: 'src/server.ts',
-    output: {
-      file: 'dist/server.js',
-      format: 'cjs',
-      banner,
-    },
-    plugins: [
-      typescript(),
-    ],
-  },
-  {
-    input: 'src/FileCounter.ts',
-    output: {
-      file: 'dist/FileCounter.js',
-      format: 'cjs',
-      banner,
-    },
-    plugins: [
-      typescript(),
-    ],
-  },
-  {
-    input: 'src/utils.ts',
-    output: {
-      file: 'dist/utils.js',
-      format: 'cjs',
-      banner,
-    },
-    plugins: [
-      typescript(),
     ],
   },
   {

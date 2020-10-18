@@ -1,4 +1,9 @@
 // for execute from browser.
+declare global {
+  interface Window {
+    enableWebSocket: boolean;
+  }
+}
 
 import {Model} from './model';
 import {Renderer} from './renderer';
