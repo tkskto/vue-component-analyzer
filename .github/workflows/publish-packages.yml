@@ -1,5 +1,5 @@
 # When you created a release, this action will run.
-name: Public packages
+name: Publish packages
 on:
   release:
     types: [created]
