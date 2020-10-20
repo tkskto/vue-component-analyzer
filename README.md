@@ -10,7 +10,7 @@ Also, you can see Props of Component.
 
 When you try to change the behavior of components, it will help you to　investigate the influence range.
 
-When you will join a new big project using Vue.js, it will help you to understand dependencies.
+When you join a new big project using Vue.js, it will help you to understand dependencies.
 
 ## installation and usage
 
