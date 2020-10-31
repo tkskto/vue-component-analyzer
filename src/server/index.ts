@@ -1,6 +1,6 @@
 // for execute from npm scripts or commandline.
 
-const {getImportDeclarationTree, counter} = require('./utils');
+const {Analyzer} = require('./Analyzer');
 const {startServer} = require('./server');
 const {writeFileSync} = require('fs');
 const path = require('path');
@@ -41,6 +41,8 @@ function writeFileExtra(filename: string, data: string) {
       console.error(`not support ${argv.format} format.`);
     }
 
+    const analyzer = new Analyzer();
+
     // get vue entries from dir
     const entries = await globby([argv.dir], {
       expandDirectories: {
@@ -52,14 +54,14 @@ function writeFileExtra(filename: string, data: string) {
 
     for (let i = 0, len = entries.length; i < len; i++) {
       const entryFile = entries[i];
-      const children = getImportDeclarationTree(entryFile);
+      const children = analyzer.getImportDeclarationTree(entryFile);
 
       entriesData.push(children);
     }
 
     const result = {
       entries: entriesData,
-      count: counter.count,
+      count: analyzer.counter.count,
     };
 
     if (argv.format === FORMAT.BOTH) {

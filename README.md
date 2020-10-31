@@ -8,7 +8,7 @@ Also, you can see Props of Component.
 
 ## Why?
 
-When you try to change the behavior of components, it will help you to　investigate the influence range.
+When you try to change the behavior of components, it will help you to　investigate the influence range. Because it is hard to know where the component is used.
 
 When you join a new big project using Vue.js, it will help you to understand dependencies.
 

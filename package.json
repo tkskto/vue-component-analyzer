@@ -8,6 +8,7 @@
     "vca": "bin/analyze.js"
   },
   "scripts": {
+    "dev": "tsc -p src/server/tsconfig.json -w",
     "build": "tsc -p src/server/tsconfig.json && rollup --config",
     "lint": "eslint -c .eslintrc.json src",
     "cover": "npm run cover:test && npm run cover:report",

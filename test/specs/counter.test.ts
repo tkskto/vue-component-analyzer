@@ -1,18 +1,21 @@
-const {getImportDeclarationTree, counter} = require('../../src/utils');
+import {platform} from 'os';
 import {existsSync, writeFileSync, readFileSync} from 'fs';
 import {join, dirname} from 'path';
 import assert from 'assert';
 const mkdirp = require('mkdirp');
+import {Analyzer} from '../../src/server/Analyzer';
 const fixturesDir = join(__dirname, '../fixture/');
-const snapshotDir = join(__dirname, '../snapshots/');
+const snapshotDir = platform() === 'win32' ? join(__dirname, '../snapshots/win32') : join(__dirname, '../snapshots/');
 const isUpdate = process.argv.includes('--update');
+
+const analyzer = new Analyzer();
 
 describe('counter\'s count test', () => {
   it('counterTest.vue', async () => {
     const filename = 'counterTest/counterTest';
-    await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), true);
+    await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), true);
     const expectedFilePath = join(snapshotDir, `${filename}.json`);
-    const json = JSON.stringify(counter.count);
+    const json = JSON.stringify(analyzer.counter.count);
 
     if (!existsSync(expectedFilePath) || isUpdate) {
       await mkdirp(dirname(expectedFilePath));

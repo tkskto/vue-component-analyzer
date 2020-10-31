@@ -1,7 +1,11 @@
-class FileCounter {
+import {resolve} from 'path';
+
+export class FileCounter {
   private _count: {[key: string]: number} = {};
 
-  public add(filename: string): void {
+  public add(_filename: string): void {
+    const filename = resolve(_filename);
+
     if (Object.prototype.hasOwnProperty.call(this._count, filename)) {
       this._count[filename]++;
     } else {
@@ -13,5 +17,3 @@ class FileCounter {
     return this._count;
   }
 }
-
-module.exports = FileCounter;
