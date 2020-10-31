@@ -49,14 +49,14 @@ export default [
     ],
   },
   {
-    input: 'src/client.ts',
+    input: 'src/client/client.ts',
     output: {
       file: 'dist/client.js',
       format: 'es',
     },
     plugins: [
       typescript({
-        tsconfig: 'tsconfigForClient.json',
+        tsconfig: 'src/client/tsconfig.json',
       }),
     ],
   },

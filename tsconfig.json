@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES2015",
-    "module": "CommonJS",
     "removeComments": true,
     "strict": true,
     "moduleResolution": "node",
@@ -10,23 +9,10 @@
       "node_modules/@types",
       "types"
     ],
-    "types": [
-      "vue-eslint-parser",
-      "mocha",
-      "node"
-    ],
-    "outDir": ".temp",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/index.ts",
-    "src/server.ts",
-    "src/FileCounter.ts",
-    "src/utils.ts",
-    "types/index.d.ts"
-  ],
   "exclude": [
     "test",
     "node_modules"

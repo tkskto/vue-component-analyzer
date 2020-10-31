@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNEXT",
+    "types": [
+      "vue-eslint-parser",
+      "mocha"
+    ],
+    "lib": ["dom", "es6"]
+  },
+  "include": [
+    "*.ts",
+    "../../types/index.d.ts",
+    "../../types/global.d.ts"
+  ]
+}
