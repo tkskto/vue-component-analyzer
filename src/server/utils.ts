@@ -89,8 +89,14 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   }
 
   if (filename) {
-    if (extname(filename) === '' && existsSync(`${filename}.vue`)) {
-      return `${filename}.vue`;
+    if (extname(filename) === '') {
+      if (existsSync(`${filename}.vue`)) {
+        return `${filename}.vue`;
+      } else if (existsSync(`${filename}.js`)) {
+        return `${filename}.js`;
+      } else if (existsSync(`${filename}.ts`)) {
+        return `${filename}.ts`;
+      }
     }
   }
 

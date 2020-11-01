@@ -20,39 +20,31 @@ export class Analyzer {
    */
   public getImportDeclarationTree = (fileName: string, isTest = false): FileReport => {
     const filename = resolve(cwd, fileName);
+    // get filename without current working directory.
     const shortFilename = filename.replace(cwd, '');
-    const children: FileReport[] = [];
-
     // get file statistic
     const stat = statSync(filename);
-    const result: FileReport = {
-      name: shortFilename,
-      props: '',
-      size: stat.size,
-      lastModifiedTime: isTest ? 0 : Number(stat.mtimeMs.toFixed(0)),
-      children,
-    };
 
     console.log(`read ${filename}.`);
 
     // increment count of this file.
     this._counter.add(shortFilename);
 
-    if (extname(filename) === '') {
-      return result;
+    // if this file is not Vue Component file, return only filename and stat.
+    if (extname(filename) === '' || extname(filename) !== '.vue') {
+      return {
+        name: shortFilename,
+        props: '',
+        size: stat.size,
+        lastModifiedTime: isTest ? 0 : Number(stat.mtimeMs.toFixed(0)),
+        children: [],
+      };
     }
 
-    // if this file is not Vue Component file, we return only filename and stat.
-    if (extname(filename) !== '.vue') {
-      return result;
-    }
+    const contents = readFileSync(filename, 'utf-8');
+    const component = new VueComponent(shortFilename, contents, stat);
 
     try {
-      const file = readFileSync(filename, 'utf-8');
-      const component = new VueComponent(file);
-
-      result.props = component.props;
-
       // if we get, read imported file recursive.
       for (let i = 0, len = component.importDeclaration.length; i < len; i++) {
         // TODO: support other types? (value might be RegExp, or number, boolean.)
@@ -62,7 +54,7 @@ export class Analyzer {
           const nextFilename = resolveFile(source, filename);
 
           if (nextFilename) {
-            children.push(this.getImportDeclarationTree(nextFilename, isTest));
+            component.addChildReport(this.getImportDeclarationTree(nextFilename, isTest));
           }
         }
       }
@@ -71,7 +63,7 @@ export class Analyzer {
       console.error(err.message);
     }
 
-    return result;
+    return component.getFileReport(isTest);
   };
 
   get counter(): FileCounter {

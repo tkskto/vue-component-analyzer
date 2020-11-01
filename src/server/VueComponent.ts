@@ -2,6 +2,8 @@ import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, ESLintProgram} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
 import {getImportDeclaration, getDeclarationSyntax} from './utils';
+import FileReport = vueComponentAnalyzer.FileReport;
+import {Stats} from 'fs';
 
 const parserOption = {
   ecmaVersion: 2018,
@@ -9,19 +11,31 @@ const parserOption = {
 };
 
 export class VueComponent {
+  private _filename = '';
+
+  private _lastModifiedTime = 0;
+
+  private _size = 0;
+
   private _template = '';
 
   private _style = '';
 
   private _props = '';
 
+  private _children: FileReport[] = [];
+
   private _importDeclaration: ESLintImportDeclaration[] = [];
 
-  constructor(file: string) {
+  constructor(filename: string, contents: string, stats?: Stats) {
+    this._filename = filename;
+    this._lastModifiedTime = stats?.mtimeMs || 0;
+    this._size = stats?.size || 0;
+
     // get each part from text of file.
-    const templateBody = file.match(/(?<template><template>[\s\S]*<\/template>)/u);
-    const scriptBody = file.match(/(?<script><script>[\s\S]*<\/script>)/u);
-    const styleBody = file.match(/(?<style><style>[\s\S]*<\/style>)/u);
+    const templateBody = contents.match(/(?<template><template>[\s\S]*<\/template>)/u);
+    const scriptBody = contents.match(/(?<script><script>[\s\S]*<\/script>)/u);
+    const styleBody = contents.match(/(?<style><style>[\s\S]*<\/style>)/u);
 
     this._template = templateBody?.groups?.template || '';
     this._style = styleBody?.groups?.template || '';
@@ -55,11 +69,21 @@ export class VueComponent {
     }
   }
 
+  public addChildReport(report: FileReport) {
+    this._children.push(report);
+  }
+
   get importDeclaration(): ESLintImportDeclaration[] {
     return this._importDeclaration;
   }
 
-  get props(): string {
-    return this._props;
+  public getFileReport(isTest: boolean): FileReport {
+    return {
+      name: this._filename,
+      props: this._props,
+      size: this._size,
+      lastModifiedTime: isTest ? 0 : Number(this._lastModifiedTime.toFixed(0)),
+      children: this._children,
+    };
   }
 }
