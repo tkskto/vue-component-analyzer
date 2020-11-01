@@ -1,11 +1,9 @@
 import FileReport = vueComponentAnalyzer.FileReport;
-import {ESLintProgram} from 'vue-eslint-parser/ast/nodes';
-import {parse} from 'vue-eslint-parser';
-import {getImportDeclaration, getPropsDeclaration, resolveFile} from './utils';
-import {Token} from 'vue-eslint-parser/ast/tokens';
+import {resolveFile} from './utils';
 import {readFileSync, statSync} from 'fs';
 import {resolve, extname} from 'path';
 import {FileCounter} from './FileCounter';
+import {VueComponent} from './VueComponent';
 const cwd = process.cwd();
 
 export class Analyzer {
@@ -24,11 +22,14 @@ export class Analyzer {
     const filename = resolve(cwd, fileName);
     const shortFilename = filename.replace(cwd, '');
     const children: FileReport[] = [];
+
+    // get file statistic
+    const stat = statSync(filename);
     const result: FileReport = {
       name: shortFilename,
       props: '',
-      size: 0,
-      lastModifiedTime: 0,
+      size: stat.size,
+      lastModifiedTime: isTest ? 0 : Number(stat.mtimeMs.toFixed(0)),
       children,
     };
 
@@ -41,15 +42,6 @@ export class Analyzer {
       return result;
     }
 
-    // get statistic only vue file.
-    const stat = statSync(filename);
-
-    if (!isTest) {
-      result.lastModifiedTime = Number(stat.mtimeMs.toFixed(0));
-    }
-
-    result.size = stat.size;
-
     // if this file is not Vue Component file, we return only filename and stat.
     if (extname(filename) !== '.vue') {
       return result;
@@ -57,26 +49,14 @@ export class Analyzer {
 
     try {
       const file = readFileSync(filename, 'utf-8');
-      const parserOption = {
-        ecmaVersion: 2018,
-        sourceType: 'module',
-      };
+      const component = new VueComponent(file);
 
-      // using vue-eslint-parser package.
-      const esLintProgram: ESLintProgram = parse(file, parserOption);
-
-      // get props from parser results.
-      if (esLintProgram.tokens) {
-        result.props = this.getProps(esLintProgram.tokens);
-      }
-
-      // get only import declaration syntax.
-      const body = getImportDeclaration(esLintProgram.body);
+      result.props = component.props;
 
       // if we get, read imported file recursive.
-      for (let i = 0, len = body.length; i < len; i++) {
+      for (let i = 0, len = component.importDeclaration.length; i < len; i++) {
         // TODO: support other types? (value might be RegExp, or number, boolean.)
-        const source = String(body[i].source.value);
+        const source = String(component.importDeclaration[i].source.value);
 
         if (source) {
           const nextFilename = resolveFile(source, filename);
@@ -93,22 +73,6 @@ export class Analyzer {
 
     return result;
   };
-
-  private getProps = (tokens: Token[]) => {
-    try {
-      const propsDeclaration = JSON.parse(getPropsDeclaration(tokens));
-
-      if (propsDeclaration && propsDeclaration.props) {
-        return propsDeclaration.props;
-      }
-
-      return '';
-    } catch (err) {
-      console.warn('failed to analyze props.');
-
-      return '';
-    }
-  }
 
   get counter(): FileCounter {
     return this._counter;

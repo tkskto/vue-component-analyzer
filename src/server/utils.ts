@@ -16,11 +16,13 @@ export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDec
 };
 
 /**
- * get Props Declaration syntax from Tokens.
+ * get Declaration syntax from Tokens.
  * @param tokens
+ * @param targetKeyName
+ * @returns {string}
  */
-export const getPropsDeclaration = (tokens: Token[]): string => {
-  let isPropsToken = false;
+export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'props'): string => {
+  let isTargetToken = false;
   let result = '{'; // for JSON.parse
   let closedCount = 0;
   // TODO: support Date and Function Type Props.
@@ -28,10 +30,10 @@ export const getPropsDeclaration = (tokens: Token[]): string => {
 
   for (const token of tokens) {
     const {type, value} = token;
-    // waiting to see starting the declaration of props.
-    if (isPropsToken || (type === 'Identifier' && value === 'props')) {
+    // waiting to see starting the declaration of target.
+    if (isTargetToken || (!isTargetToken && type === 'Identifier' && value === targetKeyName)) {
       const needQuoting = needQuotingTypes.includes(type);
-      isPropsToken = true;
+      isTargetToken = true;
 
       if (type === 'Punctuator') {
         // count brace for finding end of the declaration.
