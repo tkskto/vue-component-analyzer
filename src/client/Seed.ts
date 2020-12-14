@@ -61,6 +61,12 @@ export class Seed {
   }
 
   private renderDetails(): string {
+    // TODO: ├, ┤, │, ─, └
+    // if view type is simple text, do not show props and metadata.
+    if (this._model.viewType === 'TEXT') {
+      return `<span>${this._name}</span>`;
+    }
+
     return `<details>
         <summary>${this._name}</summary>
         ${this.renderProps()}
@@ -91,6 +97,11 @@ export class Seed {
   }
 
   private getCountText(): string {
+    // if view type is simple text, do not show count.
+    if (this._model.viewType === 'TEXT') {
+      return '';
+    }
+
     if (this._count === 0) {
       return '';
     } else if (this._count === 1) {

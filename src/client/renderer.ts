@@ -63,7 +63,7 @@ export class Renderer {
    * rendering DOM from tree.
    * @private
    */
-  private render():void {
+  public render():void {
     let html = '';
     for (let i = 0, len = this._tree.length; i < len; i++) {
       const [root] = this._tree[i];
