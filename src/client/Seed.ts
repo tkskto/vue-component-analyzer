@@ -80,12 +80,12 @@ export class Seed {
     }
 
     return `<div class="seed${seedClassName}">
-      <span class="file">
-        <span class="filename">
-          <span class="file__text">${contents}</span>
+      <div class="file">
+        <div class="filename">
+          <div class="file__text">${contents}</div>
           ${this.getCountText()}
-        </span>
-      </span>
+        </div>
+      </div>
       ${childHTML}
     </div>`;
   }
