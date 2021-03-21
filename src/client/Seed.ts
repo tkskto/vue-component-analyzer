@@ -52,8 +52,8 @@ export class Seed {
 
     if (fileSize && lastUpdated) {
       return `
-        <span class="file__meta">FileSize: ${fileSize} KB</span>
-        <span class="file__meta">LastUpdated: ${lastUpdated} days ago</span>
+        <span class="file__meta meta__fileSize">FileSize: ${fileSize} KB</span>
+        <span class="file__meta meta__lastUpdated">LastUpdated: ${lastUpdated} days ago</span>
       `;
     }
 
@@ -61,12 +61,6 @@ export class Seed {
   }
 
   private renderDetails(): string {
-    // TODO: ├, ┤, │, ─, └
-    // if view type is simple text, do not show props and metadata.
-    if (this._model.viewType === 'TEXT') {
-      return `<span>${this._name}</span>`;
-    }
-
     return `<details>
         <summary>${this._name}</summary>
         ${this.renderProps()}
@@ -97,11 +91,6 @@ export class Seed {
   }
 
   private getCountText(): string {
-    // if view type is simple text, do not show count.
-    if (this._model.viewType === 'TEXT') {
-      return '';
-    }
-
     if (this._count === 0) {
       return '';
     } else if (this._count === 1) {

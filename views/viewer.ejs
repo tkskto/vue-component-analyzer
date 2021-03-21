@@ -12,14 +12,29 @@
 </head>
 <body>
 <main>
-<div class="switcher">
-<label class="view-switch"><input id="js-view-switch-graph" name="view-style" type="radio" checked>graph style</label>
-<label class="view-switch"><input id="js-view-switch-text" name="view-style" type="radio">simple style</label>
-</div>
-<div id="app"></div>
+  <header>
+    <div class="utility">
+      <button id="btn-toggle-visible-state" type="button"><span class="btn-text">expand all</span></button>
+      <button id="btn-settings" type="button"><span class="btn-text">settings</span></button>
+    </div>
+    <div class="settings">
+      <div class="settings-title">Information</div>
+      <label class="information-switch"><input data-setting-name="fileName" type="checkbox" checked disabled>Filename</label>
+      <label class="information-switch"><input class="js-settings-toggle" data-setting-name="props" type="checkbox" checked>Props</label>
+      <label class="information-switch"><input class="js-settings-toggle" data-setting-name="fileSize" type="checkbox" checked>File Size</label>
+      <label class="information-switch"><input class="js-settings-toggle" data-setting-name="lastUpdated" type="checkbox" checked>Last Updated</label>
+      <label class="information-switch"><input class="js-settings-toggle" data-setting-name="referenceCount" type="checkbox" checked>Referenced Count</label>
+      <div class="settings-title">Style</div>
+      <div class="information-switch">
+        <label class="view-switch"><input id="js-view-switch-graph" name="view-style" type="radio" checked>graph style</label>
+        <label class="view-switch"><input id="js-view-switch-text" name="view-style" type="radio">simple style</label>
+      </div>
+    </div>
+  </header>
+  <div id="app"></div>
 </main>
 <footer>
-<p>If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
+  <p>If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
 </footer>
 </body>
 </html>

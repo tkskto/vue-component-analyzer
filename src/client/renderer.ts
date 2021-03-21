@@ -1,7 +1,7 @@
 // for execute from browser.
 
 import {Seed} from './Seed';
-import {Model} from './model';
+import {Model, VIEW_TYPE} from './model';
 import FileReport = vueComponentAnalyzer.FileReport;
 
 export class Renderer {
@@ -43,20 +43,48 @@ export class Renderer {
   }
 
   private ready = () => {
-    const {data} = this._model;
-    const {entries} = data;
+    if ('GRAPH' === this._model.viewType) {
+      const {data} = this._model;
+      const {entries} = data;
 
-    for (let i = 0, len = entries.length; i < len; i++) {
-      const entry = entries[i];
+      for (let i = 0, len = entries.length; i < len; i++) {
+        const entry = entries[i];
 
-      if (data) {
-        const root = new Seed(entry, 0, this._model);
+        if (data) {
+          const root = new Seed(entry, 0, this._model);
 
-        this._tree.push(this.generateSeed(entry, root));
+          this._tree.push(this.generateSeed(entry, root));
+        }
       }
     }
 
     this.render();
+  }
+
+  private renderLine(name: string, level: number, isLast: boolean): string {
+    let line = ' ';
+
+    for (let i = 0; i < level; i++) {
+      line += '│   ';
+    }
+
+    line += isLast ? '└─ ' : '├─ ';
+    line += name;
+
+    return `${line}\n`;
+  }
+
+  private renderEntry(entry: FileReport, level: number): string {
+    let result = '';
+
+    for (let i = 0, len = entry.children.length; i < len; i++) {
+      const child = entry.children[i];
+
+      result += this.renderLine(child.name, level, i === (len - 1));
+      result += this.renderEntry(child, level + 1);
+    }
+
+    return result;
   }
 
   /**
@@ -64,15 +92,33 @@ export class Renderer {
    * @private
    */
   public render():void {
-    let html = '';
-    for (let i = 0, len = this._tree.length; i < len; i++) {
-      const [root] = this._tree[i];
+    let result = '';
 
-      html += root.render();
+    if ('GRAPH' === this._model.viewType) {
+      for (let i = 0, len = this._tree.length; i < len; i++) {
+        const [root] = this._tree[i];
+
+        result += root.render();
+      }
+    } else if ('TEXT' === this._model.viewType) {
+      const {entries} = this._model.data;
+
+      for (let i = 0, len = entries.length; i < len; i++) {
+        const entry = entries[i];
+
+        result += `${entry.name}\n`;
+        result += this.renderEntry(entries[i], 0);
+
+        if (i < len - 1) {
+          result += '\n';
+        }
+      }
+
+      result = `<pre class="tree">${result}</pre>`;
     }
 
     const group = `<div class="root">
-        ${html}
+        ${result}
     </div>`;
 
     if (this._app) {
