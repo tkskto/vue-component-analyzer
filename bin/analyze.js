@@ -6,12 +6,12 @@
  * @returns {void}
  */
 function onCatchError(error) {
-  process.exit(1);
-
   const {version} = require('../package.json');
 
   console.error(`Something went wrong. component-analyzer: ${version}. follow error message.`);
   console.error(`${error.message}`);
+
+  process.exit(1);
 }
 
 (function main() {

@@ -148,6 +148,7 @@ summary {
   border-radius: 4px;
   color: #ffffff;
   background-color: #333333;
+  overflow-x: scroll;
 }
 .settings {
   position: absolute;
