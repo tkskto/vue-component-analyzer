@@ -48,7 +48,7 @@
     "commander": "6.1.0",
     "ejs": "3.1.5",
     "express": "4.17.1",
-    "globby": "11.0.1",
+    "globby": "11.0.2",
     "mkdirp": "1.0.4",
     "opener": "1.5.2",
     "vue-eslint-parser": "7.1.1",
