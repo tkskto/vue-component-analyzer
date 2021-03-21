@@ -28,6 +28,7 @@ function writeFileExtra(filename: string, data: string) {
 }
 
 (async () => {
+  console.log('start analyzing.');
   try {
     // set commander options.
     program.option('--dir [dir]', 'root directory of src.', 'src');

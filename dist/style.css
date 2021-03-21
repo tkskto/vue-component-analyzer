@@ -4,7 +4,13 @@ body {
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   background-color: #35495e;
 }
-
+main {
+  position: relative;
+}
+header {
+  display: flex;
+  justify-content: flex-end;
+}
 .root {
   border-radius: 8px;
   margin-bottom: 20px;
@@ -115,9 +121,8 @@ summary {
   display: block;
   font-size: 13px;
   padding: 0 8px;
-}
-.file__meta:first-of-type {
-  margin-top: 4px;
+  margin-top: 6px;
+  line-height: 1.4;
 }
 .file__count {
   display: block;
@@ -126,11 +131,86 @@ summary {
   margin-top: 0.5em;
   color: #cccccc;
 }
+.no-fileSize .meta__fileSize {
+  display: none;
+}
+.no-lastUpdated .meta__lastUpdated {
+  display: none;
+}
+.no-props .file__props {
+  display: none;
+}
+.no-referenceCount .file__count {
+  display: none;
+}
+.tree {
+  padding: 8px 12px 6px;
+  border-radius: 4px;
+  color: #ffffff;
+  background-color: #333333;
+  overflow-x: scroll;
+}
+.settings {
+  position: absolute;
+  top: 32px;
+  right: 0;
+  padding: 12px;
+  border-radius: 4px;
+  z-index: 2;
+  color: #35495e;
+  background: #ffffff;
+  visibility: hidden;
+}
+.settings::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-bottom-color: #ffffff;
+  top: -16px;
+  right: 16px;
+  z-index: 2;
+}
+.show-settings .settings {
+  visibility: visible;
+}
+.settings .settings-title {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+.settings .information-switch {
+  display: block;
+  padding-left: 8px;
+}
+.settings .information-switch input {
+  margin-right: 6px;
+}
+.settings .information-switch + .settings-title {
+  margin-top: 8px;
+}
+.switcher {
+  text-align: right;
+}
+.view-switch + .view-switch {
+  position: relative;
+  margin-left: 10px;
+}
+.view-switch + .view-switch::before {
+  content: "/";
+  color: #ccc;
+  margin-right: 10px;
+}
+.view-switch input {
+  margin-top: 0;
+  vertical-align: middle;
+}
 footer {
   margin-top: 20px;
   padding: 8px;
-  font-size: 10px;
-  text-align: left;
+  font-size: 11px;
+  text-align: right;
   color: #ffffff;
 }
 footer a {

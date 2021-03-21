@@ -1,9 +1,10 @@
 // for execute from browser.
 import {Model} from './model';
 import {Renderer} from './renderer';
+import {setSettings} from './Settings';
 
 const model = new Model();
-const renderer = new Renderer(model); // eslint-disable-line
+const renderer = new Renderer(model);
 let ws: WebSocket;
 
 try {
@@ -20,10 +21,13 @@ window.addEventListener('load', () => {
       const msg = JSON.parse(event.data);
 
       model.data = msg; // emit Model.EVENT.DATA_UPDATE event
+
+      setSettings(model);
     });
   } else {
     console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
   }
 });
 
+model.addEventListener(Model.EVENT.VIEW_CHANGED, () => renderer.render());
 
