@@ -58,7 +58,7 @@
     "@mitsue/eslint-config": "3.0.0",
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-json": "4.1.0",
-    "@rollup/plugin-node-resolve": "9.0.0",
+    "@rollup/plugin-node-resolve": "11.2.0",
     "@rollup/plugin-typescript": "8.2.0",
     "@types/express": "4.17.11",
     "@types/mocha": "8.2.2",
