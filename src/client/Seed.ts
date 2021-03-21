@@ -52,8 +52,8 @@ export class Seed {
 
     if (fileSize && lastUpdated) {
       return `
-        <span class="file__meta">FileSize: ${fileSize} KB</span>
-        <span class="file__meta">LastUpdated: ${lastUpdated} days ago</span>
+        <span class="file__meta meta__fileSize">FileSize: ${fileSize} KB</span>
+        <span class="file__meta meta__lastUpdated">LastUpdated: ${lastUpdated} days ago</span>
       `;
     }
 
@@ -80,12 +80,12 @@ export class Seed {
     }
 
     return `<div class="seed${seedClassName}">
-      <span class="file">
-        <span class="filename">
-          <span class="file__text">${contents}</span>
+      <div class="file">
+        <div class="filename">
+          <div class="file__text">${contents}</div>
           ${this.getCountText()}
-        </span>
-      </span>
+        </div>
+      </div>
       ${childHTML}
     </div>`;
   }

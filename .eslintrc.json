@@ -12,9 +12,10 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "indent": [2, 2],
+    "indent": [2, 2, {"SwitchCase": 1}],
     "multiline-comment-style": 0,
     "@typescript-eslint/no-var-requires": 0,
-    "no-console": 0
+    "no-console": 0,
+    "no-new": 0
   }
 }
