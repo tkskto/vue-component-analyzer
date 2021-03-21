@@ -5,7 +5,7 @@ const {startServer} = require('./server');
 const {writeFileSync} = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const commander = require('commander');
+const {program} = require('commander');
 const globby = require('globby');
 
 const FORMAT = {
@@ -30,12 +30,13 @@ function writeFileExtra(filename: string, data: string) {
 (async () => {
   try {
     // set commander options.
-    commander.option('--dir [dir]', 'root directory of src.', 'src');
-    commander.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', FORMAT.BROWSER);
-    commander.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json" or "both")', 'out');
-    commander.option('-p, --port [number]', 'select a port number for the local server', '8888');
+    program.option('--dir [dir]', 'root directory of src.', 'src');
+    program.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', FORMAT.BROWSER);
+    program.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json" or "both")', 'out');
+    program.option('-p, --port [number]', 'select a port number for the local server', '8888');
+    program.parse(process.argv);
 
-    const argv = commander.parse(process.argv);
+    const argv = program.opts();
 
     if (argv.format !== FORMAT.BROWSER && argv.format !== FORMAT.JSON && argv.format !== FORMAT.BOTH) {
       console.error(`not support ${argv.format} format.`);
