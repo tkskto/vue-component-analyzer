@@ -45,26 +45,26 @@
     "access": "public"
   },
   "dependencies": {
-    "commander": "6.1.0",
+    "commander": "7.1.0",
     "ejs": "3.1.6",
     "express": "4.17.1",
-    "globby": "11.0.1",
+    "globby": "11.0.2",
     "mkdirp": "1.0.4",
     "opener": "1.5.2",
     "vue-eslint-parser": "7.1.1",
-    "ws": "7.3.1"
+    "ws": "7.4.4"
   },
   "devDependencies": {
     "@mitsue/eslint-config": "3.0.0",
     "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
-    "@rollup/plugin-typescript": "6.0.0",
+    "@rollup/plugin-typescript": "8.2.0",
     "@types/express": "4.17.8",
     "@types/mocha": "8.0.3",
     "@types/node": "14.11.8",
     "@types/opener": "1.4.0",
-    "@types/ws": "7.2.7",
+    "@types/ws": "7.4.0",
     "@typescript-eslint/eslint-plugin": "4.4.1",
     "@typescript-eslint/parser": "4.4.1",
     "eslint": "7.11.0",
