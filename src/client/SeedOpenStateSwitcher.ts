@@ -5,18 +5,46 @@ class SeedOpenStateSwitcher {
 
   private _details: NodeListOf<HTMLDetailsElement> | null = null;
 
+  private _textElement: HTMLElement | null;
+
   constructor(_button: HTMLButtonElement, model: Model) {
+    this._textElement = document.getElementById('btn-toggle-visible-state-text');
     _button.addEventListener('click', this.onClick.bind(this));
 
     model.addEventListener(Model.EVENT.DATA_UPDATE, this.onDataUpdated.bind(this));
   }
 
-  private onClick() {
+  private open() {
     if (this._details) {
-      this._isOpen = !this._isOpen;
       this._details.forEach((detail) => {
-        detail.open = this._isOpen;
+        detail.open = true;
       });
+    }
+
+    if (this._textElement) {
+      this._textElement.textContent = 'collapse all';
+    }
+  }
+
+  private close() {
+    if (this._details) {
+      this._details.forEach((detail) => {
+        detail.open = false;
+      });
+    }
+
+    if (this._textElement) {
+      this._textElement.textContent = 'expand all';
+    }
+  }
+
+  private onClick() {
+    this._isOpen = !this._isOpen;
+
+    if (this._isOpen) {
+      this.open();
+    } else {
+      this.close();
     }
   }
 
