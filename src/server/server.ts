@@ -41,6 +41,18 @@ const startServer = (port: number, json: AnalyzeReport): void => {
     });
   });
 
+  server.on('error', (err: Error) => {
+    console.log(err);
+
+    server.close((serverErr: Error) => {
+      console.log(serverErr);
+    });
+
+    wss.close((webSocketErr: Error) => {
+      console.log(webSocketErr);
+    });
+  });
+
   server.listen(port, HOST, () => {
     const addressPort = server.address().port || port;
     const url = `http://${HOST}:${addressPort}/`;
