@@ -14,7 +14,6 @@ export class Model extends CustomEventDispatcher {
 
   public static EVENT = {
     DATA_UPDATE: 'dataUpdate',
-    VIEW_CHANGED: 'viewChanged',
     SETTING_CHANGED: 'settingChanged',
   }
 
@@ -65,7 +64,7 @@ export class Model extends CustomEventDispatcher {
 
   set viewType(value: VIEW_TYPE) {
     this._viewType = value;
-    this.dispatchEvent(Model.EVENT.VIEW_CHANGED);
+    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
   }
 
   get visibleSettings(): boolean {
