@@ -1,7 +1,7 @@
 // for execute from browser.
 
 import {Seed} from './Seed';
-import {Model, VIEW_TYPE} from './model';
+import {Model} from './model';
 import FileReport = vueComponentAnalyzer.FileReport;
 
 export class Renderer {

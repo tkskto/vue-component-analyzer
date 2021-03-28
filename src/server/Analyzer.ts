@@ -15,15 +15,20 @@ export class Analyzer {
 
   /**
    * get import tree.
-   * @param fileName entry file name
-   * @param isTest whether it through the test. if this doesn't exist lastModifiedTime will always fail on the GitHub Actions.
+   * @param {string} fileName entry file name
+   * @param {string[]} parents entries of file name
+   * @param {boolean} isTest whether it through the test. if this doesn't exist lastModifiedTime will always fail on the GitHub Actions.
    */
-  public getImportDeclarationTree = (fileName: string, isTest = false): FileReport => {
+  public getImportDeclarationTree = (fileName: string, parents: string[], isTest = false): FileReport => {
     const filename = resolve(cwd, fileName);
     // get filename without current working directory.
     const shortFilename = filename.replace(cwd, '');
     // get file statistic
     const stat = statSync(filename);
+    // make a filename list for detecting circular dependency.
+    const ancestorList: string[] = parents.concat();
+
+    ancestorList.push(fileName);
 
     console.log(`read ${filename}.`);
 
@@ -54,7 +59,11 @@ export class Analyzer {
           const nextFilename = resolveFile(source, filename);
 
           if (nextFilename) {
-            component.addChildReport(this.getImportDeclarationTree(nextFilename, isTest));
+            if (parents.includes(nextFilename)) {
+              console.warn(`Circular dependency detected between ${nextFilename} and ${filename}`);
+            } else {
+              component.addChildReport(this.getImportDeclarationTree(nextFilename, ancestorList, isTest));
+            }
           }
         }
       }
