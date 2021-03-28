@@ -61,7 +61,7 @@ export class Seed {
   }
 
   private renderDetails(): string {
-    return `<details>
+    return `<details class="detail">
         <summary>${this._name}</summary>
         ${this.renderProps()}
         ${this.renderMetaData()}

@@ -13,7 +13,7 @@ const analyzer = new Analyzer();
 describe('counter\'s count test', () => {
   it('counterTest.vue', async () => {
     const filename = 'counterTest/counterTest';
-    await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), true);
+    await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const expectedFilePath = join(snapshotDir, `${filename}.json`);
     const json = JSON.stringify(analyzer.counter.count);
 
