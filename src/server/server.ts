@@ -44,13 +44,11 @@ const startServer = (port: number, json: AnalyzeReport): void => {
   server.on('error', (err: Error) => {
     console.log(err);
 
-    server.close((serverErr: Error) => {
-      console.log(serverErr);
-    });
-
-    wss.close((webSocketErr: Error) => {
-      console.log(webSocketErr);
-    });
+    if (server.listening) {
+      server.close((serverErr: Error) => {
+        console.log(serverErr);
+      });
+    }
   });
 
   server.listen(port, HOST, () => {
