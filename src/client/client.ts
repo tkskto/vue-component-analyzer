@@ -2,9 +2,10 @@
 import {Model} from './model';
 import {Renderer} from './renderer';
 import {setSettings} from './Settings';
+import {setSeedOpenStateSwitcher} from './SeedOpenStateSwitcher';
 
 const model = new Model();
-const renderer = new Renderer(model);
+new Renderer(model);
 let ws: WebSocket;
 
 try {
@@ -20,6 +21,8 @@ window.addEventListener('load', () => {
     ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
 
+      setSeedOpenStateSwitcher(model);
+
       model.data = msg; // emit Model.EVENT.DATA_UPDATE event
 
       setSettings(model);
@@ -28,6 +31,3 @@ window.addEventListener('load', () => {
     console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
   }
 });
-
-model.addEventListener(Model.EVENT.VIEW_CHANGED, () => renderer.render());
-

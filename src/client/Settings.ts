@@ -2,17 +2,18 @@ import {Model} from './model';
 import {VisibleSwitcher} from './VisibleSwitcher';
 import {ViewSwitcher} from './viewSwitcher';
 
-export const setSettings = function (model: Model) {
+export const setSettings = function (model: Model): void {
   const {body} = document;
   const btnSwitchSettings = document.getElementById('btn-settings');
   const nodeListOfSwitch = body.querySelectorAll<HTMLInputElement>('.js-settings-toggle');
   const switcherElmForGraph: HTMLInputElement = document.getElementById('js-view-switch-graph') as HTMLInputElement;
   const switcherElmForText: HTMLInputElement = document.getElementById('js-view-switch-text') as HTMLInputElement;
-  const switcherForGraph = new ViewSwitcher(switcherElmForGraph, 'GRAPH', model); // eslint-disable-line
-  const switcherForText = new ViewSwitcher(switcherElmForText, 'TEXT', model); // eslint-disable-line
+
+  new ViewSwitcher(switcherElmForGraph, 'GRAPH', model);
+  new ViewSwitcher(switcherElmForText, 'TEXT', model);
 
   const onSettingsChanged = function () {
-    body.className = '';
+    body.className = `${model.viewType}`;
 
     if (model.visibleSettings) {
       body.classList.add('show-settings');

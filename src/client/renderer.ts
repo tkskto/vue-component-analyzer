@@ -1,7 +1,7 @@
 // for execute from browser.
 
 import {Seed} from './Seed';
-import {Model, VIEW_TYPE} from './model';
+import {Model} from './model';
 import FileReport = vueComponentAnalyzer.FileReport;
 
 export class Renderer {
@@ -92,37 +92,35 @@ export class Renderer {
    * @private
    */
   public render():void {
-    let result = '';
+    let html = '';
 
-    if ('GRAPH' === this._model.viewType) {
-      for (let i = 0, len = this._tree.length; i < len; i++) {
-        const [root] = this._tree[i];
+    for (let i = 0, len = this._tree.length; i < len; i++) {
+      const [root] = this._tree[i];
 
-        result += root.render();
-      }
-    } else if ('TEXT' === this._model.viewType) {
-      const {entries} = this._model.data;
-
-      for (let i = 0, len = entries.length; i < len; i++) {
-        const entry = entries[i];
-
-        result += `${entry.name}\n`;
-        result += this.renderEntry(entries[i], 0);
-
-        if (i < len - 1) {
-          result += '\n';
-        }
-      }
-
-      result = `<pre class="tree">${result}</pre>`;
+      html += root.render();
     }
 
-    const group = `<div class="root">
-        ${result}
-    </div>`;
+    html = `<div class="root html">${html}</div>`;
+
+    const {entries} = this._model.data;
+    let text = '';
+
+    for (let i = 0, len = entries.length; i < len; i++) {
+      const entry = entries[i];
+
+      text += `${entry.name}\n`;
+      text += this.renderEntry(entries[i], 0);
+
+      if (i < len - 1) {
+        text += '\n';
+      }
+    }
+
+    text = `<div class="root text"><pre class="tree">${text}</pre></div>`;
 
     if (this._app) {
-      this._app.innerHTML = group;
+      this._app.innerHTML = html + text;
+      console.log('rendered');
     }
   }
 }
