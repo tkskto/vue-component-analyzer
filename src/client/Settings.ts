@@ -2,7 +2,7 @@ import {Model} from './model';
 import {VisibleSwitcher} from './VisibleSwitcher';
 import {ViewSwitcher} from './viewSwitcher';
 
-export const setSettings = function (model: Model) {
+export const setSettings = function (model: Model): void {
   const {body} = document;
   const btnSwitchSettings = document.getElementById('btn-settings');
   const nodeListOfSwitch = body.querySelectorAll<HTMLInputElement>('.js-settings-toggle');

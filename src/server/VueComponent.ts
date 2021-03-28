@@ -69,7 +69,7 @@ export class VueComponent {
     }
   }
 
-  public addChildReport(report: FileReport) {
+  public addChildReport(report: FileReport): void {
     this._children.push(report);
   }
 
