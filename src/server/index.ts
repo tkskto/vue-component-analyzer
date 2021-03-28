@@ -56,7 +56,7 @@ function writeFileExtra(filename: string, data: string) {
 
     for (let i = 0, len = entries.length; i < len; i++) {
       const entryFile = entries[i];
-      const children = analyzer.getImportDeclarationTree(entryFile);
+      const children = analyzer.getImportDeclarationTree(entryFile, []);
 
       entriesData.push(children);
     }

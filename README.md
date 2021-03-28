@@ -6,9 +6,13 @@ Also, you can see Props of Component.
 
 ![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot3.png?raw=true)
 
+or you can see simple text pattern.
+
+![](https://github.com/tkskto/vue-component-analyzer/blob/images/images/screenshot4.png?raw=true)
+
 ## Why?
 
-When you try to change the behavior of components, it will help you to　investigate the influence range. Because it is hard to know where the component is used.
+When you try to change the behavior of components, it will help you to investigate the influence range. Because it is hard to know where the component is used.
 
 When you join a new big project using Vue.js, it will help you to understand dependencies.
 
