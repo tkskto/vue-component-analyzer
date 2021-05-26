@@ -72,7 +72,7 @@
     "lint-staged": "10.5.4",
     "mocha": "8.4.0",
     "nyc": "15.1.0",
-    "rollup": "2.42.1",
+    "rollup": "2.50.1",
     "rollup-plugin-license": "2.3.0",
     "ts-mocha": "8.0.0",
     "typescript": "4.2.3"
