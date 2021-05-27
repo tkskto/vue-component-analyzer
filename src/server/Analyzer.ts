@@ -30,7 +30,7 @@ export class Analyzer {
 
     ancestorList.push(fileName);
 
-    console.log(`read ${filename}.`);
+    console.log(`read ${filename}`);
 
     // increment count of this file.
     this._counter.add(shortFilename);
