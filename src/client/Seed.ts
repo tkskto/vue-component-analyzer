@@ -47,17 +47,17 @@ export class Seed {
   }
 
   private renderMetaData(): string {
+    let metaString = '';
     const fileSize = (this._fileSize / 1024).toFixed(2);
     const lastUpdated = this._lastModifiedTime === 0 ? 0 : this._model.getHowManyDaysAgo(new Date(this._lastModifiedTime));
 
-    if (fileSize && lastUpdated) {
-      return `
-        <span class="file__meta meta__fileSize">FileSize: ${fileSize} KB</span>
-        <span class="file__meta meta__lastUpdated">LastUpdated: ${lastUpdated} days ago</span>
-      `;
+    if (fileSize) {
+      metaString += `<span class="file__meta meta__fileSize">FileSize: ${fileSize} KB</span>`;
     }
 
-    return '';
+    metaString += `<span class="file__meta meta__lastUpdated">LastUpdated: ${lastUpdated} days ago</span>`;
+
+    return metaString;
   }
 
   private renderDetails(): string {

@@ -52,10 +52,10 @@
     "mkdirp": "1.0.4",
     "opener": "1.5.2",
     "vue-eslint-parser": "7.6.0",
-    "ws": "7.4.5"
+    "ws": "7.4.6"
   },
   "devDependencies": {
-    "@mitsue/eslint-config": "3.0.0",
+    "@mitsue/eslint-config": "4.0.1",
     "@rollup/plugin-commonjs": "17.1.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "11.2.0",
@@ -67,7 +67,7 @@
     "@types/ws": "7.4.4",
     "@typescript-eslint/eslint-plugin": "4.25.0",
     "@typescript-eslint/parser": "4.25.0",
-    "eslint": "7.22.0",
+    "eslint": "7.27.0",
     "husky": "4.3.8",
     "lint-staged": "10.5.4",
     "mocha": "8.4.0",
@@ -75,7 +75,7 @@
     "rollup": "2.42.1",
     "rollup-plugin-license": "2.3.0",
     "ts-mocha": "8.0.0",
-    "typescript": "4.2.3"
+    "typescript": "4.3.2"
   },
   "lint-staged": {
     "*.ts": [
