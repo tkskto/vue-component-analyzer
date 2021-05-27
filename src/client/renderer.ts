@@ -120,7 +120,6 @@ export class Renderer {
 
     if (this._app) {
       this._app.innerHTML = html + text;
-      console.log('rendered');
     }
   }
 }

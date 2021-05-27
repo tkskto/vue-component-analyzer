@@ -9,6 +9,8 @@ class Model {
 
   private _port = '8888';
 
+  private _isSilentMode = false;
+
   get resourceRoot(): string {
     return this._resourceRoot;
   }
@@ -39,6 +41,14 @@ class Model {
 
   set port(value: string) {
     this._port = value;
+  }
+
+  get isSilentMode(): boolean {
+    return this._isSilentMode;
+  }
+
+  set isSilentMode(value: boolean) {
+    this._isSilentMode = value;
   }
 }
 
