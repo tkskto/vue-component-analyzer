@@ -4,6 +4,7 @@ import {
   ESLintStatement,
 } from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
+import {model} from './Model';
 const {existsSync} = require('fs');
 const {resolve, extname, dirname} = require('path');
 
@@ -85,7 +86,7 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   } else if (_filename.startsWith('./')) {
     filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
   } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
-    filename = _filename.replace('~', '.').replace('@', '.');
+    filename = _filename.replace('~', model.resourceRoot).replace('@', model.resourceRoot);
   }
 
   if (filename) {
