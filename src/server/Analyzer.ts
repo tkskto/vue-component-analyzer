@@ -4,6 +4,7 @@ import {readFileSync, statSync} from 'fs';
 import {resolve, extname} from 'path';
 import {FileCounter} from './FileCounter';
 import {VueComponent} from './VueComponent';
+import {model} from './Model';
 const cwd = process.cwd();
 
 export class Analyzer {
@@ -30,7 +31,9 @@ export class Analyzer {
 
     ancestorList.push(fileName);
 
-    console.log(`read ${filename}.`);
+    if (!model.isSilentMode) {
+      console.log(`read ${filename}`);
+    }
 
     // increment count of this file.
     this._counter.add(shortFilename);

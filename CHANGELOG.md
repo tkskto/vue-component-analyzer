@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0
+
+### Updates
+
+-   \#75 add silent mode
+
+### Bug Fixes
+
+-   \#73 fix a bug in file import process.
+-   \#74 fix a bug in client JavaScript logic.
+
+### Chores
+
+-   \#72 update `ws` 7.4.4 to 7.4.6
+
 ## 0.2.1
 
 ### Updates
