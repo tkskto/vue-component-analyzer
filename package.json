@@ -51,7 +51,7 @@
     "globby": "11.0.3",
     "mkdirp": "1.0.4",
     "opener": "1.5.2",
-    "vue-eslint-parser": "7.6.0",
+    "vue-eslint-parser": "7.7.2",
     "ws": "7.4.6"
   },
   "devDependencies": {
