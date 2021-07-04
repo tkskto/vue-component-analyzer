@@ -50,11 +50,15 @@ function writeFileExtra(filename: string, data: string) {
     const analyzer = new Analyzer();
 
     // get vue entries from dir
-    const entries = await globby([argv.dir], {
+    const entries = await globby([argv.dir, '!**/node_modules/**'], {
       expandDirectories: {
         extensions: ['vue'],
       },
     });
+
+    if (entries.length === 0) {
+      console.log('There is no entry file.');
+    }
 
     const entriesData = [];
 
