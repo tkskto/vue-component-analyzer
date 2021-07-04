@@ -17,7 +17,7 @@
     "test": "npm run test:base -- --timeout 60000",
     "test:base": "ts-mocha ./test/specs/*.ts",
     "test:base:update": "ts-mocha ./test/specs/*.ts --update",
-    "tmp": "node dist/index.js --dir test/fixture/declarationTest/importOne.vue -p 8888"
+    "tmp": "node dist/index.js --dir . -p 8888"
   },
   "keywords": [
     "Vue.js",

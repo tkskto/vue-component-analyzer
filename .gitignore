@@ -5,3 +5,5 @@ coverage
 .temp
 dist/**
 !dist/style.css
+!dist/index.html
+!dist/tmp.json

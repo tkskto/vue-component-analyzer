@@ -1,0 +1,375 @@
+{
+    "entries": [
+        {
+            "name": "/test/components/child.vue",
+            "props": "",
+            "size": 42,
+            "lastModifiedTime": 1602339747230,
+            "children": []
+        },
+        {
+            "name": "/test/components/child2.vue",
+            "props": "",
+            "size": 43,
+            "lastModifiedTime": 1598084447271,
+            "children": []
+        },
+        {
+            "name": "/test/components/nested.vue",
+            "props": "",
+            "size": 97,
+            "lastModifiedTime": 1598084447271,
+            "children": [
+                {
+                    "name": "/test/components/child.vue",
+                    "props": "",
+                    "size": 42,
+                    "lastModifiedTime": 1602339747230,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/components/nested2.vue",
+            "props": "",
+            "size": 135,
+            "lastModifiedTime": 1598084447271,
+            "children": [
+                {
+                    "name": "/test/components/child.vue",
+                    "props": "",
+                    "size": 42,
+                    "lastModifiedTime": 1602339747230,
+                    "children": []
+                },
+                {
+                    "name": "/test/components/child2.vue",
+                    "props": "",
+                    "size": 43,
+                    "lastModifiedTime": 1598084447271,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/counterTest/counterComponent.vue",
+            "props": "",
+            "size": 156,
+            "lastModifiedTime": 1616917204400,
+            "children": [
+                {
+                    "name": "/test/components/child.vue",
+                    "props": "",
+                    "size": 42,
+                    "lastModifiedTime": 1602339747230,
+                    "children": []
+                },
+                {
+                    "name": "/test/fixture/counterTest/counterComponent2.vue",
+                    "props": "",
+                    "size": 108,
+                    "lastModifiedTime": 1616917204400,
+                    "children": [
+                        {
+                            "name": "/test/components/child2.vue",
+                            "props": "",
+                            "size": 43,
+                            "lastModifiedTime": 1598084447271,
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/counterTest/counterComponent2.vue",
+            "props": "",
+            "size": 108,
+            "lastModifiedTime": 1616917204400,
+            "children": [
+                {
+                    "name": "/test/components/child2.vue",
+                    "props": "",
+                    "size": 43,
+                    "lastModifiedTime": 1598084447271,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/counterTest/counterTest.vue",
+            "props": "",
+            "size": 152,
+            "lastModifiedTime": 1616917204400,
+            "children": [
+                {
+                    "name": "/test/components/nested2.vue",
+                    "props": "",
+                    "size": 135,
+                    "lastModifiedTime": 1598084447271,
+                    "children": [
+                        {
+                            "name": "/test/components/child.vue",
+                            "props": "",
+                            "size": 42,
+                            "lastModifiedTime": 1602339747230,
+                            "children": []
+                        },
+                        {
+                            "name": "/test/components/child2.vue",
+                            "props": "",
+                            "size": 43,
+                            "lastModifiedTime": 1598084447271,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "/test/fixture/counterTest/counterComponent.vue",
+                    "props": "",
+                    "size": 156,
+                    "lastModifiedTime": 1616917204400,
+                    "children": [
+                        {
+                            "name": "/test/components/child.vue",
+                            "props": "",
+                            "size": 42,
+                            "lastModifiedTime": 1602339747230,
+                            "children": []
+                        },
+                        {
+                            "name": "/test/fixture/counterTest/counterComponent2.vue",
+                            "props": "",
+                            "size": 108,
+                            "lastModifiedTime": 1616917204400,
+                            "children": [
+                                {
+                                    "name": "/test/components/child2.vue",
+                                    "props": "",
+                                    "size": 43,
+                                    "lastModifiedTime": 1598084447271,
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/SJIS.vue",
+            "props": "",
+            "size": 103,
+            "lastModifiedTime": 1616917204401,
+            "children": [
+                {
+                    "name": "/test/components/child.vue",
+                    "props": "",
+                    "size": 42,
+                    "lastModifiedTime": 1602339747230,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/importNestedOne.vue",
+            "props": "",
+            "size": 108,
+            "lastModifiedTime": 1616917204401,
+            "children": [
+                {
+                    "name": "/test/components/nested.vue",
+                    "props": "",
+                    "size": 97,
+                    "lastModifiedTime": 1598084447271,
+                    "children": [
+                        {
+                            "name": "/test/components/child.vue",
+                            "props": "",
+                            "size": 42,
+                            "lastModifiedTime": 1602339747230,
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/importNestedTwo.vue",
+            "props": "",
+            "size": 162,
+            "lastModifiedTime": 1616917204401,
+            "children": [
+                {
+                    "name": "/test/components/nested.vue",
+                    "props": "",
+                    "size": 97,
+                    "lastModifiedTime": 1598084447271,
+                    "children": [
+                        {
+                            "name": "/test/components/child.vue",
+                            "props": "",
+                            "size": 42,
+                            "lastModifiedTime": 1602339747230,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "/test/components/nested2.vue",
+                    "props": "",
+                    "size": 135,
+                    "lastModifiedTime": 1598084447271,
+                    "children": [
+                        {
+                            "name": "/test/components/child.vue",
+                            "props": "",
+                            "size": 42,
+                            "lastModifiedTime": 1602339747230,
+                            "children": []
+                        },
+                        {
+                            "name": "/test/components/child2.vue",
+                            "props": "",
+                            "size": 43,
+                            "lastModifiedTime": 1598084447271,
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/importOne.vue",
+            "props": "",
+            "size": 108,
+            "lastModifiedTime": 1616917204402,
+            "children": [
+                {
+                    "name": "/test/components/child.vue",
+                    "props": "",
+                    "size": 42,
+                    "lastModifiedTime": 1602339747230,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/importThirdParty.vue",
+            "props": "",
+            "size": 125,
+            "lastModifiedTime": 1616917204402,
+            "children": []
+        },
+        {
+            "name": "/test/fixture/declarationTest/importTwo.vue",
+            "props": "",
+            "size": 158,
+            "lastModifiedTime": 1616917204402,
+            "children": [
+                {
+                    "name": "/test/components/child.vue",
+                    "props": "",
+                    "size": 42,
+                    "lastModifiedTime": 1602339747230,
+                    "children": []
+                },
+                {
+                    "name": "/test/components/child2.vue",
+                    "props": "",
+                    "size": 43,
+                    "lastModifiedTime": 1598084447271,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/noExtension.vue",
+            "props": "",
+            "size": 147,
+            "lastModifiedTime": 1616917204402,
+            "children": [
+                {
+                    "name": "/test/components/nested.vue",
+                    "props": "",
+                    "size": 97,
+                    "lastModifiedTime": 1598084447271,
+                    "children": [
+                        {
+                            "name": "/test/components/child.vue",
+                            "props": "",
+                            "size": 42,
+                            "lastModifiedTime": 1602339747230,
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "/test/assets/module.js",
+                    "props": "",
+                    "size": 19,
+                    "lastModifiedTime": 1616917204399,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "name": "/test/fixture/declarationTest/onlyTemplate.vue",
+            "props": "",
+            "size": 37,
+            "lastModifiedTime": 1616917204403,
+            "children": []
+        },
+        {
+            "name": "/test/fixture/propsTest/oneProps.vue",
+            "props": {
+                "data": {
+                    "type": "String",
+                    "required": "true",
+                    "default": "1"
+                }
+            },
+            "size": 192,
+            "lastModifiedTime": 1616917204403,
+            "children": []
+        },
+        {
+            "name": "/test/fixture/propsTest/twoProps.vue",
+            "props": {
+                "data": {
+                    "type": "String",
+                    "required": "true",
+                    "default": "1"
+                },
+                "data2": {
+                    "type": "Number",
+                    "required": "false",
+                    "default": 1
+                }
+            },
+            "size": 283,
+            "lastModifiedTime": 1616917204403,
+            "children": []
+        }
+    ],
+    "count": {
+        "/test/components/child.vue": 13,
+        "/test/components/child2.vue": 8,
+        "/test/components/nested.vue": 4,
+        "/test/components/nested2.vue": 3,
+        "/test/fixture/counterTest/counterComponent.vue": 2,
+        "/test/fixture/counterTest/counterComponent2.vue": 3,
+        "/test/fixture/counterTest/counterTest.vue": 1,
+        "/test/fixture/declarationTest/SJIS.vue": 1,
+        "/test/fixture/declarationTest/importNestedOne.vue": 1,
+        "/test/fixture/declarationTest/importNestedTwo.vue": 1,
+        "/test/fixture/declarationTest/importOne.vue": 1,
+        "/test/fixture/declarationTest/importThirdParty.vue": 1,
+        "/test/fixture/declarationTest/importTwo.vue": 1,
+        "/test/fixture/declarationTest/noExtension.vue": 1,
+        "/test/assets/module.js": 1,
+        "/test/fixture/declarationTest/onlyTemplate.vue": 1,
+        "/test/fixture/propsTest/oneProps.vue": 1,
+        "/test/fixture/propsTest/twoProps.vue": 1
+    }
+}

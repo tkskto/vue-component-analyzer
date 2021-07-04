@@ -17,17 +17,22 @@ try {
 }
 
 window.addEventListener('load', () => {
+  setSeedOpenStateSwitcher(model);
+  setSettings(model);
+
   if (ws) {
     ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
 
-      setSeedOpenStateSwitcher(model);
-
       model.data = msg; // emit Model.EVENT.DATA_UPDATE event
-
-      setSettings(model);
     });
   } else {
+    fetch('./tmp.json').then((res) => res.json()).then((json) => {
+      console.log(json);
+      model.data = json;
+    }).catch((err) => {
+      console.log(err.message);
+    });
     console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
   }
 });
