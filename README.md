@@ -1,6 +1,6 @@
 # vue-component-analyzer
 
-This tool can Analyze dependency tree for Vue.js SFC (Single File Component).
+This tool can Analyze dependency tree for Vue.js SFC (Single File Component). You can see [GitHub Pages](https://tkskto.github.io/vue-component-analyzer/dist/) for a demo.
 
 Also, you can see Props of Component.
 
@@ -12,9 +12,9 @@ or you can see simple text pattern.
 
 ## Why?
 
-When you try to change the behavior of components, it will help you to investigate the influence range. Because it is hard to know where the component is used.
+When you try to change the behavior of components, it is hard to know where the component is used.
 
-When you join a new big project using Vue.js, it will help you to understand dependencies.
+When you join a new big project using Vue.js, it is hard to understand dependencies.
 
 ## installation and usage
 
@@ -32,15 +32,15 @@ Then put command on npm scripts.
 }
 ```
 
-Or you can use npx（after npm install）:
+Or you can use npm exec（after npm install）:
 
 ```
-npx vca --dir pages
+npm exec vca -- --dir .
 ```
 
 ### CLI Options
 
-*   `--dir` : analyze target directory. default is `src`.
+*   `--dir` : analyze target directory. default is `src`. `node_modules` will be ignored by default.
 *   `--silent` : running without almost logs.
 *   `-f` or `--format` : report type. choose one from [browser | json | both]. default is `browser`.
 *   `-o` or `--out` : output directory. JSON file will output here.
