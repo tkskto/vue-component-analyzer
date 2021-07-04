@@ -40,10 +40,11 @@ npx vca --dir pages
 
 ### CLI Options
 
-- `--dir` : analyze target directory. default is `src`.
-- `-f` or `--format` : report type. choose one from [browser | json | both]. default is `browser`.
-- `-o` or `--out` : output directory. JSON file will output here.
-- `-p` or `--port` : select a port number for the local server.
+*   `--dir` : analyze target directory. default is `src`.
+*   `--silent` : running without almost logs.
+*   `-f` or `--format` : report type. choose one from [browser | json | both]. default is `browser`.
+*   `-o` or `--out` : output directory. JSON file will output here.
+*   `-p` or `--port` : select a port number for the local server.
 
 ## License
 
