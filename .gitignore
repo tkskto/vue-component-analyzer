@@ -3,7 +3,4 @@ out
 coverage
 .nyc_output
 .temp
-dist/**
-!dist/style.css
-!dist/index.html
-!dist/tmp.json
+dist/index.js
