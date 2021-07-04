@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.1
+
+### Bug Fixes
+
+-   \#94 exclude `node_modules`.
+
+### Chores
+
+-   \#93 update `vue-eslint-parser` 7.6.0 to 7.7.2
+-   \#91 update `commander` 7.2.0 to 8.0.0
+-   \#89 update `globby` 11.0.3 to 11.0.4
+-   \#88 update `ws` 7.4.6 to 7.5.2
+
 ## 0.3.0
 
 ### Updates
