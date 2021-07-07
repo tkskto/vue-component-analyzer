@@ -62,7 +62,7 @@
     "@rollup/plugin-typescript": "8.2.1",
     "@types/express": "4.17.12",
     "@types/mocha": "8.2.2",
-    "@types/node": "14.17.4",
+    "@types/node": "14.17.5",
     "@types/opener": "1.4.0",
     "@types/ws": "7.4.6",
     "@typescript-eslint/eslint-plugin": "4.28.1",
