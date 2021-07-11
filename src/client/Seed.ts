@@ -60,9 +60,21 @@ export class Seed {
     return metaString;
   }
 
+  private renderSummary(): string {
+    let name = this._name;
+
+    if (this._name.endsWith('.vue')) {
+      name = `<img class="icon" src="https://v3.vuejs.org/logo.png" alt="">${name}`;
+    } else if (this._name.endsWith('.js')) {
+      name = `<img class="icon" src="https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png" alt="">${name}`;
+    }
+
+    return `<summary>${name}</summary>`;
+  }
+
   private renderDetails(): string {
     return `<details class="detail">
-        <summary>${this._name}</summary>
+        ${this.renderSummary()}
         ${this.renderProps()}
         ${this.renderMetaData()}
     </details>`;
@@ -77,6 +89,10 @@ export class Seed {
       childHTML = this.renderChildren();
     } else {
       seedClassName = ' -no-child';
+    }
+
+    if (this.isJS()) {
+      seedClassName += ' js';
     }
 
     return `<div class="seed${seedClassName}">
@@ -106,5 +122,12 @@ export class Seed {
 
   set children(value: Seed[]) {
     this._children = value;
+  }
+
+  /**
+   * @return boolean
+   */
+  isJS() {
+    return this._name.endsWith('.js');
   }
 }
