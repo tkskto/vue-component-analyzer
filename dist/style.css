@@ -2,7 +2,7 @@
 
 body {
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  background-color: #35495e;
+  background-color: #293D52;
 }
 main {
   position: relative;
@@ -33,7 +33,7 @@ header {
   padding: 0 18px;
   margin: 10px 0;
   color: #fff;
-  background-color: #35495e;
+  background-color: #293D52;
 }
 .root > .seed {
   margin: 40px 0;
@@ -105,13 +105,21 @@ header {
   padding: 12px;
   word-break: break-all;
   z-index: 1;
-  background-color: #35495e;
+  background-color: #293D52;
+}
+.js .filename {
+  border: 1px solid #ffff00;
 }
 details {
   line-height: 1.7;
 }
 summary {
   line-height: 1.2;
+}
+.icon {
+  width: 18px;
+  vertical-align: top;
+  margin-right: 6px;
 }
 .file__text {
   display: block;
@@ -163,7 +171,7 @@ summary {
   padding: 12px;
   border-radius: 4px;
   z-index: 2;
-  color: #35495e;
+  color: #293D52;
   background: #ffffff;
   visibility: hidden;
 }
