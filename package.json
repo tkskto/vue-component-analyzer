@@ -61,7 +61,7 @@
     "@rollup/plugin-node-resolve": "13.0.2",
     "@rollup/plugin-typescript": "8.2.3",
     "@types/ejs": "3.0.7",
-    "@types/express": "4.17.12",
+    "@types/express": "4.17.13",
     "@types/mkdirp": "1.0.2",
     "@types/mocha": "8.2.2",
     "@types/node": "14.17.4",
