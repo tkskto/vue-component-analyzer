@@ -2,13 +2,13 @@
 
 import {FORMAT} from './Constant';
 import {model} from './Model';
-const {Analyzer} = require('./Analyzer');
-const {startServer} = require('./server');
-const {writeFileSync} = require('fs');
-const path = require('path');
-const mkdirp = require('mkdirp');
-const {program} = require('commander');
-const globby = require('globby');
+import {getOptions} from './Commander';
+import {analyzer} from './Analyzer';
+import {startServer} from './server';
+import {writeFileSync} from 'fs';
+import path from 'path';
+import mkdirp from 'mkdirp';
+import globby from 'globby';
 
 // TODO: add log system
 // TODO: add error system
@@ -25,15 +25,8 @@ function writeFileExtra(filename: string, data: string) {
 
 (async () => {
   try {
-    // set commander options.
-    program.option('--dir [dir]', 'root directory of src.', 'src');
-    program.option('-f, --format [type]', 'Add the specified type of report [browser, json or both]', FORMAT.BROWSER);
-    program.option('-o, --out [dir]', 'output directory (enable with setting --format option to "json" or "both")', 'out');
-    program.option('-p, --port [number]', 'select a port number for the local server', '8888');
-    program.option('--silent', 'do not show logs with silent flag');
-    program.parse(process.argv);
-
-    const argv = program.opts();
+    // get commander options.
+    const argv = getOptions(process.argv);
 
     model.resourceRoot = argv.dir;
     model.format = argv.format;
@@ -46,8 +39,6 @@ function writeFileExtra(filename: string, data: string) {
     }
 
     console.log('start analyzing.');
-
-    const analyzer = new Analyzer();
 
     // get vue entries from dir
     const entries = await globby([argv.dir, '!**/node_modules/**'], {

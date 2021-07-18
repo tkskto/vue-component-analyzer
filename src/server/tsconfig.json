@@ -4,6 +4,8 @@
     "module": "CommonJS",
     "types": [
       "vue-eslint-parser",
+      "express",
+      "ws",
       "mocha",
       "node"
     ],
