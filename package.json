@@ -1,6 +1,6 @@
 {
   "name": "@tkskto/vue-component-analyzer",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Analyze dependency tree for Vue.js SFC (Single File Component)",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -51,16 +51,18 @@
     "globby": "11.0.4",
     "mkdirp": "1.0.4",
     "opener": "1.5.2",
-    "vue-eslint-parser": "7.7.2",
-    "ws": "7.5.2"
+    "vue-eslint-parser": "7.9.0",
+    "ws": "7.5.3"
   },
   "devDependencies": {
     "@mitsue/eslint-config": "4.0.1",
-    "@rollup/plugin-commonjs": "19.0.0",
+    "@rollup/plugin-commonjs": "19.0.1",
     "@rollup/plugin-json": "4.1.0",
-    "@rollup/plugin-node-resolve": "13.0.0",
-    "@rollup/plugin-typescript": "8.2.1",
+    "@rollup/plugin-node-resolve": "13.0.2",
+    "@rollup/plugin-typescript": "8.2.3",
+    "@types/ejs": "3.0.7",
     "@types/express": "4.17.12",
+    "@types/mkdirp": "1.0.2",
     "@types/mocha": "8.2.2",
     "@types/node": "14.17.4",
     "@types/opener": "1.4.0",
@@ -72,8 +74,9 @@
     "lint-staged": "11.0.0",
     "mocha": "9.0.2",
     "nyc": "15.1.0",
-    "rollup": "2.52.7",
+    "rollup": "2.53.2",
     "rollup-plugin-license": "2.5.0",
+    "rollup-plugin-terser": "7.0.2",
     "ts-mocha": "8.0.0",
     "typescript": "4.3.5"
   },
