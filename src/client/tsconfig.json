@@ -3,7 +3,6 @@
   "compilerOptions": {
     "module": "ESNEXT",
     "types": [
-      "vue-eslint-parser",
       "mocha"
     ],
     "lib": ["dom", "es6"]

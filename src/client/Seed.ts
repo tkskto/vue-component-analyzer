@@ -64,9 +64,11 @@ export class Seed {
     let name = this._name;
 
     if (this._name.endsWith('.vue')) {
-      name = `<img class="icon" src="https://v3.vuejs.org/logo.png" alt="">${name}`;
+      name = `<img class="icon" src="../dist/icon/icon-vue.png" alt="">${name}`;
     } else if (this._name.endsWith('.js')) {
-      name = `<img class="icon" src="https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png" alt="">${name}`;
+      name = `<img class="icon" src="../dist/icon/icon-js.png" alt="">${name}`;
+    } else if (this._name.endsWith('.ts')) {
+      name = `<img class="icon" src="../dist/icon/icon-ts.png" alt="">${name}`;
     }
 
     return `<summary>${name}</summary>`;

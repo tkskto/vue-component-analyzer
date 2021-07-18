@@ -2,13 +2,11 @@ import {platform} from 'os';
 import {existsSync, writeFileSync, readFileSync} from 'fs';
 import {join, dirname} from 'path';
 import assert from 'assert';
-const mkdirp = require('mkdirp');
-const {Analyzer} = require('../../src/server/Analyzer');
+import mkdirp from 'mkdirp';
+import {analyzer} from '../../src/server/Analyzer';
 const fixturesDir = join(__dirname, '../fixture/');
 const snapshotDir = platform() === 'win32' ? join(__dirname, '../snapshots/win32') : join(__dirname, '../snapshots/');
 const isUpdate = process.argv.includes('--update');
-
-const analyzer = new Analyzer();
 
 describe('import declaration test', () => {
   it('importOne.vue', async () => {

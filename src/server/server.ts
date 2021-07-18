@@ -1,21 +1,19 @@
 // for execute from npm scripts or commandline.
 
 import AnalyzeReport = vueComponentAnalyzer.AnalyzeReport;
-import {Request, Response} from 'express';
-import WebSocket from 'ws';
-const path = require('path');
-const http = require('http');
-const {renderFile} = require('ejs');
-const express = require('express');
-const webSocket = require('ws');
-const opener = require('opener');
+import express from 'express';
+import webSocket from 'ws';
+import path from 'path';
+import http from 'http';
+import {renderFile} from 'ejs';
+import opener from 'opener';
 
 const projectRoot = path.resolve(__dirname, '..');
 
 /**
  * start web socket server and connect when finished generate component tree.
  */
-const startServer = (port: number, json: AnalyzeReport): void => {
+export const startServer = (port: string, json: AnalyzeReport): void => {
   const HOST = '127.0.0.1';
 
   // establish local web server.
@@ -33,7 +31,7 @@ const startServer = (port: number, json: AnalyzeReport): void => {
     server,
   });
 
-  app.use('/', (req: Request, res: Response) => {
+  app.use('/', (req: express.Request, res: express.Response) => {
     res.render('viewer', {
       mode: 'server',
       title: 'analyze report',
@@ -45,14 +43,22 @@ const startServer = (port: number, json: AnalyzeReport): void => {
     console.log(err);
 
     if (server.listening) {
-      server.close((serverErr: Error) => {
+      server.close((serverErr: Error | undefined) => {
         console.log(serverErr);
       });
     }
   });
 
-  server.listen(port, HOST, () => {
-    const addressPort = server.address().port || port;
+  server.listen(Number(port), HOST, () => {
+    const address = server?.address();
+    let addressPort = port;
+
+    if (typeof address === 'string') {
+      addressPort = address;
+    } else if (typeof address === 'object') {
+      addressPort = String(address?.port) || port;
+    }
+
     const url = `http://${HOST}:${addressPort}/`;
 
     console.log(`Vue Component Analyzer is started at ${url}`);
@@ -62,7 +68,7 @@ const startServer = (port: number, json: AnalyzeReport): void => {
 
     wss.on('connection', (ws: WebSocket) => {
       // pass tree data to browser.
-      wss.clients.forEach((client: WebSocket) => {
+      wss.clients.forEach((client: webSocket) => {
         client.send(JSON.stringify(json));
       });
 
@@ -72,5 +78,3 @@ const startServer = (port: number, json: AnalyzeReport): void => {
     });
   });
 };
-
-exports.startServer = startServer;
