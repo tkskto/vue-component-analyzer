@@ -5,3 +5,4 @@ coverage
 .temp
 dist/**
 !dist/style.css
+!dist/icon/icon-ts.png
