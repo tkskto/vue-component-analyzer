@@ -3,4 +3,7 @@ out
 coverage
 .nyc_output
 .temp
+dist/**
 dist/index.js
+!dist/style.css
+!dist/icon/icon-ts.png

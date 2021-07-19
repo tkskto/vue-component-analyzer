@@ -5,8 +5,8 @@ import {
 } from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
 import {model} from './Model';
-const {existsSync} = require('fs');
-const {resolve, extname, dirname} = require('path');
+import {existsSync} from 'fs';
+import {resolve, extname, dirname} from 'path';
 
 /**
  * get only Import Declaration syntax.

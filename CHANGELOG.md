@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.2
+
+### enhancement
+
+-   add icon.
+
+### Chores
+
+-   \#110 update `vue-eslint-parser` 7.7.2 to 7.9.0
+-   \#103 update `ws` 7.5.2 to 7.5.3
+
 ## 0.3.1
 
 ### Bug Fixes

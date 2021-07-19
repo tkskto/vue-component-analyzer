@@ -7,7 +7,7 @@ import {VueComponent} from './VueComponent';
 import {model} from './Model';
 const cwd = process.cwd();
 
-export class Analyzer {
+class Analyzer {
   private readonly _counter: FileCounter;
 
   constructor() {
@@ -82,3 +82,5 @@ export class Analyzer {
     return this._counter;
   }
 }
+
+export const analyzer = new Analyzer();
