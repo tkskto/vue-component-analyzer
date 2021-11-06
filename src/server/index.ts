@@ -76,6 +76,8 @@ function writeFileExtra(filename: string, data: string) {
 
     console.log('finished analyzing.');
   } catch (err) {
-    console.error(err.message);
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
   }
 })();
