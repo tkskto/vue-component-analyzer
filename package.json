@@ -63,7 +63,7 @@
     "@types/ejs": "3.0.7",
     "@types/express": "4.17.12",
     "@types/mkdirp": "1.0.2",
-    "@types/mocha": "8.2.2",
+    "@types/mocha": "8.2.3",
     "@types/node": "16.11.6",
     "@types/opener": "1.4.0",
     "@types/ws": "8.2.0",
