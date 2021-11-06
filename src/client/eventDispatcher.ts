@@ -68,7 +68,7 @@ export class CustomEventDispatcher {
         try {
           listener.handler(e);
         } catch (error) {
-          if (window.console) {
+          if (error instanceof Error) {
             console.error(error.stack);
           }
         }
