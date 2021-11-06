@@ -6,9 +6,9 @@ import {getOptions} from './Commander';
 import {analyzer} from './Analyzer';
 import {startServer} from './server';
 import {writeFileSync} from 'fs';
+import {globby} from 'globby';
 import path from 'path';
 import mkdirp from 'mkdirp';
-import globby from 'globby';
 
 // TODO: add log system
 // TODO: add error system
