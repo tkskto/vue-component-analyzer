@@ -2,7 +2,7 @@
 
 import AnalyzeReport = vueComponentAnalyzer.AnalyzeReport;
 import express from 'express';
-import webSocket from 'ws';
+import {WebSocketServer} from 'ws';
 import path from 'path';
 import http from 'http';
 import {renderFile} from 'ejs';
@@ -27,7 +27,7 @@ export const startServer = (port: string, json: AnalyzeReport): void => {
 
   // use same server for WebSocket Server.
   const server = http.createServer(app);
-  const wss = new webSocket.Server({
+  const wss = new WebSocketServer({
     server,
   });
 
@@ -68,9 +68,7 @@ export const startServer = (port: string, json: AnalyzeReport): void => {
 
     wss.on('connection', (ws: WebSocket) => {
       // pass tree data to browser.
-      wss.clients.forEach((client: webSocket) => {
-        client.send(JSON.stringify(json));
-      });
+      ws.send(JSON.stringify(json));
 
       ws.addEventListener('error', () => {
         console.error('Something went to wrong on web socket.');
