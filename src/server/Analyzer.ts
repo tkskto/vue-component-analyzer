@@ -72,7 +72,9 @@ class Analyzer {
       }
     } catch (err) {
       console.error(`Something went wrong with reading ${filename}`);
-      console.error(err.message);
+      if (err instanceof Error) {
+        console.error(err.message);
+      }
     }
 
     return component.getFileReport(isTest);
