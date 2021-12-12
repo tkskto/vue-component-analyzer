@@ -14,6 +14,7 @@
 <main>
   <header>
     <div class="utility">
+      <button id="btn-capture" type="button">capture</button>
       <button id="btn-toggle-visible-state" type="button"><span id="btn-toggle-visible-state-text" class="btn-text">expand all</span></button>
       <button id="btn-settings" type="button"><span class="btn-text">settings</span></button>
     </div>
@@ -36,5 +37,15 @@
 <footer>
   <p>If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
 </footer>
+<div id="dialog" class="dialog">
+<div class="dialog-inner">
+<div class="dialog-header">
+<a id="btn-export" href download="result.png">export</a>
+<button id="btn-dialog-close" type="button">close</button>
+</div>
+<div id="dialog-contents" class="dialog-contents"></div>
+</div>
+<div class="dialog-overlay"></div>
+</div>
 </body>
 </html>
