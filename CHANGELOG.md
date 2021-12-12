@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0
+
+### enhancement
+
+-   add screenshot feature (for only image mode)
+
+### Chores
+
+-   \#119 update dependency `commander` to v8.3.0
+-   \#132 update dependency `vue-eslint-parser` to v8
+-   \#137 update dependency `ws` to v8.3.0
+
+### Breaking Changes
+
+-   Dropped support for Node.js v12.x
+
 ## 0.3.2
 
 ### enhancement
