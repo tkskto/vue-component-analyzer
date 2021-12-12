@@ -129,7 +129,7 @@ export class Seed {
   /**
    * @return boolean
    */
-  isJS() {
+  isJS(): boolean {
     return this._name.endsWith('.js');
   }
 }
