@@ -59,7 +59,7 @@ export class Renderer {
     }
 
     this.render();
-  }
+  };
 
   private renderLine(name: string, level: number, isLast: boolean): string {
     let line = ' ';
