@@ -25,7 +25,7 @@ export const makeImage = (url: string): Promise<HTMLImageElement> => (
 export const makeSVG = async (app: HTMLDivElement, width: number, height: number): Promise<string> => {
   const clone = app.cloneNode(true) as HTMLDivElement;
 
-  const willRemoveElements = clone.querySelectorAll<HTMLImageElement>('img, script');
+  const willRemoveElements = clone.querySelectorAll<HTMLImageElement>('img, script, svg');
 
   willRemoveElements.forEach((element) => {
     if (element.parentElement) {
