@@ -47,7 +47,7 @@
   "dependencies": {
     "commander": "8.3.0",
     "ejs": "3.1.6",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "globby": "11.0.4",
     "mkdirp": "1.0.4",
     "opener": "1.5.2",
@@ -61,7 +61,7 @@
     "@rollup/plugin-node-resolve": "13.0.6",
     "@rollup/plugin-typescript": "8.3.0",
     "@types/ejs": "3.1.0",
-    "@types/express": "4.17.12",
+    "@types/express": "4.17.13",
     "@types/mkdirp": "1.0.2",
     "@types/mocha": "9.0.0",
     "@types/node": "16.11.11",
