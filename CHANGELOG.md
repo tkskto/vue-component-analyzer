@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.1
+
+### Chores
+
+-   \#153 update dependency `vue-eslint-parser` to v8.2.0
+-   \#138 update dependency `ws` to v8.5.0
+
+### Fixes
+
+-   update Vue.js logo to SVG.
+
 ## 0.4.0
 
 ### enhancement
