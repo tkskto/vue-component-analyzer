@@ -53,7 +53,7 @@ export class VueComponent {
     this._importDeclaration = getImportDeclaration(esLintProgram.body);
   }
 
-  private getProps = (tokens: Token[]): string => {
+  private getProps(tokens: Token[]): string {
     try {
       const propsDeclaration = JSON.parse(getDeclarationSyntax(tokens, 'props'));
 

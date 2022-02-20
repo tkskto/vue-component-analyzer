@@ -18,17 +18,17 @@ class CustomDialog {
     }
   }
 
-  show = () => {
+  show() {
     document.body.classList.add('-dialog-show');
     disableTabIndex('#dialog');
   }
 
-  close = () => {
+  close() {
     document.body.classList.remove('-dialog-show');
     resetTabIndex();
   }
 
-  load = () => {
+  load() {
     this.show();
 
     if (this._contents) {
@@ -36,18 +36,18 @@ class CustomDialog {
     }
   }
 
-  complete = (html: string) => {
+  complete(html: string) {
     if (this._contents) {
       this._contents.innerHTML = html;
     }
   }
 
-  showExportDialog = async () => {
+  async showExportDialog() {
     this.load();
     const img = await capture();
     this._btnExport.href = img.src;
     this.complete(img.outerHTML);
-  };
+  }
 }
 
 export const customDialog = new CustomDialog();

@@ -15,6 +15,7 @@ export class Seed {
 
   private _count: number;
 
+  // eslint-disable-next-line no-use-before-define
   private _children: Seed[] = []; // imported modules from this file.
 
   /**
@@ -64,7 +65,7 @@ export class Seed {
     let name = this._name;
 
     if (this._name.endsWith('.vue')) {
-      name = `<img class="icon" src="https://v3.vuejs.org/logo.png" alt="">${name}`;
+      name = `<svg class="icon" viewBox="0 0 128 128" width="24" height="24"><use xlink:href="#logo"></use></svg>${name}`;
     } else if (this._name.endsWith('.js')) {
       name = `<img class="icon" src="https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png" alt="">${name}`;
     } else if (this._name.endsWith('.ts')) {
