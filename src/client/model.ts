@@ -15,7 +15,7 @@ export class Model extends CustomEventDispatcher {
   public static EVENT = {
     DATA_UPDATE: 'dataUpdate',
     SETTING_CHANGED: 'settingChanged',
-  }
+  };
 
   private _today: Date;
 

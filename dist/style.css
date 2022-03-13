@@ -4,6 +4,10 @@ body {
   font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   background-color: #293D52;
 }
+body.-dialog-show {
+  height: 100%;
+  overflow: hidden;
+}
 main {
   position: relative;
 }
@@ -13,7 +17,7 @@ header {
 }
 .root {
   border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 20px 0;
 }
 .GRAPH .root.text {
   display: none;
@@ -229,4 +233,57 @@ footer {
 }
 footer a {
   color: #54eda9;
+}
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s ease, opacity 0.2s ease;
+  z-index: 10;
+}
+.-dialog-show .dialog {
+  visibility: visible;
+  opacity: 1;
+}
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.dialog-inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 90%;
+  height: 90%;
+  z-index: 1;
+  border-radius: 4px;
+  padding: 20px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.dialog-contents {
+  width: 100%;
+  height: calc(100% - 40px);
+  overflow: auto;
+  box-sizing: border-box;
+}
+.dialog-contents img {
+  max-width: 100%;
+}
+.dialog .dialog-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
 }
