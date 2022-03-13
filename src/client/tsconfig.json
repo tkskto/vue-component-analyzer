@@ -1,10 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "ESNEXT",
-    "types": [
-      "mocha"
-    ],
     "lib": ["dom", "es6"]
   },
   "include": [

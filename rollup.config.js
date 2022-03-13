@@ -25,12 +25,13 @@ const banner = `/*!
 export default [
   {
     input: '.temp/index.js',
-    output: {
-      file: 'dist/index.js',
-      format: 'cjs',
-      banner,
-      exports: 'default',
-    },
+    output: [
+      {
+        file: 'dist/index.mjs',
+        format: 'es',
+        banner,
+      },
+    ],
     external: [
       'fs',
       'path',

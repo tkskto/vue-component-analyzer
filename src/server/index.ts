@@ -6,9 +6,9 @@ import {getOptions} from './Commander';
 import {analyzer} from './Analyzer';
 import {startServer} from './server';
 import {writeFileSync} from 'fs';
+import {globby} from 'globby';
 import path from 'path';
 import mkdirp from 'mkdirp';
-import globby from 'globby';
 
 // TODO: add log system
 // TODO: add error system
@@ -23,7 +23,7 @@ function writeFileExtra(filename: string, data: string) {
   });
 }
 
-(async () => {
+export const vueComponentAnalyze = async () => {
   try {
     // get commander options.
     const argv = getOptions(process.argv);
@@ -80,4 +80,4 @@ function writeFileExtra(filename: string, data: string) {
       console.error(err.message);
     }
   }
-})();
+};
