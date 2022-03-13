@@ -1,11 +1,11 @@
 import {getOptions} from '../../src/server/Commander';
-import assert from 'assert';
+import {deepStrictEqual} from 'assert';
 
 describe('commander test', () => {
-  it('default', () => {
+  test('get default option', () => {
     const option = getOptions([]);
 
-    assert.deepStrictEqual(option, {
+    deepStrictEqual(option, {
       dir: 'src',
       format: 'browser',
       out: 'out',
