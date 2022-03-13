@@ -1,9 +1,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": [
-      "mocha"
-    ],
     "lib": ["dom", "es6"]
   },
   "include": [
