@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "ES2021",
+    "lib": ["ESNext", "WebWorker"],
+    "module": "ESNext",
     "removeComments": true,
     "strict": true,
     "moduleResolution": "node",
@@ -12,6 +14,13 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
   },
   "exclude": [
     "test",
