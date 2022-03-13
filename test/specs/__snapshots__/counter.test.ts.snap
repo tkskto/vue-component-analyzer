@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`counter's count test counterTest.vue 1`] = `"{\\"/test/fixture/counterTest/counterTest.vue\\":1,\\"/test/components/nested2.vue\\":1,\\"/test/components/child.vue\\":2,\\"/test/components/child2.vue\\":2,\\"/test/fixture/counterTest/counterComponent.vue\\":1,\\"/test/fixture/counterTest/counterComponent2.vue\\":1}"`;

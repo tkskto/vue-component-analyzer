@@ -80,11 +80,12 @@ export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'p
  */
 export const resolveFile = (_filename: string, _currentFileName: string): string => {
   let filename = '';
+  const dirnameOfCurrentFile = dirname(_currentFileName);
 
   if (_filename.startsWith('../')) {
-    filename = resolve(dirname(_currentFileName), _filename);
+    filename = resolve(dirnameOfCurrentFile, _filename);
   } else if (_filename.startsWith('./')) {
-    filename = `${dirname(_currentFileName)}/${_filename.replace(/\.\/|/ug, '')}`;
+    filename = `${dirnameOfCurrentFile}/${_filename.replace(/\.\/|/ug, '')}`;
   } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
     filename = _filename.replace('~', model.resourceRoot).replace('@', model.resourceRoot);
   }

@@ -1,12 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "CommonJS",
     "types": [
       "vue-eslint-parser",
       "express",
       "ws",
-      "mocha",
       "node"
     ],
     "outDir": "../../.temp"
