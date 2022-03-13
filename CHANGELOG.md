@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0
+
+change package type to `module`.
+
+### Chores
+
+-   \#158 update dependency `commander` to v9.0.0
+-   \#159 update dependency `globby` to v13.0.0
+
 ## 0.4.1
 
 ### Chores
