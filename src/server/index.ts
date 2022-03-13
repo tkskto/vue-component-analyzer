@@ -23,7 +23,7 @@ function writeFileExtra(filename: string, data: string) {
   });
 }
 
-(async () => {
+export const vueComponentAnalyze = async () => {
   try {
     // get commander options.
     const argv = getOptions(process.argv);
@@ -80,4 +80,4 @@ function writeFileExtra(filename: string, data: string) {
       console.error(err.message);
     }
   }
-})();
+};

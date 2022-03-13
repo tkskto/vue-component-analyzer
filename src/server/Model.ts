@@ -1,7 +1,7 @@
 import {FORMAT} from './Constant';
 
 class Model {
-  private _resourceRoot = 'src';
+  private _resourceRoot = '.';
 
   private _format = FORMAT.BROWSER;
 
