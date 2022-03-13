@@ -1,7 +1,16 @@
 class StyleGetter {
   private _style = '';
 
-  private getStyle = () => fetch('/dist/style.css').then((res) => res.text());
+  private getStyle = async () => {
+    const styleElement: HTMLLinkElement | null = document.querySelector('#style');
+    let style = '';
+
+    if (styleElement) {
+      style = await fetch(styleElement.href).then((res) => res.text());
+    }
+
+    return style;
+  };
 
   /**
    * get css strings for SVG Image
