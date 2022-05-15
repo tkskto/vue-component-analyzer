@@ -73,7 +73,7 @@
     "jest": "27.5.1",
     "lint-staged": "12.3.4",
     "nyc": "15.1.0",
-    "rollup": "2.67.3",
+    "rollup": "2.73.0",
     "rollup-plugin-license": "2.6.0",
     "rollup-plugin-terser": "7.0.2",
     "ts-jest": "27.1.3",
