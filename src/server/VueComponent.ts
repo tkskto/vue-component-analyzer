@@ -6,7 +6,7 @@ import FileReport = vueComponentAnalyzer.FileReport;
 import {Stats} from 'fs';
 
 const parserOption = {
-  ecmaVersion: 2018,
+  ecmaVersion: 'latest',
   sourceType: 'module',
 };
 
