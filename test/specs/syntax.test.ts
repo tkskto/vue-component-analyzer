@@ -26,4 +26,12 @@ describe('syntax test', () => {
 
     expect(json).toMatchSnapshot();
   });
+
+  it('classDefined.vue', async () => {
+    const filename = 'syntaxTest/classDefined';
+    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
 });

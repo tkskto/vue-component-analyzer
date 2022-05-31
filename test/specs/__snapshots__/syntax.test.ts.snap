@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`syntax test classDefined.vue 1`] = `"{\\"name\\":\\"/test/fixture/syntaxTest/classDefined.vue\\",\\"props\\":\\"\\",\\"size\\":261,\\"lastModifiedTime\\":0,\\"children\\":[]}"`;
+
 exports[`syntax test logicalAssignment.vue 1`] = `"{\\"name\\":\\"/test/fixture/syntaxTest/logicalAssignment.vue\\",\\"props\\":\\"\\",\\"size\\":219,\\"lastModifiedTime\\":0,\\"children\\":[]}"`;
 
 exports[`syntax test numericSeparators.vue 1`] = `"{\\"name\\":\\"/test/fixture/syntaxTest/numericSeparators.vue\\",\\"props\\":\\"\\",\\"size\\":135,\\"lastModifiedTime\\":0,\\"children\\":[]}"`;
