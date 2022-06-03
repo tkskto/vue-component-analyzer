@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.1
+
+### Chores
+
+-   \#171 update dependency `vue-eslint-parser` to v8.3.0
+-   \#178 update dependency `ejs` to v3.1.8
+-   \#186 update dependency `commander` to v9.3.0
+-   \#187 update dependency `express` to v4.18.1
+
+### Fixes
+
+-   Fails to render when the component uses optional chaining operator \#174 from @nachodd
+
 ## 0.5.0
 
 change package type to `module`.
