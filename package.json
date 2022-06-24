@@ -71,7 +71,7 @@
     "eslint": "8.16.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
-    "lint-staged": "12.5.0",
+    "lint-staged": "13.0.3",
     "nyc": "15.1.0",
     "rollup": "2.75.5",
     "rollup-plugin-license": "2.8.0",
