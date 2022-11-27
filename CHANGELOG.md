@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.2
+
+### Chores
+
+-   \#210 update dependency
+  -   `commander` to v9.4.1
+  -   `globby` to v13.1.2
+  -   `vue-eslint-parser` to v9.1.0
+  -   `ws` to v8.11.0
+
 ## 0.5.1
 
 ### Chores
