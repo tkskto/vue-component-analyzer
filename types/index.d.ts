@@ -1,3 +1,10 @@
+/**
+ * name: filename
+ * props: props defined in the component
+ * size: filesize
+ * lastModifiedTime: date modified the file
+ * children: information array this file is importing
+ */
 export interface FileReport {
   name: string,
   props: string,
