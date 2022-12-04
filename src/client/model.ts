@@ -1,5 +1,5 @@
+import {AnalyzeReport} from '../../types';
 import {CustomEventDispatcher} from './eventDispatcher';
-import AnalyzeReport = vueComponentAnalyzer.AnalyzeReport;
 
 export type INFORMATION_TYPE = 'settings' | 'props' | 'fileSize' | 'lastUpdated' | 'referenceCount';
 export type VIEW_TYPE = 'GRAPH' | 'TEXT';
@@ -38,11 +38,11 @@ export class Model extends CustomEventDispatcher {
     this._todayTime = this._today.getTime();
   }
 
-  get data(): vueComponentAnalyzer.AnalyzeReport {
+  get data(): AnalyzeReport {
     return this._data;
   }
 
-  set data(value: vueComponentAnalyzer.AnalyzeReport) {
+  set data(value: AnalyzeReport) {
     this._data = value;
     this.dispatchEvent(Model.EVENT.DATA_UPDATE);
   }

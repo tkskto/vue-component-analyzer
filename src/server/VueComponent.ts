@@ -1,8 +1,8 @@
+import {FileReport} from '../../types';
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, ESLintProgram} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
 import {getImportDeclaration, getDeclarationSyntax} from './utils';
-import FileReport = vueComponentAnalyzer.FileReport;
 import {Stats} from 'fs';
 
 const parserOption = {

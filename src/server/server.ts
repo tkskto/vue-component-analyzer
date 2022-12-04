@@ -1,6 +1,6 @@
 // for execute from npm scripts or commandline.
 
-import AnalyzeReport = vueComponentAnalyzer.AnalyzeReport;
+import {AnalyzeReport} from '../../types';
 import express from 'express';
 import {WebSocketServer} from 'ws';
 import path from 'path';

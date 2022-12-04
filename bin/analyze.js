@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {vueComponentAnalyze} from '../dist/index.mjs';
+import {analyzeFromCLI} from '../dist/index.mjs';
 
 /**
  * Catch and report unexpected error.
@@ -14,12 +14,12 @@ function onCatchError(error) {
   process.exit(1);
 }
 
-(function main() {
+(async function main() {
   process.on('uncaughtException', onCatchError);
   process.on('unhandledRejection', onCatchError);
 
   try {
-    vueComponentAnalyze();
+    await analyzeFromCLI();
   } catch (err) {
     onCatchError(err);
   }
