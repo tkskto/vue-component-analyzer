@@ -1,11 +1,11 @@
 import {join} from 'path';
-import {analyzer} from '../../src/server/Analyzer';
+import {getImportDeclarationTree} from '../../src/server/Analyzer';
 const fixturesDir = join(__dirname, '../fixture/');
 
 describe('import declaration test', () => {
   it('importOne.vue', async () => {
     const filename = 'declarationTest/importOne';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -14,7 +14,7 @@ describe('import declaration test', () => {
 
   it('importTwo.vue', async () => {
     const filename = 'declarationTest/importTwo';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -23,7 +23,7 @@ describe('import declaration test', () => {
 
   it('importThirdParty.vue', async () => {
     const filename = 'declarationTest/importTwo';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -32,7 +32,7 @@ describe('import declaration test', () => {
 
   it('importNestedOne.vue', async () => {
     const filename = 'declarationTest/importNestedOne';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -41,7 +41,7 @@ describe('import declaration test', () => {
 
   it('importNestedTwo.vue', async () => {
     const filename = 'declarationTest/importNestedTwo';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -50,7 +50,7 @@ describe('import declaration test', () => {
 
   it('importNestedTwo.vue', async () => {
     const filename = 'declarationTest/importNestedTwo';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -59,7 +59,7 @@ describe('import declaration test', () => {
 
   it('onlyTemplate.vue', async () => {
     const filename = 'declarationTest/onlyTemplate';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -68,7 +68,7 @@ describe('import declaration test', () => {
 
   it('SJIS.vue', async () => {
     const filename = 'declarationTest/SJIS';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
@@ -77,7 +77,7 @@ describe('import declaration test', () => {
 
   it('noExtension.vue', async () => {
     const filename = 'declarationTest/noExtension';
-    const declaration = await analyzer.getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
     expect(json).toMatchSnapshot();
