@@ -46,8 +46,22 @@ npm exec vca -- --dir .
 *   `-o` or `--out` : output directory. JSON file will output here.
 *   `-p` or `--port` : select a port number for the local server.
 
+## API
+
+vue-component-analyzer is also available as an API from v0.6.0.
+
+This API is intended to be used for testing.
+
+```javascript
+import {getImportDeclarationTree} from '@tkskto/vue-component-analyzer';
+
+const jsonOfTree = getImportDeclarationTree('entryFile.vue');
+```
+
+See [index.d.ts](./types/index.d.ts) for details of types.
+
+(`lastModifiedTime` can be noise. If you don't need it remove explicitly.)
+
 ## License
 
 MIT License.
-
-

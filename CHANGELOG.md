@@ -1,14 +1,24 @@
 # Changelog
 
+## 0.6.0
+
+### enhancement
+
+-   add getImportDeclarationTree API.
+
+### Chores
+
+-   \#210 `express` to v4.8.12
+
 ## 0.5.2
 
 ### Chores
 
 -   \#210 update dependency
-  -   `commander` to v9.4.1
-  -   `globby` to v13.1.2
-  -   `vue-eslint-parser` to v9.1.0
-  -   `ws` to v8.11.0
+    -   `commander` to v9.4.1
+    -   `globby` to v13.1.2
+    -   `vue-eslint-parser` to v9.1.0
+    -   `ws` to v8.11.0
 
 ## 0.5.1
 

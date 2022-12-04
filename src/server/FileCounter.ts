@@ -13,7 +13,13 @@ export class FileCounter {
     }
   }
 
-  public get count(): {[key: string]: number} {
+  public clear(): void {
+    this._count = {};
+  }
+
+  public get result(): {[key: string]: number} {
     return this._count;
   }
 }
+
+export const fileCounter = new FileCounter();

@@ -1,7 +1,7 @@
 /**
  * Data Type of one of Vue File.
  */
-import FileReport = vueComponentAnalyzer.FileReport;
+import {FileReport} from '../../types';
 import {Model} from './model';
 
 export class Seed {

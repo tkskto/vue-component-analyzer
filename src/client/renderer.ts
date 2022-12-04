@@ -1,8 +1,8 @@
 // for execute from browser.
 
+import {FileReport} from '../../types';
 import {Seed} from './Seed';
 import {Model} from './model';
-import FileReport = vueComponentAnalyzer.FileReport;
 
 export class Renderer {
   private readonly _app: HTMLElement | null;
