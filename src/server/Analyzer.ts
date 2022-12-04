@@ -1,88 +1,74 @@
-import FileReport = vueComponentAnalyzer.FileReport;
+import {FileReport} from '../../types';
 import {resolveFile} from './utils';
 import {readFileSync, statSync} from 'fs';
 import {resolve, extname} from 'path';
-import {FileCounter} from './FileCounter';
+import {fileCounter} from './FileCounter';
 import {VueComponent} from './VueComponent';
 import {model} from './Model';
 const cwd = process.cwd();
 
-class Analyzer {
-  private readonly _counter: FileCounter;
+/**
+ * get import tree.
+ * @param {string} fileName entry file name
+ * @param {string[]} parents entries of file name
+ * @param {boolean} isTest whether it through the test. if this doesn't exist lastModifiedTime will always fail on the GitHub Actions.
+ */
+export const getImportDeclarationTree = (fileName: string, parents: string[] = [], isTest = false): FileReport => {
+  const filename = resolve(cwd, fileName);
+  // get filename without current working directory.
+  const shortFilename = filename.replace(cwd, '');
+  // get file statistic
+  const stat = statSync(filename);
+  // make a filename list for detecting circular dependency.
+  const ancestorList: string[] = parents.concat();
 
-  constructor() {
-    this._counter = new FileCounter();
+  ancestorList.push(fileName);
+
+  if (!model.isSilentMode) {
+    console.log(`read ${filename}`);
   }
 
-  /**
-   * get import tree.
-   * @param {string} fileName entry file name
-   * @param {string[]} parents entries of file name
-   * @param {boolean} isTest whether it through the test. if this doesn't exist lastModifiedTime will always fail on the GitHub Actions.
-   */
-  public getImportDeclarationTree = (fileName: string, parents: string[], isTest = false): FileReport => {
-    const filename = resolve(cwd, fileName);
-    // get filename without current working directory.
-    const shortFilename = filename.replace(cwd, '');
-    // get file statistic
-    const stat = statSync(filename);
-    // make a filename list for detecting circular dependency.
-    const ancestorList: string[] = parents.concat();
+  // increment count of this file.
+  fileCounter.add(shortFilename);
 
-    ancestorList.push(fileName);
+  // if this file is not Vue Component file, return only filename and stat.
+  if (extname(filename) === '' || extname(filename) !== '.vue') {
+    return {
+      name: shortFilename,
+      props: '',
+      size: stat.size,
+      lastModifiedTime: isTest ? 0 : Number(stat.mtimeMs.toFixed(0)),
+      children: [],
+    };
+  }
 
-    if (!model.isSilentMode) {
-      console.log(`read ${filename}`);
-    }
+  const contents = readFileSync(filename, 'utf-8');
+  const component = new VueComponent(shortFilename, contents, stat);
 
-    // increment count of this file.
-    this._counter.add(shortFilename);
+  try {
+    // if we get, read imported file recursive.
+    for (let i = 0, len = component.importDeclaration.length; i < len; i++) {
+      // TODO: support other types? (value might be RegExp, or number, boolean.)
+      const source = String(component.importDeclaration[i].source.value);
 
-    // if this file is not Vue Component file, return only filename and stat.
-    if (extname(filename) === '' || extname(filename) !== '.vue') {
-      return {
-        name: shortFilename,
-        props: '',
-        size: stat.size,
-        lastModifiedTime: isTest ? 0 : Number(stat.mtimeMs.toFixed(0)),
-        children: [],
-      };
-    }
+      if (source) {
+        const nextFilename = resolveFile(source, filename);
 
-    const contents = readFileSync(filename, 'utf-8');
-    const component = new VueComponent(shortFilename, contents, stat);
-
-    try {
-      // if we get, read imported file recursive.
-      for (let i = 0, len = component.importDeclaration.length; i < len; i++) {
-        // TODO: support other types? (value might be RegExp, or number, boolean.)
-        const source = String(component.importDeclaration[i].source.value);
-
-        if (source) {
-          const nextFilename = resolveFile(source, filename);
-
-          if (nextFilename) {
-            if (parents.includes(nextFilename)) {
-              console.warn(`Circular dependency detected between ${nextFilename} and ${filename}`);
-            } else {
-              component.addChildReport(this.getImportDeclarationTree(nextFilename, ancestorList, isTest));
-            }
+        if (nextFilename) {
+          if (parents.includes(nextFilename)) {
+            console.warn(`Circular dependency detected between ${nextFilename} and ${filename}`);
+          } else {
+            component.addChildReport(getImportDeclarationTree(nextFilename, ancestorList, isTest));
           }
         }
       }
-    } catch (err) {
-      console.error(`Something went wrong with reading ${filename}`);
-      if (err instanceof Error) {
-        console.error(err.message);
-      }
     }
-
-    return component.getFileReport(isTest);
-  };
-
-  get counter(): FileCounter {
-    return this._counter;
+  } catch (err) {
+    console.error(`Something went wrong with reading ${filename}`);
+    if (err instanceof Error) {
+      console.error(err.message);
+    }
   }
-}
 
-export const analyzer = new Analyzer();
+  return component.getFileReport(isTest);
+};

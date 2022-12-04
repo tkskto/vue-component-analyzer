@@ -3,6 +3,8 @@
   "version": "0.5.2",
   "description": "Analyze dependency tree for Vue.js SFC (Single File Component)",
   "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./types/index.d.ts",
   "bin": {
     "vca": "bin/analyze.js"
   },
