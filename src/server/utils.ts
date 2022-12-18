@@ -12,7 +12,7 @@ import {resolve, extname, dirname} from 'path';
  * get only Import Declaration syntax.
  * @param {Node[]} nodeArr
  */
-export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDeclaration)[]): ESLintImportDeclaration[] => { // eslint-disable-line
+export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDeclaration)[]): ESLintImportDeclaration[] => {
   return nodeArr.filter((node) => node.type === 'ImportDeclaration') as ESLintImportDeclaration[];
 };
 
@@ -61,7 +61,7 @@ export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'p
       }
 
       // change quotation to double for JSON.
-      result += value.replace(/'/ug, '"');
+      result += value.replaceAll('\'', '"');
 
       // put right-hand quotation for JSON.
       if (needQuoting) {

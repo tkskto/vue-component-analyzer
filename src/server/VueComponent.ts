@@ -34,11 +34,13 @@ export class VueComponent {
 
     // get each part from text of file.
     const templateBody = contents.match(/(?<template><template>[\s\S]*<\/template>)/u);
-    const scriptBody = contents.match(/(?<script><script>[\s\S]*<\/script>)/u);
+
+    // support src, lang, setup attribute.
+    const scriptBody = contents.match(/(?<script><script[\s\S]*>[\s\S]*<\/script>)/u);
     const styleBody = contents.match(/(?<style><style>[\s\S]*<\/style>)/u);
 
     this._template = templateBody?.groups?.template || '';
-    this._style = styleBody?.groups?.template || '';
+    this._style = styleBody?.groups?.style || '';
 
     const scriptString = scriptBody?.groups?.script || '';
 
