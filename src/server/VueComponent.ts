@@ -28,6 +28,8 @@ export class VueComponent {
 
   private _importDeclaration: ESLintImportDeclaration[] = [];
 
+  private _srcAttribute: string;
+
   constructor(filename: string, contents: string, stats?: Stats) {
     this._filename = filename;
     this._lastModifiedTime = stats?.mtimeMs || 0;
@@ -60,6 +62,10 @@ export class VueComponent {
 
       throw err;
     }
+
+    const scriptSrc = scriptString.match(/<script src="(?<src>[\s\S]*)">/u);
+
+    this._srcAttribute = scriptSrc?.groups?.src || '';
   }
 
   private getProps(tokens: Token[]): string {
@@ -96,6 +102,10 @@ export class VueComponent {
 
   get importDeclaration(): ESLintImportDeclaration[] {
     return this._importDeclaration;
+  }
+
+  get srcAttribute(): string {
+    return this._srcAttribute;
   }
 
   public getFileReport(isTest: boolean): FileReport {

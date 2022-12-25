@@ -44,6 +44,17 @@ export const getImportDeclarationTree = (fileName: string, parents: string[] = [
 
   const contents = readFileSync(filename, 'utf-8');
   const component = new VueComponent(shortFilename, contents, stat);
+  const getNextDeclaration = (source: string) => {
+    const nextFilename = resolveFile(source, filename);
+
+    if (nextFilename) {
+      if (parents.includes(nextFilename)) {
+        console.warn(`Circular dependency detected between ${nextFilename} and ${filename}`);
+      } else {
+        component.addChildReport(getImportDeclarationTree(nextFilename, ancestorList, isTest));
+      }
+    }
+  };
 
   try {
     // if we get, read imported file recursive.
@@ -52,16 +63,12 @@ export const getImportDeclarationTree = (fileName: string, parents: string[] = [
       const source = String(component.importDeclaration[i].source.value);
 
       if (source) {
-        const nextFilename = resolveFile(source, filename);
-
-        if (nextFilename) {
-          if (parents.includes(nextFilename)) {
-            console.warn(`Circular dependency detected between ${nextFilename} and ${filename}`);
-          } else {
-            component.addChildReport(getImportDeclarationTree(nextFilename, ancestorList, isTest));
-          }
-        }
+        getNextDeclaration(source);
       }
+    }
+
+    if (component.srcAttribute) {
+      getNextDeclaration(component.srcAttribute);
     }
   } catch (err) {
     console.error(`Something went wrong with reading ${filename}`);
