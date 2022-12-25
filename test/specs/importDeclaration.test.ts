@@ -77,7 +77,13 @@ describe('import declaration test', () => {
       props: '',
       size: 88,
       lastModifiedTime: 0,
-      children: [],
+      children: [{
+        name: '/test/components/child.vue',
+        props: '',
+        size: 42,
+        lastModifiedTime: 0,
+        children: [],
+      }],
     });
   });
 
