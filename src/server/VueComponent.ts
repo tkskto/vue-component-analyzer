@@ -8,6 +8,7 @@ import {Stats} from 'fs';
 const parserOption = {
   ecmaVersion: 'latest',
   sourceType: 'module',
+  parser: '@typescript-eslint/parser',
 };
 
 export class VueComponent {
@@ -44,15 +45,21 @@ export class VueComponent {
 
     const scriptString = scriptBody?.groups?.script || '';
 
-    // using vue-eslint-parser package.
-    const esLintProgram: ESLintProgram = parse(scriptString, parserOption);
+    try {
+      // using vue-eslint-parser package.
+      const esLintProgram: ESLintProgram = parse(scriptString, parserOption);
 
-    // get props from parser results.
-    if (esLintProgram.tokens) {
-      this._props = this.getProps(esLintProgram.tokens);
+      // get props from parser results.
+      if (esLintProgram.tokens) {
+        this._props = this.getProps(esLintProgram.tokens);
+      }
+
+      this._importDeclaration = getImportDeclaration(esLintProgram.body);
+    } catch (err: unknown) {
+      console.error('something went wrong at pars.');
+
+      throw err;
     }
-
-    this._importDeclaration = getImportDeclaration(esLintProgram.body);
   }
 
   private getProps(tokens: Token[]): string {
@@ -63,9 +70,21 @@ export class VueComponent {
         return propsDeclaration.props;
       }
 
+      const definePropsDeclaration = getDeclarationSyntax(tokens, 'defineProps');
+
+      const definePropsDeclarationJSON = JSON.parse(definePropsDeclaration);
+
+      if (definePropsDeclarationJSON && definePropsDeclarationJSON.defineProps) {
+        return definePropsDeclarationJSON.defineProps;
+      }
+
       return '';
     } catch (err) {
       console.warn('failed to analyze props.');
+
+      if (err instanceof Error) {
+        console.error(err.message);
+      }
 
       return '';
     }
