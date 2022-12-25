@@ -29,7 +29,7 @@ export const getImportDeclarationTree = (fileName: string, parents: string[] = [
   }
 
   // increment count of this file.
-  fileCounter.add(shortFilename);
+  fileCounter.add(filename);
 
   // if this file is not Vue Component file, return only filename and stat.
   if (extname(filename) === '' || extname(filename) !== '.vue') {
