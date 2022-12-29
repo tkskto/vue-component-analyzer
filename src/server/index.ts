@@ -28,7 +28,9 @@ const analyze = (entries: string[]): Promise<AnalyzeReport> => {
   return new Promise((resolve, reject) => {
     try {
       if (entries.length === 0) {
-        console.log('There is no entry file.');
+        reject(new Error('There is no entry file.'));
+
+        return;
       }
 
       const entriesData = [];
@@ -45,6 +47,7 @@ const analyze = (entries: string[]): Promise<AnalyzeReport> => {
         count: fileCounter.result,
       });
     } catch (err) {
+      console.error('something went to wrong at analyze.');
       reject(err);
     }
   });
