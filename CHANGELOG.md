@@ -6,7 +6,7 @@
 
 -   add support for importing scripts with some attributes(`src`, `setup`, `lang`).
 
-## 0.6.0
+## 0.6.1
 
 ### enhancement
 
@@ -14,6 +14,7 @@
 
 ### Chores
 
+-   use Node.js LTS for build in GitHub Actions.
 -   \#210 `express` to v4.8.12
 
 ## 0.5.2

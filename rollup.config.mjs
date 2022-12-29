@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
-import { readFile } from 'fs/promises';
+import {readFile} from 'fs/promises';
 const pkg = JSON.parse(
   await readFile(
     new URL('./package.json', import.meta.url)

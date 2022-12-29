@@ -48,7 +48,7 @@ npm exec vca -- --dir .
 
 ## API
 
-vue-component-analyzer is also available as an API from v0.6.0.
+vue-component-analyzer is also available as an API from v0.6.1.
 
 This API is intended to be used for testing.
 
