@@ -65,7 +65,7 @@ export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'p
       }
 
       // change quotation to double for JSON.
-      result += value.replaceAll('\'', '"');
+      result += value.replace(/'/ug, '"');
 
       // put right-hand quotation for JSON.
       if (needQuoting) {
