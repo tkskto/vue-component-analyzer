@@ -34,4 +34,30 @@ describe('syntax test', () => {
 
     expect(json).toMatchSnapshot();
   });
+
+  it('langIsTypeScript.vue', async () => {
+    const filename = 'syntaxTest/langIsTypeScript';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: '/test/fixture/syntaxTest/langIsTypeScript.vue',
+      props: '',
+      size: 198,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
+
+  it('langIsTypeScriptWithSetup.vue', async () => {
+    const filename = 'syntaxTest/langIsTypeScriptWithSetup';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: '/test/fixture/syntaxTest/langIsTypeScriptWithSetup.vue',
+      props: '',
+      size: 142,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
 });

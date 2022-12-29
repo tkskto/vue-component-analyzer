@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0
+
+### enhancement
+
+-   add support for importing scripts with some attributes(`src`, `setup`, `lang`).
+
 ## 0.6.1
 
 ### enhancement

@@ -19,4 +19,29 @@ describe('props test', () => {
 
     expect(json).toMatchSnapshot();
   });
+
+
+  it('defineTwoProps.vue', async () => {
+    const filename = 'propsTest/defineTwoProps';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: '/test/fixture/propsTest/defineTwoProps.vue',
+      props: {
+        data: {
+          type: 'String',
+          required: 'true',
+          default: '1',
+        },
+        data2: {
+          type: 'Number',
+          required: 'false',
+          default: 1,
+        },
+      },
+      size: 222,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
 });

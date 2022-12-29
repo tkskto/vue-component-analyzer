@@ -1,15 +1,15 @@
-import {resolve} from 'path';
+const cwd = process.cwd();
 
 export class FileCounter {
   private _count: {[key: string]: number} = {};
 
   public add(_filename: string): void {
-    const filename = resolve(_filename);
+    const shortFilename = _filename.replace(cwd, '');
 
-    if (Object.prototype.hasOwnProperty.call(this._count, filename)) {
-      this._count[filename]++;
+    if (Object.prototype.hasOwnProperty.call(this._count, shortFilename)) {
+      this._count[shortFilename]++;
     } else {
-      this._count[filename] = 1;
+      this._count[shortFilename] = 1;
     }
   }
 

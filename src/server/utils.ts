@@ -12,7 +12,7 @@ import {resolve, extname, dirname} from 'path';
  * get only Import Declaration syntax.
  * @param {Node[]} nodeArr
  */
-export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDeclaration)[]): ESLintImportDeclaration[] => { // eslint-disable-line
+export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDeclaration)[]): ESLintImportDeclaration[] => {
   return nodeArr.filter((node) => node.type === 'ImportDeclaration') as ESLintImportDeclaration[];
 };
 
@@ -22,7 +22,7 @@ export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDec
  * @param targetKeyName
  * @returns {string}
  */
-export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'props'): string => {
+export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'props' | 'defineProps'): string => {
   let isTargetToken = false;
   let result = '{'; // for JSON.parse
   let closedCount = 0;
@@ -35,6 +35,10 @@ export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'p
     if (isTargetToken || (!isTargetToken && type === 'Identifier' && value === targetKeyName)) {
       const needQuoting = needQuotingTypes.includes(type);
       isTargetToken = true;
+
+      if (['(', ')'].includes(value)) {
+        continue;
+      }
 
       if (type === 'Punctuator') {
         // count brace for finding end of the declaration.
@@ -66,6 +70,10 @@ export const getDeclarationSyntax = (tokens: Token[], targetKeyName: 'data' | 'p
       // put right-hand quotation for JSON.
       if (needQuoting) {
         result += '"';
+      }
+
+      if (value === 'defineProps') {
+        result += ':';
       }
     }
   }
