@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@typescript-eslint/parser": "5.54.0",
-    "commander": "9.4.1",
+    "commander": "10.0.0",
     "ejs": "3.1.8",
     "express": "4.18.2",
     "globby": "13.1.3",
