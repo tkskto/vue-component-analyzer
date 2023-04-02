@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1
+
+There is nothing enhancement, just update dependencies.
+
 ## 0.7.0
 
 ### enhancement
