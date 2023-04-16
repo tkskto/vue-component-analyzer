@@ -93,7 +93,11 @@ export const setScreenCapture = function (): void {
   if (btnCapture) {
     btnCapture.addEventListener('click', async () => {
       try {
-        await customDialog.showExportDialog();
+        customDialog.load();
+
+        const img = await capture();
+
+        await customDialog.showExportDialog(img);
       } catch (err) {
         console.error(err);
       }
