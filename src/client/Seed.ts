@@ -98,6 +98,10 @@ export class Seed {
       seedClassName += ' js';
     }
 
+    if (this.isTS()) {
+      seedClassName += ' ts';
+    }
+
     return `<div class="seed${seedClassName}">
       <div class="file">
         <div class="filename">
@@ -132,5 +136,12 @@ export class Seed {
    */
   isJS(): boolean {
     return this._name.endsWith('.js');
+  }
+
+  /**
+   * @return boolean
+   */
+  isTS(): boolean {
+    return this._name.endsWith('.ts');
   }
 }

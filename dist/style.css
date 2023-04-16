@@ -114,6 +114,9 @@ header {
 .js .filename {
   border: 1px solid #ffff00;
 }
+.ts .filename {
+  border: 1px solid #3178c6;
+}
 details {
   line-height: 1.7;
 }
