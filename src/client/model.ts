@@ -13,7 +13,6 @@ export class Model extends CustomEventDispatcher {
   private _viewType: VIEW_TYPE = 'GRAPH';
 
   public static EVENT = {
-    DATA_UPDATE: 'dataUpdate',
     SETTING_CHANGED: 'settingChanged',
   };
 
@@ -44,7 +43,6 @@ export class Model extends CustomEventDispatcher {
 
   set data(value: AnalyzeReport) {
     this._data = value;
-    this.dispatchEvent(Model.EVENT.DATA_UPDATE);
   }
 
   /**

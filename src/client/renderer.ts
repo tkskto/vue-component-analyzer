@@ -5,14 +5,12 @@ import {Seed} from './Seed';
 import {Model} from './model';
 
 export class Renderer {
-  private readonly _app: HTMLElement | null;
+  private _model: Model;
 
   private _tree: Seed[][] = [];
 
-  constructor(private _model: Model) {
-    this._app = document.getElementById('app');
-
-    _model.addEventListener(Model.EVENT.DATA_UPDATE, this.ready);
+  constructor(_model: Model) {
+    this._model = _model;
   }
 
   /**
@@ -42,23 +40,22 @@ export class Renderer {
     return tree;
   }
 
+  /**
+   * transform json to Tree data for rendering
+   */
   private ready = () => {
-    if ('GRAPH' === this._model.viewType) {
-      const {data} = this._model;
-      const {entries} = data;
+    const {data} = this._model;
+    const {entries} = data;
 
-      for (let i = 0, len = entries.length; i < len; i++) {
-        const entry = entries[i];
+    for (let i = 0, len = entries.length; i < len; i++) {
+      const entry = entries[i];
 
-        if (data) {
-          const root = new Seed(entry, 0, this._model);
+      if (data) {
+        const root = new Seed(entry, 0, this._model);
 
-          this._tree.push(this.generateSeed(entry, root));
-        }
+        this._tree.push(this.generateSeed(entry, root));
       }
     }
-
-    this.render();
   };
 
   private renderLine(name: string, level: number, isLast: boolean): string {
@@ -91,8 +88,10 @@ export class Renderer {
    * rendering DOM from tree.
    * @private
    */
-  public render():void {
+  public render(): string {
     let html = '';
+
+    this.ready();
 
     for (let i = 0, len = this._tree.length; i < len; i++) {
       const [root] = this._tree[i];
@@ -118,8 +117,6 @@ export class Renderer {
 
     text = `<div class="root text"><pre class="tree">${text}</pre></div>`;
 
-    if (this._app) {
-      this._app.innerHTML = html + text;
-    }
+    return html + text;
   }
 }
