@@ -1,7 +1,7 @@
 <template>
   <div></div>
 </template>
-<script setup lang="ts">
+<script lang="ts">
 export default {
   created() {
     const num: number = 0;

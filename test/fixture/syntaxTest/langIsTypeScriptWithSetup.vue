@@ -1,7 +1,7 @@
 <template>
   <div></div>
 </template>
-<script lang="ts">
+<script setup lang=ts>
 const num: number = 0;
 const str: string = '';
 const bool: boolean = false;

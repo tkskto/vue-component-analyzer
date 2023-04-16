@@ -42,7 +42,7 @@ describe('syntax test', () => {
     expect(declaration).toStrictEqual({
       name: '/test/fixture/syntaxTest/langIsTypeScript.vue',
       props: '',
-      size: 198,
+      size: 192,
       lastModifiedTime: 0,
       children: [],
     });
@@ -55,7 +55,7 @@ describe('syntax test', () => {
     expect(declaration).toStrictEqual({
       name: '/test/fixture/syntaxTest/langIsTypeScriptWithSetup.vue',
       props: '',
-      size: 142,
+      size: 146,
       lastModifiedTime: 0,
       children: [],
     });
