@@ -1,4 +1,3 @@
-import {capture} from '../ScreenCapture';
 import {disableTabIndex, resetTabIndex} from '../common';
 
 class CustomDialog {
@@ -18,17 +17,17 @@ class CustomDialog {
     }
   }
 
-  show() {
+  private show() {
     document.body.classList.add('-dialog-show');
     disableTabIndex('#dialog');
   }
 
-  close() {
+  private close() {
     document.body.classList.remove('-dialog-show');
     resetTabIndex();
   }
 
-  load() {
+  public load() {
     this.show();
 
     if (this._contents) {
@@ -36,15 +35,13 @@ class CustomDialog {
     }
   }
 
-  complete(html: string) {
+  private complete(html: string) {
     if (this._contents) {
       this._contents.innerHTML = html;
     }
   }
 
-  async showExportDialog() {
-    this.load();
-    const img = await capture();
+  showExportDialog(img: HTMLImageElement) {
     this._btnExport.href = img.src;
     this.complete(img.outerHTML);
   }

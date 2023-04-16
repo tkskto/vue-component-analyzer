@@ -1,5 +1,3 @@
-import {Model} from './model';
-
 class SeedOpenStateSwitcher {
   private _isOpen = false;
 
@@ -7,11 +5,11 @@ class SeedOpenStateSwitcher {
 
   private _textElement: HTMLElement | null;
 
-  constructor(_button: HTMLButtonElement, model: Model) {
+  constructor(_button: HTMLButtonElement) {
     this._textElement = document.getElementById('btn-toggle-visible-state-text');
-    _button.addEventListener('click', this.onClick.bind(this));
+    this._details = document.querySelectorAll<HTMLDetailsElement>('.detail');
 
-    model.addEventListener(Model.EVENT.DATA_UPDATE, this.onDataUpdated.bind(this));
+    _button.addEventListener('click', this.onClick.bind(this));
   }
 
   private open() {
@@ -47,16 +45,12 @@ class SeedOpenStateSwitcher {
       this.close();
     }
   }
-
-  private onDataUpdated() {
-    this._details = document.querySelectorAll<HTMLDetailsElement>('.detail');
-  }
 }
 
-export const setSeedOpenStateSwitcher = (model: Model): void => {
+export const setSeedOpenStateSwitcher = (): void => {
   const btn = document.getElementById('btn-toggle-visible-state');
 
   if (btn) {
-    new SeedOpenStateSwitcher(btn as HTMLButtonElement, model);
+    new SeedOpenStateSwitcher(btn as HTMLButtonElement);
   }
 };
