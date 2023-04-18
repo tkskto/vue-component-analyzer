@@ -76,7 +76,9 @@ export class Seed {
   }
 
   private renderDetails(): string {
-    return `<details class="detail">
+    const openAttribute = this._model.env === 'node' ? ' open' : '';
+
+    return `<details class="detail"${openAttribute}>
         ${this.renderSummary()}
         ${this.renderProps()}
         ${this.renderMetaData()}

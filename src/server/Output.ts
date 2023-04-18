@@ -35,6 +35,7 @@ export async function writeHTML(_filename: string, result: AnalyzeReport) {
     const clientModel = new Model();
 
     clientModel.data = result;
+    clientModel.env = 'node';
 
     const renderer = new Renderer(clientModel);
     const htmlString = renderer.render();
