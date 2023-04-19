@@ -29,7 +29,7 @@ const banner = `/*!
 
 export default [
   {
-    input: '.temp/index.js',
+    input: '.temp/server/index.js',
     output: [
       {
         file: 'dist/index.mjs',

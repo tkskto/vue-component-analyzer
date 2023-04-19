@@ -42,8 +42,8 @@ npm exec vca -- --dir .
 
 *   `--dir` : analyze target directory. default is `src`. `node_modules` will be ignored by default.
 *   `--silent` : running without almost logs.
-*   `-f` or `--format` : report type. choose one from [browser | json | both]. default is `browser`.
-*   `-o` or `--out` : output directory. JSON file will output here.
+*   `-f` or `--format` : report type. choose one from [browser | json | html]. default is `browser`.
+*   `-o` or `--out` : output directory. JSON or HTML file will output here.
 *   `-p` or `--port` : select a port number for the local server.
 
 ## API

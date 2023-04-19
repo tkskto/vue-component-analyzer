@@ -59,7 +59,7 @@ export class CustomEventDispatcher {
       e = new MyCustomEvent(type);
     }
 
-    if (this.listeners[type] !== null) {
+    if (this.listeners[type] !== null && this.listeners[type] !== undefined) {
       const len: number = this.listeners[type].length;
       e.currentTarget = this;
 
