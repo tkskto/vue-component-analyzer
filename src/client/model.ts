@@ -12,8 +12,9 @@ export class Model extends CustomEventDispatcher {
 
   private _viewType: VIEW_TYPE = 'GRAPH';
 
+  private _env: 'browser' | 'node' = 'browser';
+
   public static EVENT = {
-    DATA_UPDATE: 'dataUpdate',
     SETTING_CHANGED: 'settingChanged',
   };
 
@@ -44,7 +45,6 @@ export class Model extends CustomEventDispatcher {
 
   set data(value: AnalyzeReport) {
     this._data = value;
-    this.dispatchEvent(Model.EVENT.DATA_UPDATE);
   }
 
   /**
@@ -110,5 +110,13 @@ export class Model extends CustomEventDispatcher {
   set visibleReferenceCount(value: boolean) {
     this._visibleReferenceCount = value;
     this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+  }
+
+  get env(): 'browser' | 'node' {
+    return this._env;
+  }
+
+  set env(value: 'browser' | 'node') {
+    this._env = value;
   }
 }

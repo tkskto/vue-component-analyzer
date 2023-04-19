@@ -76,7 +76,9 @@ export class Seed {
   }
 
   private renderDetails(): string {
-    return `<details class="detail">
+    const openAttribute = this._model.env === 'node' ? ' open' : '';
+
+    return `<details class="detail"${openAttribute}>
         ${this.renderSummary()}
         ${this.renderProps()}
         ${this.renderMetaData()}
@@ -96,6 +98,10 @@ export class Seed {
 
     if (this.isJS()) {
       seedClassName += ' js';
+    }
+
+    if (this.isTS()) {
+      seedClassName += ' ts';
     }
 
     return `<div class="seed${seedClassName}">
@@ -132,5 +138,12 @@ export class Seed {
    */
   isJS(): boolean {
     return this._name.endsWith('.js');
+  }
+
+  /**
+   * @return boolean
+   */
+  isTS(): boolean {
+    return this._name.endsWith('.ts');
   }
 }

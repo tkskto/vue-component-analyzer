@@ -6,23 +6,13 @@ import {getOptions} from './Commander';
 import {getImportDeclarationTree} from './Analyzer';
 import {startServer} from './server';
 import {fileCounter} from './FileCounter';
-import {writeFileSync} from 'fs';
+import {writeFileExtra, writeHTML} from './Output';
 import {globby} from 'globby';
 import path from 'path';
-import mkdirp from 'mkdirp';
 
 // TODO: add log system
 // TODO: add error system
 
-function writeFileExtra(filename: string, data: string) {
-  mkdirp(path.dirname(filename)).then(() => {
-    writeFileSync(filename, data);
-  }).catch((err: Error) => {
-    if (err) {
-      throw new Error(err.message);
-    }
-  });
-}
 
 const analyze = (entries: string[]): Promise<AnalyzeReport> => {
   return new Promise((resolve, reject) => {
@@ -80,11 +70,13 @@ export const analyzeFromCLI = async (): Promise<void> => {
 
   if (argv.format === FORMAT.BOTH) {
     startServer(argv.port, result);
-    writeFileExtra(path.resolve(process.cwd(), `${argv.out}/result.json`), JSON.stringify(result, null, 4));
+    await writeFileExtra(path.resolve(process.cwd(), argv.out), JSON.stringify(result, null, 4));
   } else if (argv.format === FORMAT.BROWSER) {
     startServer(argv.port, result);
   } else if (argv.format === FORMAT.JSON) {
-    writeFileExtra(path.resolve(process.cwd(), `${argv.out}/result.json`), JSON.stringify(result, null, 4));
+    await writeFileExtra(path.resolve(process.cwd(), argv.out), JSON.stringify(result, null, 4));
+  } else if (argv.format === FORMAT.HTML) {
+    await writeHTML(path.resolve(process.cwd(), argv.out), result);
   }
 
   console.log('finished analyzing.');

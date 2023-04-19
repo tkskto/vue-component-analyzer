@@ -6,7 +6,7 @@ import {setSeedOpenStateSwitcher} from './SeedOpenStateSwitcher';
 import {setScreenCapture} from './ScreenCapture';
 
 const model = new Model();
-new Renderer(model);
+const renderer = new Renderer(model);
 let ws: WebSocket;
 
 try {
@@ -21,13 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ws) {
     ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
+      const app = document.querySelector<HTMLElement>('#app');
 
-      setSeedOpenStateSwitcher(model);
+      if (!app) {
+        return;
+      }
 
-      model.data = msg; // emit Model.EVENT.DATA_UPDATE event
+      model.data = msg;
+
+      const html = renderer.render();
+
+      app.innerHTML = html;
 
       setSettings(model);
       setScreenCapture();
+      setSeedOpenStateSwitcher();
     });
   } else {
     console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
