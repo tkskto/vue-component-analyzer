@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.8.0
+
+### enhancement
+
+-   \#289 add `html` export format.
+
+### Chores
+
+-   \#287 `mkdirp` to v3.0.0
+-   \#288 `globby` to v13.1.4
+-   \#292 `commander` to v10.0.1
+
 ## 0.7.1
 
 There is nothing enhancement, just update dependencies.
