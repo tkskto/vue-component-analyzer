@@ -67,7 +67,7 @@
     "@rollup/plugin-typescript": "11.1.0",
     "@types/ejs": "3.1.2",
     "@types/express": "4.17.17",
-    "@types/jest": "29.5.0",
+    "@types/jest": "29.5.1",
     "@types/mkdirp": "1.0.2",
     "@types/node": "18.15.11",
     "@types/opener": "1.4.0",
