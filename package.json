@@ -51,7 +51,7 @@
     "@typescript-eslint/parser": "5.59.0",
     "commander": "10.0.1",
     "ejs": "3.1.9",
-    "express": "4.18.2",
+    "express": "4.19.2",
     "globby": "13.1.4",
     "mkdirp": "3.0.0",
     "opener": "1.5.2",
