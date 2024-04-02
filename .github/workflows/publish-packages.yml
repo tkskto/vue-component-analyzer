@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # publish for npm package.
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
@@ -20,7 +20,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       # publish for GitHub Package.
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           registry-url: 'https://npm.pkg.github.com'
       - run: npm publish
