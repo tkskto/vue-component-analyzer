@@ -56,7 +56,7 @@
     "mkdirp": "3.0.1",
     "opener": "1.5.2",
     "vue-eslint-parser": "9.4.2",
-    "ws": "8.13.0"
+    "ws": "8.16.0"
   },
   "devDependencies": {
     "@mitsue/eslint-config": "4.1.0",
@@ -71,7 +71,7 @@
     "@types/mkdirp": "1.0.2",
     "@types/node": "18.19.28",
     "@types/opener": "1.4.3",
-    "@types/ws": "8.5.4",
+    "@types/ws": "8.5.10",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "eslint": "8.57.0",
     "husky": "8.0.3",
