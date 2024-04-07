@@ -52,6 +52,20 @@ describe('props test', () => {
   });
 
 
+  it('defineNameOnlyProps.vue', () => {
+    const filename = 'propsTest/defineNameOnlyProps';
+    const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: `/test/fixture/${filename}.vue`,
+      props: ['foo'],
+      size: 222,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
+
+
   it('defineTwoProps.vue', () => {
     const filename = 'propsTest/defineTwoProps';
     const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
@@ -79,6 +93,24 @@ describe('props test', () => {
 
   it('defineTypeOnlyProps.vue', () => {
     const filename = 'propsTest/defineTypeOnlyProps';
+    const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: `/test/fixture/${filename}.vue`,
+      props: {
+        title: 'String',
+        likes: 'Number',
+      },
+      size: 112,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
+
+
+
+  it('defineTypeOnlyPropsVariables.vue', () => {
+    const filename = 'propsTest/defineTypeOnlyPropsVariables';
     const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
 
     expect(declaration).toStrictEqual({
