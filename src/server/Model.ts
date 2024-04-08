@@ -9,7 +9,9 @@ class Model {
 
   private _port = '8888';
 
-  private _isSilentMode = false;
+  private _isSilentMode = true;
+
+  private _tsconfigPathMapping = new Map<string, string>();
 
   get resourceRoot(): string {
     return this._resourceRoot;
@@ -49,6 +51,14 @@ class Model {
 
   set isSilentMode(value: boolean) {
     this._isSilentMode = value;
+  }
+
+  get tsconfigPathMapping(): Map<string, string> {
+    return this._tsconfigPathMapping;
+  }
+
+  set tsconfigPathMapping(paths: Map<string, string>) {
+    this._tsconfigPathMapping = paths;
   }
 }
 

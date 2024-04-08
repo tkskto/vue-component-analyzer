@@ -6,7 +6,8 @@ import {
 import {Token} from 'vue-eslint-parser/ast/tokens';
 import {model} from './Model';
 import {existsSync} from 'fs';
-import {resolve, extname, dirname} from 'path';
+import {resolve, extname, dirname, normalize} from 'path';
+import {type TsConfigJson} from 'get-tsconfig';
 
 /**
  * get only Import Declaration syntax.
@@ -94,6 +95,20 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
     filename = resolve(dirnameOfCurrentFile, _filename);
   } else if (_filename.startsWith('./')) {
     filename = `${dirnameOfCurrentFile}/${_filename.replace(/\.\/|/ug, '')}`;
+  } else if (model.tsconfigPathMapping.size > 0) {
+    // `@@` should be processed before `@`
+    const keys = Array.from(model.tsconfigPathMapping.keys()).sort().reverse();
+
+    for (let index = 0; index < keys.length; index++) {
+      const key = keys[index];
+      const replaceTo = model.tsconfigPathMapping.get(key);
+
+      if (_filename.startsWith(key) && replaceTo) {
+        filename = _filename.replace(key, replaceTo);
+
+        break;
+      }
+    }
   } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
     filename = _filename.replace('~', model.resourceRoot).replace('@', model.resourceRoot);
   }
@@ -110,5 +125,25 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
     }
   }
 
+  filename = normalize(filename);
+
   return filename;
+};
+
+export const getTsConfigPathMapping = (compilerOptions: TsConfigJson.CompilerOptions): Map<string, string> => {
+  const {paths, baseUrl} = compilerOptions;
+  const pathMaps = new Map<string, string>();
+
+  if (!baseUrl || !paths) {
+    return pathMaps;
+  }
+
+  for (const key in paths) {
+    if (Object.hasOwn(paths, key)) {
+      // only use the first path for now.
+      pathMaps.set(key.replace('/*', ''), resolve(model.resourceRoot, baseUrl, paths[key][0].replace('/*', '')));
+    }
+  }
+
+  return pathMaps;
 };
