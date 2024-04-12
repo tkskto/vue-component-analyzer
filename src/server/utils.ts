@@ -113,7 +113,10 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
     filename = _filename.replace('~', model.resourceRoot).replace('@', model.resourceRoot);
   }
 
+  // filename is empty when import third-party script
   if (filename) {
+    filename = normalize(filename);
+
     if (extname(filename) === '') {
       if (existsSync(`${filename}.vue`)) {
         return `${filename}.vue`;
@@ -124,8 +127,6 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
       }
     }
   }
-
-  filename = normalize(filename);
 
   return filename;
 };
