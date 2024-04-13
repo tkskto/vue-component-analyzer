@@ -9,7 +9,7 @@ class Model {
 
   private _port = '8888';
 
-  private _isSilentMode = true;
+  private _isSilentMode = false;
 
   private _tsconfigPathMapping = new Map<string, string>();
 
