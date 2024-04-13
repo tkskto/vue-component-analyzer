@@ -9,6 +9,7 @@
     "vca": "bin/analyze.js"
   },
   "scripts": {
+    "prepare": "husky",
     "dev": "run-p dev:*",
     "dev:typeScript": "tsc -p src/server/tsconfig.json -w",
     "dev:rollup": "rollup --config -w",
