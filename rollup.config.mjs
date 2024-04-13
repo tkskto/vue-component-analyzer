@@ -49,6 +49,7 @@ export default [
       'ws',
       'express',
       'ejs',
+      'get-tsconfig',
     ],
     plugins: [
       json(),

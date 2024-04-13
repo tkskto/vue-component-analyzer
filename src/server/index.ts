@@ -9,6 +9,8 @@ import {fileCounter} from './FileCounter';
 import {writeFileExtra, writeHTML} from './Output';
 import {globby} from 'globby';
 import path from 'path';
+import {getTsconfig} from 'get-tsconfig';
+import {getTsConfigPathMapping} from './utils';
 
 // TODO: add log system
 // TODO: add error system
@@ -52,6 +54,14 @@ export const analyzeFromCLI = async (): Promise<void> => {
   model.outDirectory = argv.out;
   model.port = argv.port;
   model.isSilentMode = argv.silent || false;
+
+  const tsconfig = getTsconfig(argv.dir);
+
+  if (tsconfig !== null && tsconfig.config.compilerOptions) {
+    const pathMaps = getTsConfigPathMapping(tsconfig.config.compilerOptions);
+
+    model.tsconfigPathMapping = pathMaps;
+  }
 
   if (argv.format !== FORMAT.BROWSER && argv.format !== FORMAT.JSON && argv.format !== FORMAT.BOTH) {
     console.error(`not support ${argv.format} format.`);
