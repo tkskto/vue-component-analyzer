@@ -50,6 +50,7 @@ export default [
       'express',
       'ejs',
       'get-tsconfig',
+      'js-beautify',
     ],
     plugins: [
       json(),
