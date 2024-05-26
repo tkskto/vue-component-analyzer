@@ -1,12 +1,12 @@
 <template>
-  <div></div>
+    <div></div>
 </template>
 <script>
-  export default {
+export default {
     props: {
-      title: String,
-      likes: Number
+        title: String,
+        likes: Number
     },
-  };
+};
 </script>
 

@@ -1,9 +1,9 @@
 <template>
-  <div></div>
+    <div></div>
 </template>
 <script setup>
 defineProps({
-  title: String,
-  likes: Number
+    title: String,
+    likes: Number
 })
 </script>

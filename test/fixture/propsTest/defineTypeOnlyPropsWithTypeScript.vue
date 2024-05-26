@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
 defineProps<{
-  title: string
-  likes?: number
+    title: string
+    likes?: number
 }>()
 </script>
