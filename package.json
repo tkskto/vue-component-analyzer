@@ -53,7 +53,7 @@
     "commander": "12.0.0",
     "ejs": "3.1.10",
     "express": "4.19.2",
-    "get-tsconfig": "4.7.3",
+    "get-tsconfig": "4.7.5",
     "globby": "14.0.1",
     "mkdirp": "3.0.1",
     "opener": "1.5.2",
