@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`props test oneProps.vue 1`] = `"{"name":"/test/fixture/propsTest/oneProps.vue","props":{"data":{"type":"String","required":"true","default":"1"}},"size":192,"lastModifiedTime":0,"children":[]}"`;
+exports[`props test oneProps.vue 1`] = `"{"name":"/test/fixture/propsTest/oneProps.vue","props":"props: {\\n    data: {\\n        type: String,\\n        required: true,\\n        default: '1',\\n    },\\n}","size":192,"lastModifiedTime":0,"children":[]}"`;
 
-exports[`props test twoProps.vue 1`] = `"{"name":"/test/fixture/propsTest/twoProps.vue","props":{"data":{"type":"String","required":"true","default":"1"},"data2":{"type":"Number","required":"false","default":1}},"size":283,"lastModifiedTime":0,"children":[]}"`;
+exports[`props test twoProps.vue 1`] = `"{"name":"/test/fixture/propsTest/twoProps.vue","props":"props: {\\n    data: {\\n        type: String,\\n        required: true,\\n        default: '1',\\n    },\\n    data2: {\\n        type: Number,\\n        required: false,\\n        default: 1,\\n    },\\n}","size":283,"lastModifiedTime":0,"children":[]}"`;
