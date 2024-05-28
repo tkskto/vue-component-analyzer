@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.9.0
+
+### Fixes
+
+-   fixed parsing process of defineProps \#308 from @Disservin
+-   add support tsconfig path aliases \#309 from @Disservin
+
+Thank you for your issue!
+
+### Chores
+
+-   \#300 `mkdirp` to v3.0.1
+-   \#303 `vue-eslint-parser` to v9.4.2
+-   \#336 `globby` to v14.0.1
+-   \#345 `ws` to v8.17.0
+-   \#348 `ejs` to v3.1.10
+-   \#352 `commander` to v12.1.0
+
 ## 0.8.0
 
 ### enhancement
