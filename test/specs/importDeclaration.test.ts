@@ -87,6 +87,29 @@ describe('import declaration test', () => {
     });
   });
 
+  it('importOneWithDoubleAtSign.vue', async () => {
+    const filename = 'declarationTest/importOneWithDoubleAtSign';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
+
+  it('importOneWithTilde.vue', async () => {
+    const filename = 'declarationTest/importOneWithTilde';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
+
+  it('importOneWithDoubleTilde.vue', async () => {
+    const filename = 'declarationTest/importOneWithDoubleTilde';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
 
   it('importTwo.vue', async () => {
     const filename = 'declarationTest/importTwo';

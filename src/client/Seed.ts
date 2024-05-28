@@ -44,7 +44,7 @@ export class Seed {
   }
 
   private renderProps(): string {
-    return this._props ? `<pre class="file__props">props: ${JSON.stringify(this._props, null, '\t')}</pre>` : '';
+    return this._props ? `<pre class="file__props">${this._props}</pre>` : '';
   }
 
   private renderMetaData(): string {

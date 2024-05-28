@@ -6,4 +6,4 @@ exports[`syntax test logicalAssignment.vue 1`] = `"{"name":"/test/fixture/syntax
 
 exports[`syntax test numericSeparators.vue 1`] = `"{"name":"/test/fixture/syntaxTest/numericSeparators.vue","props":"","size":135,"lastModifiedTime":0,"children":[]}"`;
 
-exports[`syntax test optionalChaining.vue 1`] = `"{"name":"/test/fixture/syntaxTest/optionalChaining.vue","props":{"data":{"type":"Object","required":"true"}},"size":286,"lastModifiedTime":0,"children":[]}"`;
+exports[`syntax test optionalChaining.vue 1`] = `"{"name":"/test/fixture/syntaxTest/optionalChaining.vue","props":"props: {\\n    data: {\\n        type: Object,\\n        required: true,\\n    },\\n}","size":286,"lastModifiedTime":0,"children":[]}"`;

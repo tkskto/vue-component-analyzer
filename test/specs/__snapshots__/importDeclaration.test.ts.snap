@@ -8,6 +8,12 @@ exports[`import declaration test importNestedTwo.vue 1`] = `"{"name":"/test/fixt
 
 exports[`import declaration test importOne.vue 1`] = `"{"name":"/test/fixture/declarationTest/importOne.vue","props":"","size":108,"lastModifiedTime":0,"children":[{"name":"/test/components/child.vue","props":"","size":42,"lastModifiedTime":0,"children":[]}]}"`;
 
+exports[`import declaration test importOneWithDoubleAtSign.vue 1`] = `"{"name":"/test/fixture/declarationTest/importOneWithDoubleAtSign.vue","props":"","size":114,"lastModifiedTime":0,"children":[]}"`;
+
+exports[`import declaration test importOneWithDoubleTilde.vue 1`] = `"{"name":"/test/fixture/declarationTest/importOneWithDoubleTilde.vue","props":"","size":114,"lastModifiedTime":0,"children":[]}"`;
+
+exports[`import declaration test importOneWithTilde.vue 1`] = `"{"name":"/test/fixture/declarationTest/importOneWithTilde.vue","props":"","size":113,"lastModifiedTime":0,"children":[{"name":"/test/components/child.vue","props":"","size":42,"lastModifiedTime":0,"children":[]}]}"`;
+
 exports[`import declaration test importThirdParty.vue 1`] = `"{"name":"/test/fixture/declarationTest/importThirdParty.vue","props":"","size":125,"lastModifiedTime":0,"children":[]}"`;
 
 exports[`import declaration test importTwo.vue 1`] = `"{"name":"/test/fixture/declarationTest/importTwo.vue","props":"","size":158,"lastModifiedTime":0,"children":[{"name":"/test/components/child.vue","props":"","size":42,"lastModifiedTime":0,"children":[]},{"name":"/test/components/child2.vue","props":"","size":43,"lastModifiedTime":0,"children":[]}]}"`;

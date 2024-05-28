@@ -2,7 +2,7 @@ import {FileReport} from '../../types';
 import {parse} from 'vue-eslint-parser';
 import {ESLintImportDeclaration, ESLintProgram} from 'vue-eslint-parser/ast/nodes';
 import {Token} from 'vue-eslint-parser/ast/tokens';
-import {getImportDeclaration, getDeclarationSyntax} from './utils';
+import {getImportDeclaration, getPropsDeclarationSyntax} from './utils';
 import {Stats} from 'fs';
 
 const parserOption = {
@@ -70,18 +70,10 @@ export class VueComponent {
 
   private getProps(tokens: Token[]): string {
     try {
-      const propsDeclaration = JSON.parse(getDeclarationSyntax(tokens, 'props'));
+      const propsDeclaration = getPropsDeclarationSyntax(tokens);
 
-      if (propsDeclaration && propsDeclaration.props) {
-        return propsDeclaration.props;
-      }
-
-      const definePropsDeclaration = getDeclarationSyntax(tokens, 'defineProps');
-
-      const definePropsDeclarationJSON = JSON.parse(definePropsDeclaration);
-
-      if (definePropsDeclarationJSON && definePropsDeclarationJSON.defineProps) {
-        return definePropsDeclarationJSON.defineProps;
+      if (propsDeclaration) {
+        return propsDeclaration;
       }
 
       return '';
