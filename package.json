@@ -62,7 +62,7 @@
     "ws": "8.17.0"
   },
   "devDependencies": {
-    "@mitsue/eslint-config": "4.1.0",
+    "@mitsue/eslint-config": "6.0.0",
     "@rollup/plugin-commonjs": "25.0.8",
     "@rollup/plugin-json": "6.1.0",
     "@rollup/plugin-node-resolve": "15.2.3",
