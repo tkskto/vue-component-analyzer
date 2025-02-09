@@ -73,7 +73,7 @@
     "@types/jest": "29.5.12",
     "@types/js-beautify": "1.14.3",
     "@types/mkdirp": "2.0.0",
-    "@types/node": "20.12.12",
+    "@types/node": "20.17.17",
     "@types/opener": "1.4.3",
     "@types/ws": "8.5.10",
     "@typescript-eslint/eslint-plugin": "7.18.0",
