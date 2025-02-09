@@ -6,7 +6,7 @@ export class FileCounter {
   public add(_filename: string): void {
     const shortFilename = _filename.replace(cwd, '');
 
-    if (Object.prototype.hasOwnProperty.call(this._count, shortFilename)) {
+    if (Object.hasOwn(this._count, shortFilename)) {
       this._count[shortFilename]++;
     } else {
       this._count[shortFilename] = 1;
