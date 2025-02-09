@@ -15,6 +15,10 @@ try {
   }
 } catch (err) {
   console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
+
+  if (err instanceof Error) {
+    console.warn(err.message);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
