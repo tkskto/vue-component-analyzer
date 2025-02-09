@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.9.1
+
+### Fixes
+
+* fix(deps): update dependency vue-eslint-parser to v9.4.3 by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/361
+* fix(deps): update typescript-eslint monorepo to v7.18.0 by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/362
+* fix(deps): update dependency ws to v8.17.1 [security] by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/370
+* fix(deps): update dependency js-beautify to v1.15.2 by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/378
+* fix(deps): update dependency express to v4.20.0 [security] by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/372
+* fix(deps): update dependency get-tsconfig to v4.10.0 by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/391
+* fix(deps): update dependency globby to v14.1.0 by @renovate in https://github.com/tkskto/vue-component-analyzer/pull/392
+
+This release resolves the following security issues.
+
+* https://github.com/tkskto/vue-component-analyzer/issues/374
+* https://github.com/tkskto/vue-component-analyzer/issues/375
+
 ## 0.9.0
 
 ### Fixes
