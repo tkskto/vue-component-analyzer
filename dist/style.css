@@ -110,6 +110,7 @@ header {
   word-break: break-all;
   z-index: 1;
   background-color: #293D52;
+  max-width: 100%;
 }
 .js .filename {
   border: 1px solid #ffff00;
@@ -138,6 +139,7 @@ summary {
   background-color: #333;
   padding: 4px 8px 6px;
   border-radius: 4px;
+  overflow-x: auto;
 }
 .file__meta {
   display: block;
