@@ -225,6 +225,40 @@ describe('props test', () => {
   });
 
 
+  it('definePropsWithDefaults.vue', () => {
+    const filename = 'propsTest/definePropsWithDefaults';
+    const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: `/test/fixture/${filename}.vue`,
+      props: `defineProps({
+    title: String,
+    likes: Number
+})`,
+      size: 178,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
+
+
+  it('definePropsWithDefaultsWithTypeScript.vue', () => {
+    const filename = 'propsTest/definePropsWithDefaultsWithTypeScript';
+    const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+
+    expect(declaration).toStrictEqual({
+      name: `/test/fixture/${filename}.vue`,
+      props: `defineProps<{
+    title: string,
+    likes?: number
+}>`,
+      size: 175,
+      lastModifiedTime: 0,
+      children: [],
+    });
+  });
+
+
   it('oneProps.vue', () => {
     const filename = 'propsTest/oneProps';
     const declaration = getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
