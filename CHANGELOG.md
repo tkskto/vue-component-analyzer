@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.0
+
+### Fixes
+
+*   set pre style for overflow contents
+
+### Chores
+
+*   \#397 express to v5
+*   \#398 node to v22 (And dropped v18.x)
+*   \#402 typescript-eslint monorepo to v8.32.1
+*   \#405 ws to v8.18.2
+*   \#409 get-tsconfig to v4.10.1
+
 ## 0.9.1
 
 ### Fixes
