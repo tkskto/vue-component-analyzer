@@ -51,35 +51,43 @@ export const getPropsDeclarationSyntax = (tokens: Token[]): string => {
   return processor?.finish() || '';
 };
 
+const resolveImport = (_filename: string, dirnameOfCurrentFile: string, tsconfigPathMapping: Map<string, string>, resourceRoot: string): string => {
+  if (_filename.startsWith('../') || _filename.startsWith('./')) {
+    return resolve(dirnameOfCurrentFile, _filename);
+  }
+  
+  if (tsconfigPathMapping.size > 0) {
+    // `@@` should be processed before `@`
+    const keys = Array.from(tsconfigPathMapping.keys()).sort((rule1, rule2) => rule2.length - rule1.length);
+
+    for (let index = 0; index < keys.length; index++) {
+      const key = keys[index];
+      const replaceTo = tsconfigPathMapping.get(key)?.replace('/*', '/');
+      const from = key.replace('/*', '/');
+
+      if (_filename.startsWith(from) && replaceTo) {
+        return _filename.replace(from, replaceTo);
+      }
+    }
+  }
+  
+  if (_filename.startsWith('~') || _filename.startsWith('@')) {
+    const remainingPath = _filename.replace(/^[~@]\/?/u, '');
+
+    return resolve(resourceRoot, remainingPath);
+  }
+
+  return '';
+}
+
 /**
  * get filename from import string. support relative path and nuxt alias.
  * @param _filename
  * @param _currentFileName
  */
 export const resolveFile = (_filename: string, _currentFileName: string): string => {
-  let filename = '';
   const dirnameOfCurrentFile = dirname(_currentFileName);
-
-  if (_filename.startsWith('../') || _filename.startsWith('./')) {
-    filename = resolve(dirnameOfCurrentFile, _filename);
-  } else if (model.tsconfigPathMapping.size > 0) {
-    // `@@` should be processed before `@`
-    const keys = Array.from(model.tsconfigPathMapping.keys()).sort((rule1, rule2) => rule2.length - rule1.length);
-
-    for (let index = 0; index < keys.length; index++) {
-      const key = keys[index];
-      const replaceTo = model.tsconfigPathMapping.get(key)?.replace('/*', '/');
-      const from = key.replace('/*', '/');
-
-      if (_filename.startsWith(from) && replaceTo) {
-        filename = _filename.replace(from, replaceTo);
-
-        break;
-      }
-    }
-  } else if (_filename.startsWith('~') || _filename.startsWith('@')) {
-    filename = _filename.replace('~', model.resourceRoot).replace('@', model.resourceRoot);
-  }
+  let filename = resolveImport(_filename, dirnameOfCurrentFile, model.tsconfigPathMapping, model.resourceRoot);
 
   // filename is empty when import third-party script
   if (filename) {

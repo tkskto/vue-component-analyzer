@@ -8,8 +8,6 @@ describe('import declaration test', () => {
     const pathMaps = new Map<string, string>();
 
     pathMaps.set('@@/*', './*');
-    pathMaps.set('@/*', './*');
-    pathMaps.set('~/*', './*');
     pathMaps.set('~~/*', './*');
 
     model.tsconfigPathMapping = pathMaps;
@@ -125,6 +123,14 @@ describe('import declaration test', () => {
 
   it('importTwo.vue', async () => {
     const filename = 'declarationTest/importTwo';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
+
+  it('importTwoNoSlash.vue', async () => {
+    const filename = 'declarationTest/importTwoNoSlash';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 
