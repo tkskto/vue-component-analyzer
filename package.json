@@ -59,7 +59,7 @@
     "mkdirp": "3.0.1",
     "opener": "1.5.2",
     "vue-eslint-parser": "10.2.0",
-    "ws": "8.18.2"
+    "ws": "8.18.3"
   },
   "devDependencies": {
     "@mitsue/eslint-config": "^7.0.0",
