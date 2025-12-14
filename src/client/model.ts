@@ -1,10 +1,9 @@
 import {AnalyzeReport} from '../../types';
-import {CustomEventDispatcher} from './eventDispatcher';
 
 export type INFORMATION_TYPE = 'settings' | 'props' | 'fileSize' | 'lastUpdated' | 'referenceCount';
 export type VIEW_TYPE = 'GRAPH' | 'TEXT';
 
-export class Model extends CustomEventDispatcher {
+export class Model extends EventTarget {
   private _data: AnalyzeReport = {
     entries: [],
     count: {},
@@ -19,6 +18,8 @@ export class Model extends CustomEventDispatcher {
   };
 
   private _today: Date;
+  
+  private _settingChangedEvent = new CustomEvent(Model.EVENT.SETTING_CHANGED);
 
   private _todayTime: number;
 
@@ -64,7 +65,7 @@ export class Model extends CustomEventDispatcher {
 
   set viewType(value: VIEW_TYPE) {
     this._viewType = value;
-    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+    this.dispatchEvent(this._settingChangedEvent);
   }
 
   get visibleSettings(): boolean {
@@ -73,7 +74,7 @@ export class Model extends CustomEventDispatcher {
 
   set visibleSettings(value: boolean) {
     this._visibleSettings = value;
-    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+    this.dispatchEvent(this._settingChangedEvent);
   }
 
   get visibleProps(): boolean {
@@ -82,7 +83,7 @@ export class Model extends CustomEventDispatcher {
 
   set visibleProps(value: boolean) {
     this._visibleProps = value;
-    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+    this.dispatchEvent(this._settingChangedEvent);
   }
 
   get visibleFileSize(): boolean {
@@ -91,7 +92,7 @@ export class Model extends CustomEventDispatcher {
 
   set visibleFileSize(value: boolean) {
     this._visibleFileSize = value;
-    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+    this.dispatchEvent(this._settingChangedEvent);
   }
 
   get visibleLastUpdated(): boolean {
@@ -100,7 +101,7 @@ export class Model extends CustomEventDispatcher {
 
   set visibleLastUpdated(value: boolean) {
     this._visibleLastUpdated = value;
-    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+    this.dispatchEvent(this._settingChangedEvent);
   }
 
   get visibleReferenceCount(): boolean {
@@ -109,7 +110,7 @@ export class Model extends CustomEventDispatcher {
 
   set visibleReferenceCount(value: boolean) {
     this._visibleReferenceCount = value;
-    this.dispatchEvent(Model.EVENT.SETTING_CHANGED);
+    this.dispatchEvent(this._settingChangedEvent);
   }
 
   get env(): 'browser' | 'node' {
