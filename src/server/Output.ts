@@ -21,7 +21,7 @@ export async function writeFileExtra(_filename: string, data: string) {
     console.log(`output completed ${filename}`);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      throw new Error(err.message);
+      throw new Error(err.message, { cause: err });
     }
   }
 }
@@ -45,7 +45,7 @@ export async function writeHTML(_filename: string, result: AnalyzeReport) {
     console.log(`output completed ${filename}`);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      throw new Error(err.message);
+      throw new Error(err.message, { cause: err });
     }
   }
 }

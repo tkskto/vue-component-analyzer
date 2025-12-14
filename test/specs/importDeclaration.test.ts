@@ -1,8 +1,20 @@
 import {join} from 'path';
 import {getImportDeclarationTree} from '../../src/server/Analyzer';
+import {model} from '../../src/server/Model';
 const fixturesDir = join(__dirname, '../fixture/');
 
 describe('import declaration test', () => {
+  beforeAll(() => {
+    const pathMaps = new Map<string, string>();
+
+    pathMaps.set('@@/*', './*');
+    pathMaps.set('@/*', './*');
+    pathMaps.set('~/*', './*');
+    pathMaps.set('~~/*', './*');
+
+    model.tsconfigPathMapping = pathMaps;
+  });
+
   it('importOne.vue', async () => {
     const filename = 'declarationTest/importOne';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);

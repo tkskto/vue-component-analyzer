@@ -60,20 +60,19 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   let filename = '';
   const dirnameOfCurrentFile = dirname(_currentFileName);
 
-  if (_filename.startsWith('../')) {
+  if (_filename.startsWith('../') || _filename.startsWith('./')) {
     filename = resolve(dirnameOfCurrentFile, _filename);
-  } else if (_filename.startsWith('./')) {
-    filename = `${dirnameOfCurrentFile}/${_filename.replace(/\.\/|/ug, '')}`;
   } else if (model.tsconfigPathMapping.size > 0) {
     // `@@` should be processed before `@`
-    const keys = Array.from(model.tsconfigPathMapping.keys()).sort().reverse();
+    const keys = Array.from(model.tsconfigPathMapping.keys()).sort((rule1, rule2) => rule2.length - rule1.length);
 
     for (let index = 0; index < keys.length; index++) {
       const key = keys[index];
-      const replaceTo = model.tsconfigPathMapping.get(key);
+      const replaceTo = model.tsconfigPathMapping.get(key)?.replace('/*', '/');
+      const from = key.replace('/*', '/');
 
-      if (_filename.startsWith(key) && replaceTo) {
-        filename = _filename.replace(key, replaceTo);
+      if (_filename.startsWith(from) && replaceTo) {
+        filename = _filename.replace(from, replaceTo);
 
         break;
       }
