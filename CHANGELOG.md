@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.10.1
+
+### Fixes
+
+-   @ and ~ paths not adding trailing slash if needed  \#423 from @vitorrd
+
+Thank you for your issue!
+
+### Chores
+
+*   \#419 commander to v14
+*   \#420 vue-eslint-parser to v10
+*   \#432 ws to v8.18.3
+*   \#435 express to v5.2.1
+*   \#436 get-tsconfig to v4.13.0
+*   \#437 typescript-eslint monorepo to v8.49.0
+
 ## 0.10.0
 
 ### Fixes

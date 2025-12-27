@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`props test oneProps.vue 1`] = `"{"name":"/test/fixture/propsTest/oneProps.vue","props":"props: {\\n    data: {\\n        type: String,\\n        required: true,\\n        default: '1',\\n    },\\n}","size":192,"lastModifiedTime":0,"children":[]}"`;
 

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`syntax test classDefined.vue 1`] = `"{"name":"/test/fixture/syntaxTest/classDefined.vue","props":"","size":261,"lastModifiedTime":0,"children":[]}"`;
 
