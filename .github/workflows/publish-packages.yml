@@ -19,16 +19,19 @@ jobs:
       - run: |
           npm ci
           npm run build
-      - name: upload artifacts
+      - name: Preview package contents
+        run: npm pack --dry-run
+      - name: Pack npm tarball
+        id: pack
+        run: |
+          TARBALL=$(npm pack --silent)
+          echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
+      - name: Upload tarball
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: artifacts
+          name: package-tarball
           if-no-files-found: error
-          path: |
-            ./bin
-            ./dist
-            ./types
-            ./views
+          path: ${{ steps.pack.outputs.tarball }}
   deploy:
     needs: build
     permissions:
@@ -42,17 +45,18 @@ jobs:
         with:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
-      - name: Download artifacts
+      - name: Download tarball
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 #v7.0.0
         with:
-          name: artifacts
+          name: package-tarball
+          path: .
       # publish for npm package.
-      - run: npm publish --provenance
+      - run: npm publish *.tgz --provenance --access public
       # publish for GitHub Package.
       - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@tkskto'
-      - run: npm publish --provenance
+      - run: npm publish *.tgz
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
