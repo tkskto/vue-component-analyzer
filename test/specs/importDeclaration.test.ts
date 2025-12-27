@@ -1,8 +1,18 @@
 import {join} from 'path';
 import {getImportDeclarationTree} from '../../src/server/Analyzer';
+import {model} from '../../src/server/Model';
 const fixturesDir = join(__dirname, '../fixture/');
 
 describe('import declaration test', () => {
+  beforeAll(() => {
+    const pathMaps = new Map<string, string>();
+
+    pathMaps.set('@@/*', './*');
+    pathMaps.set('~~/*', './*');
+
+    model.tsconfigPathMapping = pathMaps;
+  });
+
   it('importOne.vue', async () => {
     const filename = 'declarationTest/importOne';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
@@ -119,6 +129,14 @@ describe('import declaration test', () => {
     expect(json).toMatchSnapshot();
   });
 
+  it('importTwoNoSlash.vue', async () => {
+    const filename = 'declarationTest/importTwoNoSlash';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
+
   it('importTwo.vue with script setup', async () => {
     const filename = 'declarationTest/importTwoWithSetupScript';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
@@ -176,6 +194,14 @@ describe('import declaration test', () => {
 
   it('importThirdParty.vue', async () => {
     const filename = 'declarationTest/importThirdParty';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
+
+  it('importThirdPartyWithScope.vue', async () => {
+    const filename = 'declarationTest/importThirdPartyWithScope';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
     const json = JSON.stringify(declaration).slice(0);
 

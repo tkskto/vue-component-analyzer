@@ -15,7 +15,6 @@ export class Seed {
 
   private _count: number;
 
-  // eslint-disable-next-line no-use-before-define
   private _children: Seed[] = []; // imported modules from this file.
 
   /**
