@@ -1,12 +1,12 @@
 # Changelog
 
-## 0.10.2
+## 0.10.3
 
-Note: v0.10.1 was not published to npm due to a CI publish failure. This release includes all changes from v0.10.1 and fixes the publish pipeline.
+Note: v0.10.1 and v0.10.2 were not published to npm due to a CI publish failure. This release includes all changes fixes the publish pipeline.
 
 ### Fixes
 
--   @ and ~ paths not adding trailing slash if needed  \#423 from @vitorrd
+-   @ and ~ paths not adding trailing slash if needed \#423 from @vitorrd
 
 Thank you for your issue!
 
@@ -20,9 +20,13 @@ Thank you for your issue!
 *   \#436 get-tsconfig to v4.13.0
 *   \#437 typescript-eslint monorepo to v8.49.0
 
+## 0.10.2
+
+Note: Also this version was not published to npm... Changes were rolled into v0.10.3.
+
 ## 0.10.1
 
-Note: This version was not published to npm. Changes were rolled into v0.10.2.
+Note: This version was not published to npm. Changes were rolled into v0.10.3.
 
 ## 0.10.0
 
