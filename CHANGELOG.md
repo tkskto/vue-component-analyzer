@@ -1,6 +1,8 @@
 # Changelog
 
-## 0.10.1
+## 0.10.2
+
+Note: v0.10.1 was not published to npm due to a CI publish failure. This release includes all changes from v0.10.1 and fixes the publish pipeline.
 
 ### Fixes
 
@@ -10,12 +12,17 @@ Thank you for your issue!
 
 ### Chores
 
+*   Remove `scripts.prepare` (Husky) to avoid running during `npm publish`.
 *   \#419 commander to v14
 *   \#420 vue-eslint-parser to v10
 *   \#432 ws to v8.18.3
 *   \#435 express to v5.2.1
 *   \#436 get-tsconfig to v4.13.0
 *   \#437 typescript-eslint monorepo to v8.49.0
+
+## 0.10.1
+
+Note: This version was not published to npm. Changes were rolled into v0.10.2.
 
 ## 0.10.0
 
