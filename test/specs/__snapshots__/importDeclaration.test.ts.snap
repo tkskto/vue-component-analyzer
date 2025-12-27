@@ -16,6 +16,8 @@ exports[`import declaration test importOneWithTilde.vue 1`] = `"{"name":"/test/f
 
 exports[`import declaration test importThirdParty.vue 1`] = `"{"name":"/test/fixture/declarationTest/importThirdParty.vue","props":"","size":125,"lastModifiedTime":0,"children":[]}"`;
 
+exports[`import declaration test importThirdPartyWithScope.vue 1`] = `"{"name":"/test/fixture/declarationTest/importThirdPartyWithScope.vue","props":"","size":132,"lastModifiedTime":0,"children":[]}"`;
+
 exports[`import declaration test importTwo.vue 1`] = `"{"name":"/test/fixture/declarationTest/importTwo.vue","props":"","size":158,"lastModifiedTime":0,"children":[{"name":"/test/components/child.vue","props":"","size":42,"lastModifiedTime":0,"children":[]},{"name":"/test/components/child2.vue","props":"","size":43,"lastModifiedTime":0,"children":[]}]}"`;
 
 exports[`import declaration test importTwoNoSlash.vue 1`] = `"{"name":"/test/fixture/declarationTest/importTwoNoSlash.vue","props":"","size":158,"lastModifiedTime":0,"children":[{"name":"/test/components/child.vue","props":"","size":42,"lastModifiedTime":0,"children":[]},{"name":"/test/components/child2.vue","props":"","size":43,"lastModifiedTime":0,"children":[]}]}"`;

@@ -200,6 +200,14 @@ describe('import declaration test', () => {
     expect(json).toMatchSnapshot();
   });
 
+  it('importThirdPartyWithScope.vue', async () => {
+    const filename = 'declarationTest/importThirdPartyWithScope';
+    const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
+    const json = JSON.stringify(declaration).slice(0);
+
+    expect(json).toMatchSnapshot();
+  });
+
   it('importThirdParty.vue with script setup', async () => {
     const filename = 'declarationTest/importThirdPartyWithSetupScript';
     const declaration = await getImportDeclarationTree(join(fixturesDir, `${filename}.vue`), [], true);
