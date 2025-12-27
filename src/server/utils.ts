@@ -70,11 +70,27 @@ const resolveImport = (_filename: string, dirnameOfCurrentFile: string, tsconfig
       }
     }
   }
-  
-  if (_filename.startsWith('~') || _filename.startsWith('@')) {
-    const remainingPath = _filename.replace(/^[~@]\/?/u, '');
+
+  // Nuxt-style aliases: '@', '@@', '~', '~~'
+  // Support both with-slash (e.g. '@/foo') and missing-slash (e.g. '@foo') forms.
+  // The missing-slash form will be normalized by joining with resourceRoot and is later validated by resolveFile's existence checks to avoid treating scoped packages like '@vueuse/core' as local files.
+  const aliasWithSlashPrefixes = ['@@/', '~~/', '@/', '~/'];
+  const aliasPrefix = aliasWithSlashPrefixes.find((p) => _filename.startsWith(p));
+
+  if (aliasPrefix) {
+    const remainingPath = _filename.slice(aliasPrefix.length);
 
     return resolve(resourceRoot, remainingPath);
+  }
+
+  const aliasWithoutSlash = _filename.match(/^(?<alias>@@|~~|@|~)(?!\/)/u);
+
+  if (aliasWithoutSlash && aliasWithoutSlash.groups) {
+    const {alias} = aliasWithoutSlash.groups;
+    const remainder = _filename.slice(alias.length);
+    const normalizedRemainder = remainder.startsWith('/') ? remainder.slice(1) : remainder;
+
+    return resolve(resourceRoot, normalizedRemainder);
   }
 
   return '';
@@ -90,21 +106,32 @@ export const resolveFile = (_filename: string, _currentFileName: string): string
   let filename = resolveImport(_filename, dirnameOfCurrentFile, model.tsconfigPathMapping, model.resourceRoot);
 
   // filename is empty when import third-party script
-  if (filename) {
-    filename = normalize(filename);
-
-    if (extname(filename) === '') {
-      if (existsSync(`${filename}.vue`)) {
-        return `${filename}.vue`;
-      } else if (existsSync(`${filename}.js`)) {
-        return `${filename}.js`;
-      } else if (existsSync(`${filename}.ts`)) {
-        return `${filename}.ts`;
-      }
-    }
+  if (!filename) {
+    return '';
   }
 
-  return filename;
+  filename = normalize(filename);
+
+  // If extension is omitted, try common source extensions.
+  if (extname(filename) === '') {
+    if (existsSync(`${filename}.vue`)) {
+      return `${filename}.vue`;
+    }
+
+    if (existsSync(`${filename}.js`)) {
+      return `${filename}.js`;
+    }
+
+    if (existsSync(`${filename}.ts`)) {
+      return `${filename}.ts`;
+    }
+  
+    // Not a resolvable local file; treat as external.
+    return '';
+  }
+
+  // If an explicit extension is provided, ensure the file exists.
+  return existsSync(filename) ? filename : '';
 };
 
 export const getTsConfigPathMapping = (compilerOptions: TsConfigJson.CompilerOptions): Map<string, string> => {
