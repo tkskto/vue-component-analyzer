@@ -2,6 +2,12 @@
 
 ## 0.10.1
 
+### Fixes
+
+-   @ and ~ paths not adding trailing slash if needed  \#423 from @vitorrd
+
+Thank you for your issue!
+
 ### Chores
 
 *   \#419 commander to v14
