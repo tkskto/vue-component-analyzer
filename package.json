@@ -54,7 +54,7 @@
     "js-beautify": "1.15.4",
     "mkdirp": "3.0.1",
     "opener": "1.5.2",
-    "vue-eslint-parser": "10.2.0",
+    "vue-eslint-parser": "10.4.1",
     "ws": "8.21.0"
   },
   "devDependencies": {
