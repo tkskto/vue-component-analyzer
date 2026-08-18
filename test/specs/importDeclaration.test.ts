@@ -1,7 +1,8 @@
 import {join} from 'path';
+import {fileURLToPath} from 'url';
 import {getImportDeclarationTree} from '../../src/server/Analyzer';
 import {model} from '../../src/server/Model';
-const fixturesDir = join(__dirname, '../fixture/');
+const fixturesDir = fileURLToPath(new URL('../fixture/', import.meta.url));
 
 describe('import declaration test', () => {
   beforeAll(() => {

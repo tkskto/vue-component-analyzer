@@ -1,6 +1,7 @@
 import {join} from 'path';
+import {fileURLToPath} from 'url';
 import {getImportDeclarationTree} from '../../src/server/Analyzer';
-const fixturesDir = join(__dirname, '../fixture/');
+const fixturesDir = fileURLToPath(new URL('../fixture/', import.meta.url));
 
 describe('syntax test', () => {
   it('optionalChaining.vue', async () => {
