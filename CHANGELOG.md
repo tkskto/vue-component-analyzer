@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.11.0
+
+### Breaking Changes
+
+*   Drop support for Node.js 20. Node.js 22.12 or later is now required.
+
+### Fixes
+
+*   Use the public `AST` type API provided by `vue-eslint-parser` \#495.
+*   Support ESM-only dependencies in the test environment for `commander` v15 \#491.
+*   Use the ESM default export provided by `ejs` v6.
+*   Update `ws` to v8.21.3, including security fixes \#471 and \#481.
+*   Update `rollup` with security fixes \#470.
+
+### Chores
+
+*   Pin dependency versions for supply-chain hardening \#478.
+*   \#451 typescript-eslint monorepo to v8.67.0
+*   \#452 globby to v16.2.3
+*   \#473 jest monorepo to v30.4.2
+*   \#475 vue-eslint-parser to v10.4.1
+*   \#476 actions/checkout to v7
+*   \#477 actions/setup-node to v7
+*   \#479 @rollup/plugin-commonjs to v29.0.3
+*   \#480 ts-jest to v29.4.12
+*   \#483 rollup to v4.62.4
+*   \#484 @rollup/plugin-terser to v1
+*   \#485 eslint to v10.8.1
+*   \#486 lint-staged to v17.3.0
+*   \#487 get-tsconfig to v4.14.3
+*   \#488 npm-run-all2 to v9.0.3
+*   \#490 upload-artifact to v7 and download-artifact to v8
+*   \#492 ejs to v6.0.1
+*   \#496 js-beautify to v2.0.3
+
 ## 0.10.3
 
 Note: v0.10.1 and v0.10.2 were not published to npm due to a CI publish failure. This release includes all changes fixes the publish pipeline.
