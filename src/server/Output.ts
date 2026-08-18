@@ -4,7 +4,7 @@ import {Model} from '../client/model';
 import {mkdirp} from 'mkdirp';
 import path from 'path';
 import {writeFileSync} from 'fs';
-import {render} from 'ejs';
+import ejs from 'ejs';
 import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -39,7 +39,7 @@ export async function writeHTML(_filename: string, result: AnalyzeReport) {
 
     const renderer = new Renderer(clientModel);
     const htmlString = renderer.render();
-    const html = render('<%- include("/views/static.ejs", {html: html}); %>', {html: htmlString}, {root: `${projectRoot}`});
+    const html = ejs.render('<%- include("/views/static.ejs", {html: html}); %>', {html: htmlString}, {root: `${projectRoot}`});
 
     writeFileSync(filename, html);
     console.log(`output completed ${filename}`);
