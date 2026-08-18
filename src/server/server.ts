@@ -5,7 +5,7 @@ import express from 'express';
 import {WebSocketServer} from 'ws';
 import path from 'path';
 import http from 'http';
-import {renderFile} from 'ejs';
+import ejs from 'ejs';
 import opener from 'opener';
 import {fileURLToPath} from 'url';
 
@@ -23,7 +23,7 @@ export const startServer = (port: string, json: AnalyzeReport): void => {
   const app = express();
 
   // use EJS to pass variables.
-  app.engine('ejs', renderFile);
+  app.engine('ejs', ejs.renderFile);
   app.set('view engine', 'ejs');
   app.set('views', `${projectRoot}/views`);
   app.use(express.static(`${projectRoot}/`));
