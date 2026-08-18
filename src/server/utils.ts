@@ -1,9 +1,4 @@
-import {
-  ESLintImportDeclaration,
-  ESLintModuleDeclaration,
-  ESLintStatement,
-} from 'vue-eslint-parser/ast/nodes';
-import {Token} from 'vue-eslint-parser/ast/tokens';
+import type {AST} from 'vue-eslint-parser';
 import {model} from './Model';
 import {existsSync} from 'fs';
 import {resolve, extname, dirname, normalize} from 'path';
@@ -14,8 +9,8 @@ import {TokenProcessor} from './tokenProcessor';
  * get only Import Declaration syntax.
  * @param {Node[]} nodeArr
  */
-export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDeclaration)[]): ESLintImportDeclaration[] => {
-  return nodeArr.filter((node) => node.type === 'ImportDeclaration') as ESLintImportDeclaration[];
+export const getImportDeclaration = (nodeArr: (AST.ESLintStatement | AST.ESLintModuleDeclaration)[]): AST.ESLintImportDeclaration[] => {
+  return nodeArr.filter((node) => node.type === 'ImportDeclaration') as AST.ESLintImportDeclaration[];
 };
 
 /**
@@ -23,7 +18,7 @@ export const getImportDeclaration = (nodeArr: (ESLintStatement | ESLintModuleDec
  * @param tokens
  * @returns {string}
  */
-export const getPropsDeclarationSyntax = (tokens: Token[]): string => {
+export const getPropsDeclarationSyntax = (tokens: AST.Token[]): string => {
   let isInTargetToken = false;
   let processor: TokenProcessor | null = null;
 
