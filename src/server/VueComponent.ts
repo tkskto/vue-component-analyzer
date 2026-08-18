@@ -1,7 +1,5 @@
 import {FileReport} from '../../types';
-import {parse} from 'vue-eslint-parser';
-import {ESLintImportDeclaration, ESLintProgram} from 'vue-eslint-parser/ast/nodes';
-import {Token} from 'vue-eslint-parser/ast/tokens';
+import {parse, type AST} from 'vue-eslint-parser';
 import {getImportDeclaration, getPropsDeclarationSyntax} from './utils';
 import {Stats} from 'fs';
 
@@ -26,7 +24,7 @@ export class VueComponent {
 
   private _children: FileReport[] = [];
 
-  private _importDeclaration: ESLintImportDeclaration[] = [];
+  private _importDeclaration: AST.ESLintImportDeclaration[] = [];
 
   private _srcAttribute: string;
 
@@ -49,7 +47,7 @@ export class VueComponent {
 
     try {
       // using vue-eslint-parser package.
-      const esLintProgram: ESLintProgram = parse(scriptString, parserOption);
+      const esLintProgram: AST.ESLintProgram = parse(scriptString, parserOption);
 
       // get props from parser results.
       if (esLintProgram.tokens) {
@@ -68,7 +66,7 @@ export class VueComponent {
     this._srcAttribute = scriptSrc?.groups?.src || '';
   }
 
-  private getProps(tokens: Token[]): string {
+  private getProps(tokens: AST.Token[]): string {
     try {
       const propsDeclaration = getPropsDeclarationSyntax(tokens);
 
@@ -92,7 +90,7 @@ export class VueComponent {
     this._children.push(report);
   }
 
-  get importDeclaration(): ESLintImportDeclaration[] {
+  get importDeclaration(): AST.ESLintImportDeclaration[] {
     return this._importDeclaration;
   }
 
