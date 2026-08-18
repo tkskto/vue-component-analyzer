@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "..",
     "paths": {
@@ -7,5 +8,7 @@
       "~/*": ["./*"],
       "~~/*": ["./*"],
     }
-  }
+  },
+  "include": ["specs/**/*.ts"],
+  "exclude": []
 }

@@ -5,6 +5,9 @@
   "type": "module",
   "main": "./dist/index.mjs",
   "types": "./types/index.d.ts",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "bin": {
     "vca": "bin/analyze.js"
   },
@@ -15,8 +18,8 @@
     "build": "tsc -p src/server/tsconfig.json && rollup --config",
     "lint": "eslint -c eslint.config.js src",
     "test": "npm run test:base",
-    "test:base": "jest --config=jest.config.js --testTimeout=60000",
-    "test:base:update": "jest --config=jest.config.js --updateSnapshot --testTimeout=60000",
+    "test:base": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:base:update": "npm run test:base -- --updateSnapshot",
     "tmp": "node bin/analyze.js --dir . -p 8888"
   },
   "keywords": [
