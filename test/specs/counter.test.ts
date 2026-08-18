@@ -1,7 +1,8 @@
 import {join} from 'path';
+import {fileURLToPath} from 'url';
 import {getImportDeclarationTree} from '../../src/server/Analyzer';
 import {fileCounter} from '../../src/server/FileCounter';
-const fixturesDir = join(__dirname, '../fixture/');
+const fixturesDir = fileURLToPath(new URL('../fixture/', import.meta.url));
 
 describe('counter\'s count test', () => {
   test('counterTest.vue', async () => {
