@@ -1,16 +1,5 @@
 const FOCUSABLE_ELEMENTS = 'a, button, summary';
 
-export const encodeBase64 = (value: string): string => {
-  const bytes = new TextEncoder().encode(value);
-  let binary = '';
-
-  bytes.forEach((byte) => {
-    binary += String.fromCharCode(byte);
-  });
-
-  return btoa(binary);
-};
-
 /**
  * disable tabindex behind dialog
  * @param selector

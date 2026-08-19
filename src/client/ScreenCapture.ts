@@ -1,6 +1,5 @@
 import {customDialog} from './dialog';
 import {styleGetter} from './style';
-import {encodeBase64} from './common';
 
 const createSearchQueryElement = (query: string): HTMLParagraphElement => {
   const element = document.createElement('p');
@@ -9,6 +8,24 @@ const createSearchQueryElement = (query: string): HTMLParagraphElement => {
   element.textContent = `Filtered by: "${query}"`;
 
   return element;
+};
+
+const createCaptureTarget = (app: HTMLDivElement, searchQuery: string): {element: HTMLDivElement; width: number; height: number} => {
+  const queryElement = searchQuery ? createSearchQueryElement(searchQuery) : null;
+
+  if (queryElement) {
+    app.prepend(queryElement);
+  }
+
+  try {
+    return {
+      element: app.cloneNode(true) as HTMLDivElement,
+      width: app.scrollWidth,
+      height: app.scrollHeight,
+    };
+  } finally {
+    queryElement?.remove();
+  }
 };
 
 /**
@@ -32,12 +49,8 @@ export const makeImage = (url: string): Promise<HTMLImageElement> => (
  * @param width
  * @param height
  */
-export const makeSVG = async (app: HTMLDivElement, width: number, height: number, searchQuery = ''): Promise<string> => {
+export const makeSVG = async (app: HTMLDivElement, width: number, height: number): Promise<string> => {
   const clone = app.cloneNode(true) as HTMLDivElement;
-
-  if (searchQuery) {
-    clone.prepend(createSearchQueryElement(searchQuery));
-  }
 
   const willRemoveElements = clone.querySelectorAll<HTMLImageElement>('img, script, svg');
 
@@ -87,25 +100,19 @@ export const capture = async (): Promise<HTMLImageElement> => {
 
   if (app) {
     const searchQuery = document.querySelector<HTMLInputElement>('#search-file-name')?.value.trim() ?? '';
-    let width = app.scrollWidth;
-    let height = app.scrollHeight;
+    const captureTarget = createCaptureTarget(app, searchQuery);
+    const svgString = await makeSVG(captureTarget.element, captureTarget.width, captureTarget.height);
+    const svgBlob = new Blob([svgString], {type: 'image/svg+xml;charset=utf-8'});
+    const svgUrl = URL.createObjectURL(svgBlob);
+    let svgImage: HTMLImageElement;
 
-    if (searchQuery) {
-      const queryElement = createSearchQueryElement(searchQuery);
-
-      queryElement.style.position = 'absolute';
-      queryElement.style.visibility = 'hidden';
-      document.body.appendChild(queryElement);
-
-      width = Math.max(width, queryElement.scrollWidth + 36);
-      height += queryElement.scrollHeight + 12;
-
-      queryElement.remove();
+    try {
+      svgImage = await makeImage(svgUrl);
+    } finally {
+      URL.revokeObjectURL(svgUrl);
     }
 
-    const svgString = await makeSVG(app, width, height, searchQuery);
-    const svgImage = await makeImage(`data:image/svg+xml;base64,${encodeBase64(svgString)}`);
-    const pngImage = await svgToPng(svgImage, width, height);
+    const pngImage = await svgToPng(svgImage, captureTarget.width, captureTarget.height);
 
     return pngImage;
   }
