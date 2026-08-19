@@ -1,5 +1,15 @@
 import {customDialog} from './dialog';
 import {styleGetter} from './style';
+import {encodeBase64} from './common';
+
+const createSearchQueryElement = (query: string): HTMLParagraphElement => {
+  const element = document.createElement('p');
+
+  element.className = 'capture-search-query';
+  element.textContent = `Filtered by: "${query}"`;
+
+  return element;
+};
 
 /**
  * generate Image Element from uri string
@@ -22,8 +32,12 @@ export const makeImage = (url: string): Promise<HTMLImageElement> => (
  * @param width
  * @param height
  */
-export const makeSVG = async (app: HTMLDivElement, width: number, height: number): Promise<string> => {
+export const makeSVG = async (app: HTMLDivElement, width: number, height: number, searchQuery = ''): Promise<string> => {
   const clone = app.cloneNode(true) as HTMLDivElement;
+
+  if (searchQuery) {
+    clone.prepend(createSearchQueryElement(searchQuery));
+  }
 
   const willRemoveElements = clone.querySelectorAll<HTMLImageElement>('img, script, svg');
 
@@ -72,10 +86,25 @@ export const capture = async (): Promise<HTMLImageElement> => {
   const app = document.querySelector<HTMLDivElement>('.root.html');
 
   if (app) {
-    const width = app.scrollWidth;
-    const height = app.scrollHeight;
-    const svgString = await makeSVG(app, width, height);
-    const svgImage = await makeImage(`data:image/svg+xml;base64,${btoa(svgString)}`);
+    const searchQuery = document.querySelector<HTMLInputElement>('#search-file-name')?.value.trim() ?? '';
+    let width = app.scrollWidth;
+    let height = app.scrollHeight;
+
+    if (searchQuery) {
+      const queryElement = createSearchQueryElement(searchQuery);
+
+      queryElement.style.position = 'absolute';
+      queryElement.style.visibility = 'hidden';
+      document.body.appendChild(queryElement);
+
+      width = Math.max(width, queryElement.scrollWidth + 36);
+      height += queryElement.scrollHeight + 12;
+
+      queryElement.remove();
+    }
+
+    const svgString = await makeSVG(app, width, height, searchQuery);
+    const svgImage = await makeImage(`data:image/svg+xml;base64,${encodeBase64(svgString)}`);
     const pngImage = await svgToPng(svgImage, width, height);
 
     return pngImage;

@@ -4,6 +4,7 @@ import {Renderer} from './renderer';
 import {setSettings} from './Settings';
 import {setSeedOpenStateSwitcher} from './SeedOpenStateSwitcher';
 import {setScreenCapture} from './ScreenCapture';
+import {setSearch} from './Search';
 
 const model = new Model();
 const renderer = new Renderer(model);
@@ -22,6 +23,8 @@ try {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const search = setSearch(model);
+
   if (ws) {
     ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
@@ -40,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setSettings(model);
       setScreenCapture();
       setSeedOpenStateSwitcher();
+      search?.apply();
     });
   } else {
     console.warn('Couldn\'t connect to analyzer websocket server so you\'ll have to reload page manually to see updates in the treemap');
