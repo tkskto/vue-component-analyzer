@@ -15,6 +15,36 @@ header {
   z-index: 3;
   background-color: #293D52;
 }
+.utility {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: auto;
+  color: #ffffff;
+}
+.search input {
+  box-sizing: border-box;
+  min-width: 240px;
+  padding: 2px 6px;
+}
+.search__status {
+  min-width: 64px;
+  font-size: 12px;
+}
+.capture-search-query {
+  margin: 0 18px 12px;
+  padding: 8px 12px;
+  color: #ffffff;
+  background-color: #333333;
+  border-left: 4px solid #41b883;
+  white-space: nowrap;
+}
 .root {
   border-radius: 8px;
   padding: 20px 0;
@@ -39,6 +69,25 @@ header {
   color: #fff;
   background-color: #293D52;
 }
+.seed.-search-hidden {
+  display: none;
+}
+.group.-search-hidden {
+  display: none;
+}
+.seed.-search-match > .file > .filename {
+  box-shadow: 0 0 0 3px #ffffff;
+}
+.seed.-search-no-child {
+  grid-template-columns: 400px;
+  grid-template-rows: auto;
+}
+.seed.-search-no-child:nth-child(1 of .seed:not(.-search-hidden)):nth-last-child(1 of .seed:not(.-search-hidden)) {
+  margin: 0;
+}
+.seed.-search-no-child > .file::after {
+  content: none;
+}
 .root > .seed {
   margin: 40px 0;
 }
@@ -52,14 +101,14 @@ header {
   top: 0;
   left: -12px;
 }
-.seed:first-child::before {
+.seed:nth-child(1 of .seed:not(.-search-hidden))::before {
   height: calc(50% + 10px);
   top: 50%;
 }
-.seed:last-child::before {
+.seed:nth-last-child(1 of .seed:not(.-search-hidden))::before {
   height: 50%;
 }
-.seed:first-child:last-child::before {
+.seed:nth-child(1 of .seed:not(.-search-hidden)):nth-last-child(1 of .seed:not(.-search-hidden))::before {
   height: 0;
 }
 .seed.-no-child {

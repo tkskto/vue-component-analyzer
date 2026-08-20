@@ -14,6 +14,12 @@
 <main>
   <header>
     <div class="utility">
+      <div class="search">
+        <label for="search-file-name">Search files</label>
+        <input id="search-file-name" type="search" autocomplete="off">
+        <button id="btn-search-clear" type="button" disabled>clear</button>
+        <span id="search-status" class="search__status" aria-live="polite"></span>
+      </div>
       <button id="btn-capture" type="button" commandfor="dialog" command="show-modal">capture</button>
       <button id="btn-toggle-visible-state" type="button"><span id="btn-toggle-visible-state-text" class="btn-text">expand all</span></button>
       <button id="btn-settings" type="button"><span class="btn-text">settings</span></button>
