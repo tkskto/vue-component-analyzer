@@ -82,7 +82,7 @@ header {
   grid-template-columns: 400px;
   grid-template-rows: auto;
 }
-.seed.-search-no-child:first-child:last-child {
+.seed.-search-no-child:nth-child(1 of .seed:not(.-search-hidden)):nth-last-child(1 of .seed:not(.-search-hidden)) {
   margin: 0;
 }
 .seed.-search-no-child > .file::after {
@@ -101,14 +101,14 @@ header {
   top: 0;
   left: -12px;
 }
-.seed:first-child::before {
+.seed:nth-child(1 of .seed:not(.-search-hidden))::before {
   height: calc(50% + 10px);
   top: 50%;
 }
-.seed:last-child::before {
+.seed:nth-last-child(1 of .seed:not(.-search-hidden))::before {
   height: 50%;
 }
-.seed:first-child:last-child::before {
+.seed:nth-child(1 of .seed:not(.-search-hidden)):nth-last-child(1 of .seed:not(.-search-hidden))::before {
   height: 0;
 }
 .seed.-no-child {
