@@ -1,6 +1,33 @@
 import {customDialog} from './dialog';
 import {styleGetter} from './style';
 
+const createSearchQueryElement = (query: string): HTMLParagraphElement => {
+  const element = document.createElement('p');
+
+  element.className = 'capture-search-query';
+  element.textContent = `Filtered by: "${query}"`;
+
+  return element;
+};
+
+const createCaptureTarget = (app: HTMLDivElement, searchQuery: string): {element: HTMLDivElement; width: number; height: number} => {
+  const queryElement = searchQuery ? createSearchQueryElement(searchQuery) : null;
+
+  if (queryElement) {
+    app.prepend(queryElement);
+  }
+
+  try {
+    return {
+      element: app.cloneNode(true) as HTMLDivElement,
+      width: app.scrollWidth,
+      height: app.scrollHeight,
+    };
+  } finally {
+    queryElement?.remove();
+  }
+};
+
 /**
  * generate Image Element from uri string
  * @param url
@@ -72,11 +99,20 @@ export const capture = async (): Promise<HTMLImageElement> => {
   const app = document.querySelector<HTMLDivElement>('.root.html');
 
   if (app) {
-    const width = app.scrollWidth;
-    const height = app.scrollHeight;
-    const svgString = await makeSVG(app, width, height);
-    const svgImage = await makeImage(`data:image/svg+xml;base64,${btoa(svgString)}`);
-    const pngImage = await svgToPng(svgImage, width, height);
+    const searchQuery = document.querySelector<HTMLInputElement>('#search-file-name')?.value.trim() ?? '';
+    const captureTarget = createCaptureTarget(app, searchQuery);
+    const svgString = await makeSVG(captureTarget.element, captureTarget.width, captureTarget.height);
+    const svgBlob = new Blob([svgString], {type: 'image/svg+xml;charset=utf-8'});
+    const svgUrl = URL.createObjectURL(svgBlob);
+    let svgImage: HTMLImageElement;
+
+    try {
+      svgImage = await makeImage(svgUrl);
+    } finally {
+      URL.revokeObjectURL(svgUrl);
+    }
+
+    const pngImage = await svgToPng(svgImage, captureTarget.width, captureTarget.height);
 
     return pngImage;
   }

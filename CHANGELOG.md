@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.1
+
+### Enhancements
+
+*   Add filename search and include the active filter in capture output \#503.
+*   Make the viewer header sticky \#502.
+*   Use the native `dialog` element for the capture preview \#501.
+
 ## 0.11.0
 
 ### Breaking Changes
