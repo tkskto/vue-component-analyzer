@@ -20,7 +20,7 @@
         <button id="btn-search-clear" type="button" disabled>clear</button>
         <span id="search-status" class="search__status" aria-live="polite"></span>
       </div>
-      <button id="btn-capture" type="button">capture</button>
+      <button id="btn-capture" type="button" commandfor="dialog" command="show-modal">capture</button>
       <button id="btn-toggle-visible-state" type="button"><span id="btn-toggle-visible-state-text" class="btn-text">expand all</span></button>
       <button id="btn-settings" type="button"><span class="btn-text">settings</span></button>
     </div>
@@ -44,16 +44,13 @@
   <p>If you saw any problems, please let me know on <a href="https://github.com/tkskto/vue-component-analyzer/issues">github issue</a>.</p>
   <p>Vue.js logo is copy of <a href="https://vuejs.org/index.html">official Vue.js website</a>.</p>
 </footer>
-<div id="dialog" class="dialog">
-<div class="dialog-inner">
+<dialog id="dialog" class="dialog" aria-label="Capture preview">
 <div class="dialog-header">
 <a id="btn-export" href download="result.png">export</a>
-<button id="btn-dialog-close" type="button">close</button>
+<button type="button" commandfor="dialog" command="close">close</button>
 </div>
 <div id="dialog-contents" class="dialog-contents"></div>
-</div>
-<div class="dialog-overlay"></div>
-</div>
+</dialog>
 <svg class="logo" viewBox="0 0 128 128" width="24" height="24" data-v-5f26462c="">
 <symbol id="logo">
 <path fill="#42b883" d="M78.8,10L64,35.4L49.2,10H0l64,110l64-110C128,10,78.8,10,78.8,10z" data-v-5f26462c="" />
