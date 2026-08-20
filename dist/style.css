@@ -245,7 +245,6 @@ footer a {
   padding: 20px;
   background: #fff;
   box-sizing: border-box;
-  overscroll-behavior: none;
 }
 .dialog::backdrop {
   background: rgba(0, 0, 0, 0.3);
@@ -261,6 +260,7 @@ footer a {
   height: calc(100% - 40px);
   overflow: auto;
   box-sizing: border-box;
+  overscroll-behavior: contain;
 }
 .dialog-contents img {
   max-width: 100%;
