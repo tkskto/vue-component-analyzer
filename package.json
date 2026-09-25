@@ -53,7 +53,7 @@
     "ejs": "6.0.1",
     "express": "5.2.1",
     "get-tsconfig": "4.14.3",
-    "globby": "16.2.3",
+    "globby": "16.2.4",
     "js-beautify": "2.0.3",
     "mkdirp": "3.0.1",
     "opener": "1.5.2",
